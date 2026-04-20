@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 220 20% 97%;
+    --foreground: 220 30% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 30% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 30% 12%;
+
+    --primary: 220 45% 20%;
+    --primary-foreground: 40 30% 95%;
+
+    --secondary: 40 35% 92%;
+    --secondary-foreground: 220 30% 15%;
+
+    --muted: 220 15% 93%;
+    --muted-foreground: 220 10% 45%;
+
+    --accent: 38 70% 50%;
+    --accent-foreground: 220 45% 12%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 15% 88%;
+    --input: 220 15% 88%;
+    --ring: 220 45% 20%;
+
+    --radius: 0.5rem;
+
+    --success: 152 60% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 38 92% 10%;
+    --info: 210 80% 52%;
+    --info-foreground: 0 0% 100%;
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222 30% 8%;
+    --foreground: 220 15% 90%;
+
+    --card: 222 25% 12%;
+    --card-foreground: 220 15% 90%;
+
+    --popover: 222 25% 12%;
+    --popover-foreground: 220 15% 90%;
+
+    --primary: 40 50% 60%;
+    --primary-foreground: 222 30% 8%;
+
+    --secondary: 222 20% 18%;
+    --secondary-foreground: 220 15% 85%;
+
+    --muted: 222 20% 16%;
+    --muted-foreground: 220 10% 55%;
+
+    --accent: 38 70% 50%;
+    --accent-foreground: 222 30% 8%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 222 20% 20%;
+    --input: 222 20% 20%;
+    --ring: 40 50% 60%;
+
+    --success: 152 55% 35%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 80% 45%;
+    --warning-foreground: 0 0% 100%;
+    --info: 210 70% 45%;
+    --info-foreground: 0 0% 100%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Playfair Display', serif;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Playfair Display', serif;
+  }
+  .font-body {
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+}
+
+/* Print styles for PDF export */
+@media print {
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .print\:hidden {
+    display: none !important;
+  }
+
+  @page {
+    margin: 0.75in;
+    size: letter;
+  }
+
+  header {
+    position: relative !important;
+  }
+
+  main > * {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  main > *:not(:last-child) {
+    margin-bottom: 1rem;
+  }
+
+  /* Print header/footer */
+  header::after {
+    content: 'H-1B Strategic Assessment Report · Confidential Attorney Work Product';
+    display: block;
+    font-size: 8px;
+    color: hsl(var(--muted-foreground));
+    text-align: center;
+    padding-top: 0.5rem;
+    border-top: 1px solid hsl(var(--border));
+    margin-top: 0.5rem;
+  }
+}

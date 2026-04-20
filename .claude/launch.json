@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "personal-website",
+      "runtimeExecutable": "ruby",
+      "runtimeArgs": ["-e", "require 'webrick'; WEBrick::HTTPServer.new(:Port=>9123,:DocumentRoot=>'/tmp/site_preview').start"],
+      "port": 9123
+    }
+  ]
+}
