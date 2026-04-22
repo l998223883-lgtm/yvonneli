@@ -105,6 +105,23 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 .pf-toggle{font-family:var(--font-m);font-size:11px;letter-spacing:2px;opacity:.4;cursor:pointer;border:none;background:none;color:var(--paper);padding:0;text-transform:uppercase}
 .pf-toggle:hover{opacity:.7}
 .pf-collapsible{overflow:hidden;transition:max-height .4s ease}
+.resume-inline{margin-top:24px}
+.resume-inline-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.resume-inline-label{font-size:10px;letter-spacing:.12em;opacity:.35;text-transform:uppercase}
+.resume-exp-cards{display:flex;flex-direction:column;gap:10px}
+.resume-exp-card{border:1px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02);padding:16px 18px;transition:border-color .2s,background .2s}
+.resume-exp-card:hover{border-color:rgba(255,255,255,.15);background:rgba(255,255,255,.04)}
+.resume-exp-card--current{border-color:rgba(79,195,247,.2);background:rgba(79,195,247,.03)}
+.resume-exp-card--edu{border-color:rgba(255,255,255,.04);opacity:.7}
+.rec-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px;flex-wrap:wrap;margin-bottom:3px}
+.rec-co{font-family:var(--font-h);font-size:13px;letter-spacing:.03em}
+.rec-date{font-size:10px;opacity:.35;white-space:nowrap}
+.rec-role{font-size:11px;opacity:.5;margin-bottom:8px}
+.rec-bullets{margin:0 0 10px;padding-left:0;list-style:none}
+.rec-bullets li{font-size:12px;opacity:.7;line-height:1.65;padding-left:14px;position:relative}
+.rec-bullets li::before{content:'·';position:absolute;left:2px;opacity:.4}
+.rec-tags{display:flex;flex-wrap:wrap;gap:6px}
+.rec-tags span{font-size:10px;padding:2px 8px;border:1px solid rgba(255,255,255,.08);opacity:.5;letter-spacing:.04em}
 .pf-footer{padding:36px 0 0;border-top:1px solid rgba(244,241,234,.08);display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
 .pf-footer-name{font-family:var(--font-h);font-size:18px;opacity:.9}
 .pf-footer-contact{font-family:var(--font-m);font-size:12px;opacity:.5}
@@ -388,21 +405,21 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 .room.active .arch-proj-tab:hover{border-color:rgba(42,37,32,.35);background:rgba(42,37,32,.05)}
 .room.active .arch-proj-tab.active{border-color:rgba(42,37,32,.45);background:rgba(42,37,32,.08)}
 
-/* Law / Blueprint top bars */
-#law-topbar { background:rgba(237,232,222,.97) !important; border-bottom-color:rgba(42,37,32,.1) !important }
-#law-topbar * { color:#2a2520 !important }
-#law-topbar .room-title-sub, #law-topbar div > div:last-child { color:#6a508a !important }  /* purple hint for SYSTEMS title */
+/* Blueprint top bar override */
 #bp-topbar  { background:rgba(253,245,245,.97) !important; border-bottom-color:rgba(150,80,80,.12) !important }
 #bp-topbar * { color:#5c3535 !important }
 #bp-topbar #bp-topbar-title { color:#8b4040 !important }
-#law-topbar button { border-color:rgba(42,37,32,.2) !important; background:rgba(42,37,32,.04) !important }
 #bp-topbar button { border-color:rgba(150,80,80,.25) !important; background:rgba(150,80,80,.05) !important }
 #bp-topbar #bp-tab-mochi[style*="rgba(180,100,100,.15)"],#bp-topbar #bp-tab-dog[style*="rgba(180,100,100,.15)"] { background:rgba(180,100,100,.12) !important; color:#7a3535 !important; border-color:rgba(180,100,100,.45) !important }
 #bp-topbar #bp-try-btn { background:#c47070 !important; color:#fff !important; border:none !important }
-#law-topbar #law-try-btn { background:#e8a020 !important; color:#1a1612 !important; border:none !important }
-#law-topbar #law-tab-h1b[style*="rgba(179,136,255,.15)"],#law-topbar #law-tab-voice[style*="rgba(179,136,255,.15)"] { background:rgba(101,80,160,.12) !important; color:#5a3a80 !important }
 
 /* H-1B fallback on light bg */
+#h1b-demo-overlay { background:rgba(217,232,240,.98) !important }
+#h1b-demo-overlay * { color:#2a4060 !important }
+#h1b-demo-overlay [style*="rgba(179,136,255"] { border-color:rgba(100,140,180,.2) !important; background:rgba(100,140,180,.06) !important; color:#4a7fa8 !important }
+#h1b-demo-overlay [style*="background:rgba(105,240,174"] { background:rgba(100,180,140,.08) !important }
+#h1b-demo-overlay [style*="color:#69f0ae"] { color:#3a8a60 !important }
+#h1b-demo-overlay [style*="color:#b388ff"] { color:#4a7fa8 !important }
 #h1b-fallback { background:rgba(217,232,240,.98) !important }
 #h1b-fallback * { color:#3a5a7a !important }
 #h1b-fallback [style*="rgba(244,241,234"] { border-color:rgba(100,140,180,.12) !important }
@@ -426,9 +443,17 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 #bp-fallback [style*="background:rgba(15,20,35"] * { color:rgba(244,241,234,.75) !important }
 #dog-fallback [style*="background:rgba(15,20,35"] { color:rgba(244,241,234,.85) !important }
 #dog-fallback [style*="background:rgba(15,20,35"] * { color:rgba(244,241,234,.75) !important }
-#voice-fallback { background:rgba(237,232,222,.97) !important }
-#voice-fallback * { color:#2a2520 !important }
-#voice-fallback [style*="rgba(244,241,234"] { border-color:rgba(42,37,32,.12) !important }
+#voice-fallback { background:rgba(217,232,240,.98) !important }
+#voice-fallback * { color:#2a4060 !important }
+#voice-fallback [style*="rgba(244,241,234"] { border-color:rgba(100,140,180,.12) !important }
+#voice-fallback [style*="border-left:2px solid rgba(179"] { border-left-color:rgba(100,140,180,.4) !important }
+#voice-fallback [style*="background:rgba(179,136,255"] { background:rgba(100,140,180,.06) !important }
+#voice-fallback [style*="border:1px solid rgba(179"] { border-color:rgba(100,140,180,.15) !important }
+#voice-fallback [style*="border:1px solid rgba(244"] { border-color:rgba(100,140,180,.15) !important }
+#voice-fallback h2 { color:#2a4a6a !important }
+#voice-fallback [style*="background:rgba(15,18,30"] { color:rgba(217,232,240,.9) !important }
+#voice-fallback [style*="background:rgba(15,18,30"] * { color:rgba(200,220,235,.8) !important }
+#voice-fallback [style*="background:#6c47ff"] { color:#fff !important }
 #voice-fallback [style*="border-left:2px solid rgba(179,136,255"] { border-left-color:rgba(101,80,160,.4) !important }
 #voice-fallback [style*="background:rgba(179,136,255"] { background:rgba(101,80,160,.06) !important }
 #dog-fallback { background:rgba(253,245,245,.97) !important }
@@ -452,6 +477,20 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 }
 
 .bjd-gallery-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 4px;
+}
+
+.bjd-gallery-item-wide {
+  column-span: all;
+  break-inside: avoid;
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.bjd-gallery-item-wide img {
   width: 100%;
   height: auto;
   display: block;
@@ -608,8 +647,86 @@ body:has(.room.active) #tooltip { display:none !important }
             Trained in architecture and economics at WashU, specialized in real estate at Columbia. I've supported $1B+ transactions, founded a physical product company ($350K ARR), practiced legal document assistance, and now build AI-native products from zero. Each domain wasn't a detour — it was the next layer of the same system.
           </p>
           <p class="pf-about-text" style="opacity:.65">
-            I think in systems. I build in the spaces others skip. I'm looking for a team that builds AI products where design, logic, and human behavior have to work together — PM, product design, or 0→1 founding roles.
+            Turning complex systems into AI-powered decision scaffolding. I design the logic layers that make hard choices navigable — for legal compliance, career pathways, product selection, and human-AI collaboration. Looking to build AI products where law, design, and behavior converge.
           </p>
+          <!-- RESUME — cards per experience -->
+          <div class="resume-inline">
+            <div class="resume-inline-header">
+              <span class="resume-inline-label">Resume</span>
+              <a href="resume.pdf" download="YVONNELI_RESUME.pdf" class="ext-btn" style="font-size:10px">↓ PDF</a>
+            </div>
+            <div class="resume-exp-cards">
+              <div class="resume-exp-card resume-exp-card--current">
+                <div class="rec-top">
+                  <div class="rec-co">NextStep Services</div>
+                  <div class="rec-date">Feb 2025 – Present</div>
+                </div>
+                <div class="rec-role">Co-Founder &amp; Principal · California LDA</div>
+                <ul class="rec-bullets">
+                  <li>Advised international founders 0→1 on visa strategy, entity formation, equity structure</li>
+                  <li>Deployed LLM workflows (Claude, GPT-4) across client engagements</li>
+                  <li>Shipped H-1B Compass — self-serve visa engine with SOC matching &amp; wage analysis</li>
+                </ul>
+                <div class="rec-tags"><span>AI Products</span><span>LDA</span><span>Immigration</span></div>
+              </div>
+              <div class="resume-exp-card">
+                <div class="rec-top">
+                  <div class="rec-co">New Dream Services</div>
+                  <div class="rec-date">Aug 2022 – Dec 2024</div>
+                </div>
+                <div class="rec-role">Financial Analyst &amp; Acquisition Manager · Irvine</div>
+                <ul class="rec-bullets">
+                  <li>Managed $25M+ CRE portfolio — outperformed benchmarks by 5.5%</li>
+                  <li>Built 23 financial models; full due diligence across leases, comps, zoning</li>
+                </ul>
+                <div class="rec-tags"><span>Real Estate</span><span>DCF</span><span>M&amp;A</span></div>
+              </div>
+              <div class="resume-exp-card">
+                <div class="rec-top">
+                  <div class="rec-co">CBRE</div>
+                  <div class="rec-date">Jun – Aug 2022</div>
+                </div>
+                <div class="rec-role">Finance Intern, FP&amp;A · Los Angeles</div>
+                <ul class="rec-bullets">
+                  <li>Developed $1B cross-border M&amp;A investment case for Australia expansion</li>
+                  <li>Conducted 50+ expert interviews; built nine executive dashboards in Power BI</li>
+                </ul>
+                <div class="rec-tags"><span>M&amp;A</span><span>Power BI</span><span>Capital Markets</span></div>
+              </div>
+              <div class="resume-exp-card">
+                <div class="rec-top">
+                  <div class="rec-co">Cushman &amp; Wakefield</div>
+                  <div class="rec-date">Feb – Jul 2021</div>
+                </div>
+                <div class="rec-role">Real Estate Consultant · Chengdu</div>
+                <ul class="rec-bullets">
+                  <li>Co-led 7.5-acre multiuse development, $10M revenue; managed 118-page deliverable</li>
+                  <li>18 community interviews, 5 on-site investigations, 30 phone surveys</li>
+                </ul>
+                <div class="rec-tags"><span>Development</span><span>Valuation</span><span>Due Diligence</span></div>
+              </div>
+              <div class="resume-exp-card">
+                <div class="rec-top">
+                  <div class="rec-co">SPS Dolls</div>
+                  <div class="rec-date">Oct 2019 – Jul 2021</div>
+                </div>
+                <div class="rec-role">Founder &amp; IP Designer</div>
+                <ul class="rec-bullets">
+                  <li>Founded BJD IP brand; designed 15+ products; managed 5 factories</li>
+                  <li>Built omnichannel distribution; sponsored 4 national conventions; ~$350K ARR</li>
+                </ul>
+                <div class="rec-tags"><span>IP Brand</span><span>Physical Product</span><span>$350K ARR</span></div>
+              </div>
+              <div class="resume-exp-card resume-exp-card--edu">
+                <div class="rec-top">
+                  <div class="rec-co">Education</div>
+                </div>
+                <div class="rec-role">Columbia University — M.S. Real Estate Development · 2020–2022</div>
+                <div class="rec-role" style="margin-top:6px">Washington University in St. Louis — B.S. Economics &amp; Architecture · 2016–2019</div>
+              </div>
+            </div>
+          </div>
+
           <!-- 3D flip cards — hover to reveal (tap on mobile) -->
           <div class="flip-row" style="display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:20px">
             <div class="flip-card" onclick="this.classList.toggle('flipped')">
@@ -661,102 +778,6 @@ body:has(.room.active) #tooltip { display:none !important }
                 <div class="flip-card-back">
                   <div class="flip-card-year">MOCHI · SPS DOLLS · DOG SELECTOR</div>
                   <div class="flip-card-detail">Perception / attachment / meaning<br>AI Companion as original IP<br>Identity projection · Emotional bonding</div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ③ SELECTED SYSTEMS — Categorized Diagram -->
-        <section class="pf-section">
-          <div class="pf-section-label">Selected Systems</div>
-          <div class="sys-grid">
-            <!-- AI PRODUCTS -->
-            <div class="sys-row">
-              <div class="sys-cat"><span class="sys-cat-label">AI PRODUCTS</span></div>
-              <div class="sys-items">
-                <div class="sys-item" onclick="openPanel('lab_ai')">
-                  <div class="sys-item-title">AI Companion</div>
-                  <div class="sys-item-meta">0→1 · SOLO BUILD</div>
-                  <div class="sys-item-status" style="color:var(--amber)">IN DEV</div>
-                </div>
-                <div class="sys-item" onclick="openPanel('lab_voice')">
-                  <div class="sys-item-title">Voice Agent</div>
-                  <div class="sys-item-meta">PRODUCT DESIGN</div>
-                  <div class="sys-item-status" style="color:var(--amber)">IN DEV</div>
-                </div>
-                <div class="sys-item" onclick="openPanel('lab_h1b')">
-                  <div class="sys-item-title">H-1B Compass</div>
-                  <div class="sys-item-meta">LAW × AI</div>
-                  <div class="sys-item-status" style="color:var(--teal)">LIVE</div>
-                </div>
-                <div class="sys-item" onclick="openPanel('lab_nextstep')">
-                  <div class="sys-item-title">NextStep Services</div>
-                  <div class="sys-item-meta">AI CONSULTING · LDA</div>
-                  <div class="sys-item-status" style="color:var(--teal)">LIVE</div>
-                </div>
-              </div>
-            </div>
-            <!-- DESIGN & IP -->
-            <div class="sys-row">
-              <div class="sys-cat"><span class="sys-cat-label">DESIGN &amp; IP</span></div>
-              <div class="sys-items">
-                <div class="sys-item" onclick="openPanel('lab_sps')">
-                  <div class="sys-item-title">SPS Dolls</div>
-                  <div class="sys-item-meta">FOUNDER · END-TO-END</div>
-                  <div class="sys-item-status" style="color:var(--coral)">2019–2021</div>
-                </div>
-                <div class="sys-item" onclick="openPanel('lab_ai')">
-                  <div class="sys-item-title">AI Companion IP</div>
-                  <div class="sys-item-meta">ORIGINAL IP</div>
-                  <div class="sys-item-status" style="color:var(--amber)">IN DEV</div>
-                </div>
-                <div class="sys-item" onclick="openPanel('lab_brand')">
-                  <div class="sys-item-title">Brand Strategy</div>
-                  <div class="sys-item-meta">CONSULTANT · US BRAND</div>
-                  <div class="sys-item-status" style="color:var(--coral)">2022–2023</div>
-                </div>
-              </div>
-            </div>
-            <!-- REAL ESTATE & FINANCE -->
-            <div class="sys-row">
-              <div class="sys-cat"><span class="sys-cat-label">REAL ESTATE &amp; FINANCE</span></div>
-              <div class="sys-items">
-                <div class="sys-item" onclick="openPanel('lab_cbre')">
-                  <div class="sys-item-title">CBRE Los Angeles</div>
-                  <div class="sys-item-meta">FINANCIAL INTERN</div>
-                  <div class="sys-item-status" style="color:var(--blue)">2022</div>
-                </div>
-                <div class="sys-item" onclick="openPanel('lab_cw')">
-                  <div class="sys-item-title">Cushman &amp; Wakefield</div>
-                  <div class="sys-item-meta">RE CONSULTANT · CHENGDU</div>
-                  <div class="sys-item-status" style="color:var(--blue)">2021</div>
-                </div>
-                <div class="sys-item" onclick="openPanel('lab_newdream')">
-                  <div class="sys-item-title">New Dream Services</div>
-                  <div class="sys-item-meta">ACQUISITION MGR · IRVINE</div>
-                  <div class="sys-item-status" style="color:var(--blue)">2022–2024</div>
-                </div>
-              </div>
-            </div>
-            <!-- LAW & IMMIGRATION -->
-            <div class="sys-row">
-              <div class="sys-cat"><span class="sys-cat-label">LAW &amp; IMMIGRATION</span></div>
-              <div class="sys-items">
-                <div class="sys-item" onclick="openPanel('lab_h1b')">
-                  <div class="sys-item-title">H-1B Compass</div>
-                  <div class="sys-item-meta">LEGAL TOOL · LIVE</div>
-                  <div class="sys-item-status" style="color:var(--purple)">LIVE</div>
-                </div>
-                <div class="sys-item" onclick="openPanel('lab_lda')">
-                  <div class="sys-item-title">LDA California</div>
-                  <div class="sys-item-meta">REGISTERED LDA</div>
-                  <div class="sys-item-status" style="color:var(--purple)">2023–</div>
-                </div>
-                <div class="sys-item" onclick="openPanel('lab_ip')">
-                  <div class="sys-item-title">IP Law</div>
-                  <div class="sys-item-meta">FURNITURE · BRAND · AI</div>
-                  <div class="sys-item-status" style="color:var(--purple)">ONGOING</div>
                 </div>
               </div>
             </div>
@@ -826,98 +847,7 @@ body:has(.room.active) #tooltip { display:none !important }
           </div>
         </section>
 
-        <!-- ⑤ EXPERIENCE -->
-        <section class="pf-section">
-          <div class="pf-section-label">Experience</div>
-          <div class="exp-grid">
-            <div class="exp-card hotspot" data-panel="lab_newdream">
-              <div class="exp-card-badge">2022–2024</div>
-              <div class="exp-card-co">New Dream Services</div>
-              <div class="exp-card-role">Acquisition Manager → Financial Analyst · Irvine</div>
-              <div class="exp-card-detail">$25M+ portfolio · 7 CRE appraisals · 5.5% above-market · 23 financial models · DCF</div>
-            </div>
-            <div class="exp-card hotspot" data-panel="lab_cbre">
-              <div class="exp-card-badge">JUN–AUG 2022</div>
-              <div class="exp-card-co">CBRE Los Angeles</div>
-              <div class="exp-card-role">Financial Intern · FP&amp;A</div>
-              <div class="exp-card-detail">$1B M&amp;A proposal (Australia) · 50+ industry interviews · Power BI · Capital markets</div>
-            </div>
-            <div class="exp-card hotspot" data-panel="lab_cw">
-              <div class="exp-card-badge">2021</div>
-              <div class="exp-card-co">Cushman &amp; Wakefield</div>
-              <div class="exp-card-role">Real Estate Consultant · Chengdu</div>
-              <div class="exp-card-detail">$10M mixed-use development · 118-page deliverable · 18 community interviews · 7 projects</div>
-            </div>
-            <div class="exp-card hotspot" data-panel="lab_nextstep">
-              <div class="exp-card-badge">2025–PRESENT</div>
-              <div class="exp-card-co">NextStep Services</div>
-              <div class="exp-card-role">Founder &amp; Principal · AI Consulting · LDA</div>
-              <div class="exp-card-detail">AI-augmented consulting · H-1B Compass · Startup formation · LDA California</div>
-            </div>
-            <div class="exp-card hotspot" data-panel="lab_brand">
-              <div class="exp-card-badge">AUG 2022–JAN 2023</div>
-              <div class="exp-card-co">US-Based Consumer Brand</div>
-              <div class="exp-card-role">Brand Strategy Consultant · Chino, CA</div>
-              <div class="exp-card-detail">Instagram identity rebrand · Content strategy · Creator partnerships · Lifestyle repositioning</div>
-            </div>
-            <div class="exp-card" style="border-color:rgba(79,195,247,.18)">
-              <div class="exp-card-badge">2016–2022</div>
-              <div class="exp-card-co">Columbia University &amp; WashU</div>
-              <div class="exp-card-role">M.S. Real Estate Finance · B.S. Economics &amp; Architecture</div>
-              <div class="exp-card-detail">The formation: systems thinking (architecture) + behavioral logic (economics) + capital language (Columbia)</div>
-            </div>
-          </div>
-          <div class="lab-manifesto">
-            <span class="en" style="display:block;font-size:clamp(13px,2vw,17px);line-height:2;opacity:.85">Most PMs build features.<br>I build universes.</span>
-            <span class="en">I don't cross disciplines.<br>I build in the space between them.</span>
-          </div>
-        </section>
-
-        <!-- ⑥ TIMELINE -->
-        <section class="pf-section">
-          <div class="pf-section-label">Timeline</div>
-          <div class="pf-collapsible" style="max-height:none">
-            <div class="pf-timeline">
-              <div class="pf-tl-item">
-                <div class="pf-tl-year">2025 – PRESENT</div>
-                <div class="pf-tl-title">NextStep Services — Founder &amp; Principal</div>
-                <div class="pf-tl-sub">AI-augmented consulting · Immigration LDA · Startup formation · H-1B Compass</div>
-              </div>
-              <div class="pf-tl-item">
-                <div class="pf-tl-year">AUG–JAN 2022–23</div>
-                <div class="pf-tl-title">US Furniture Brand — Brand Strategy Consultant</div>
-                <div class="pf-tl-sub">Brand repositioning · Influencer strategy · Chino, CA</div>
-              </div>
-              <div class="pf-tl-item">
-                <div class="pf-tl-year">JUN–AUG 2022</div>
-                <div class="pf-tl-title">CBRE Los Angeles — Financial Intern</div>
-                <div class="pf-tl-sub">$1B M&amp;A proposal (Australia) · Power BI · 50+ industry interviews</div>
-              </div>
-              <div class="pf-tl-item">
-                <div class="pf-tl-year">2020 – 2022</div>
-                <div class="pf-tl-title">Columbia University</div>
-                <div class="pf-tl-sub">M.S. Real Estate Finance</div>
-              </div>
-              <div class="pf-tl-item">
-                <div class="pf-tl-year">2019 – 2021</div>
-                <div class="pf-tl-title">SPS Dolls — Founder &amp; IP Designer</div>
-                <div class="pf-tl-sub">Original BJD brand · ~$350K ARR · 15+ products · 5 factories</div>
-              </div>
-              <div class="pf-tl-item">
-                <div class="pf-tl-year">2021</div>
-                <div class="pf-tl-title">Cushman &amp; Wakefield — Real Estate Consultant</div>
-                <div class="pf-tl-sub">$10M development · 118-page deliverable · Chengdu</div>
-              </div>
-              <div class="pf-tl-item">
-                <div class="pf-tl-year">2016 – 2019</div>
-                <div class="pf-tl-title">Washington University in St. Louis</div>
-                <div class="pf-tl-sub">B.S. Economics &amp; Architecture</div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- ⑥ FOOTER -->
+        <!-- ⑦ FOOTER -->
         <div class="pf-footer">
           <div>
             <div class="pf-footer-name">Yvonne Li</div>
@@ -979,7 +909,7 @@ body:has(.room.active) #tooltip { display:none !important }
             <div class="arc-card-detail">Led $1B+ M&amp;A proposal for Australia acquisition &middot; 50+ capital market interviews &middot; Power BI dashboards &middot; Modeled entry strategy across asset classes</div>
           </div>
           <div class="arc-card">
-            <div class="arc-card-badge">JAN–AUG 2021</div>
+            <div class="arc-card-badge">FEB–JUL 2021</div>
             <div class="arc-card-co">Cushman &amp; Wakefield</div>
             <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;opacity:.35;margin-bottom:4px;text-transform:uppercase">Global Commercial Real Estate · Chengdu</div>
             <div class="arc-card-role">Real Estate Consultant</div>
@@ -1073,10 +1003,10 @@ body:has(.room.active) #tooltip { display:none !important }
           </div>
           <!-- Image viewer (replaces PDF.js canvas) -->
           <!-- Navigation bar — at top -->
-          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;margin-bottom:12px;background:rgba(244,241,234,.08);border:1px solid rgba(244,241,234,.12);border-bottom:none">
-            <button id="arch-img-prev" onclick="archImgPrev()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;background:none;border:1px solid rgba(244,241,234,.4);color:#f4f1ea;padding:8px 20px;cursor:pointer;transition:border-color .2s,background .2s" onmouseover="this.style.borderColor='#f4f1ea';this.style.background='rgba(244,241,234,.1)'" onmouseout="this.style.borderColor='rgba(244,241,234,.4)';this.style.background='none'">← PREV</button>
-            <span id="arch-img-counter" style="font-family:var(--font-m);font-size:10px;letter-spacing:3px;color:#f4f1ea;opacity:.8">1 / 3</span>
-            <button id="arch-img-next" onclick="archImgNext()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;background:none;border:1px solid rgba(244,241,234,.4);color:#f4f1ea;padding:8px 20px;cursor:pointer;transition:border-color .2s,background .2s" onmouseover="this.style.borderColor='#f4f1ea';this.style.background='rgba(244,241,234,.1)'" onmouseout="this.style.borderColor='rgba(244,241,234,.4)';this.style.background='none'">NEXT →</button>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 20px;margin-bottom:12px;background:#3a3530;border:1px solid rgba(42,37,32,.4);border-bottom:none">
+            <button id="arch-img-prev" onclick="archImgPrev()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;background:none;border:1px solid rgba(244,241,234,.6);color:#f4f1ea;padding:8px 20px;cursor:pointer;transition:border-color .2s,background .2s" onmouseover="this.style.borderColor='#f4f1ea';this.style.background='rgba(244,241,234,.15)'" onmouseout="this.style.borderColor='rgba(244,241,234,.6)';this.style.background='none'">← PREV</button>
+            <span id="arch-img-counter" style="font-family:var(--font-m);font-size:10px;letter-spacing:3px;color:#f4f1ea;opacity:.9">1 / 3</span>
+            <button id="arch-img-next" onclick="archImgNext()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;background:none;border:1px solid rgba(244,241,234,.6);color:#f4f1ea;padding:8px 20px;cursor:pointer;transition:border-color .2s,background .2s" onmouseover="this.style.borderColor='#f4f1ea';this.style.background='rgba(244,241,234,.15)'" onmouseout="this.style.borderColor='rgba(244,241,234,.6)';this.style.background='none'">NEXT →</button>
           </div>
 
           <div id="arch-img-viewer" style="background:rgba(0,0,0,.3);border:1px solid rgba(244,241,234,.1);position:relative">
@@ -1132,21 +1062,12 @@ body:has(.room.active) #tooltip { display:none !important }
         <!-- IP products section -->
         <section class="pf-section" style="margin-top:0;margin-bottom:28px">
           <div class="pf-section-label">IP Products</div>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">
+          <div style="margin-bottom:20px">
             <div style="padding:20px;border:1px solid rgba(244,241,234,.1);position:relative">
               <div style="font-family:var(--font-m);font-size:9px;letter-spacing:3px;opacity:.35;text-transform:uppercase;margin-bottom:10px">ORIGINAL IP · BJD</div>
               <div style="font-family:var(--font-h);font-size:17px;margin-bottom:8px;color:var(--paper)">SPS Dolls</div>
               <div style="font-size:12px;opacity:.6;line-height:1.7;margin-bottom:14px">Ball-jointed doll brand. Sculpt → 3D print → silicone mold → resin cast → 5 factories → global sales. Original world-building and character design, ~$350K ARR.</div>
               <div style="font-family:var(--font-m);font-size:10px;letter-spacing:1px;opacity:.4">Founder &amp; IP Designer · 2019–2021</div>
-            </div>
-            <div style="padding:20px;border:1px solid rgba(244,241,234,.1);position:relative">
-              <div style="font-family:var(--font-m);font-size:9px;letter-spacing:3px;opacity:.35;text-transform:uppercase;margin-bottom:10px">ORIGINAL IP · AI PET · IN DEV</div>
-              <div style="font-family:var(--font-h);font-size:17px;margin-bottom:8px;color:var(--paper)">IP Puppies</div>
-              <div style="font-size:12px;opacity:.6;line-height:1.7;margin-bottom:14px">A new original IP — small companion pets with designed personalities and visual identity. Bridging physical character design and AI-native interaction. Each character is an IP asset.</div>
-              <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-                <a href="https://puppies.app" target="_blank" class="ext-btn">↗ PUPPIES SITE</a>
-                <span style="font-family:var(--font-m);font-size:10px;opacity:.35;letter-spacing:1px">IN DEV</span>
-              </div>
             </div>
           </div>
         </section>
@@ -1191,37 +1112,32 @@ body:has(.room.active) #tooltip { display:none !important }
 
     <!-- THE LAW OFFICE -->
     <div class="room" id="room-law" style="padding:0;overflow:hidden">
-      <!-- Top bar (visible above iframe) -->
-      <div id="law-topbar" style="display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:rgba(217,232,240,.96);border-bottom:1px solid rgba(100,140,180,.15);z-index:10;position:relative">
-        <!-- LEFT: tab buttons only (margin-left clears the fixed back button) -->
-        <div style="display:flex;gap:4px;flex-shrink:0;margin-left:150px">
-          <button id="law-tab-h1b" onclick="lawTab('h1b')" style="font-family:var(--font-m);font-size:10px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:6px 6px 0 0;background:#4a7fa8;color:#fff;padding:8px 16px;cursor:pointer;transition:all .2s;font-weight:600">H-1B COMPASS</button>
-          <button id="law-tab-voice" onclick="lawTab('voice')" style="font-family:var(--font-m);font-size:10px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:6px 6px 0 0;background:rgba(74,106,138,.2);color:rgba(74,106,138,.55);padding:8px 16px;cursor:pointer;transition:all .2s">VOICE AI</button>
+      <!-- Split topbar -->
+      <div id="law-topbar" style="display:grid;grid-template-columns:1fr 1px 1fr;height:56px;background:rgba(217,232,240,.96);border-bottom:1px solid rgba(100,140,180,.15);z-index:10;position:relative">
+        <div style="display:flex;align-items:center;gap:10px;padding:0 18px 0 200px;min-width:0">
+          <div style="font-family:var(--font-h);font-size:15px;color:#2a4a6a;white-space:nowrap">01 · H-1B Compass</div>
+          <div style="font-family:var(--font-m);font-size:8px;letter-spacing:2px;color:#4a7fa8;border:1px solid rgba(74,127,168,.3);padding:2px 8px;border-radius:20px;white-space:nowrap">● LIVE</div>
+          <div style="flex:1"></div>
+          <button id="h1b-try-btn" onclick="h1bDemo()" style="font-family:var(--font-m);font-size:10px;letter-spacing:2px;background:#4a7fa8;color:#fff;border:none;padding:7px 14px;cursor:pointer;font-weight:700;white-space:nowrap">▶ TRY</button>
+          <button onclick="h1bOpen()" class="ext-btn" style="font-size:10px;padding:6px 10px">↗</button>
         </div>
-        <!-- CENTER: absolutely centered title/eyebrow -->
-        <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;white-space:nowrap">
-          <div style="font-family:var(--font-m);font-size:9px;letter-spacing:3px;opacity:.5;text-transform:uppercase;margin-bottom:2px;color:#4a6a8a">SYSTEMS &nbsp;·&nbsp; Structure / Logic / Rules</div>
-          <div id="law-topbar-title" style="font-family:var(--font-h);font-size:18px;color:#3a5a7a">H-1B Compass</div>
-        </div>
-        <!-- RIGHT: action buttons -->
-        <div style="display:flex;gap:8px;align-items:center;flex-shrink:0">
-          <button id="law-try-btn" onclick="h1bDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:#4a7fa8;color:#fff;padding:10px 20px;cursor:pointer;font-weight:700">▶ TRY LIVE</button>
-          <button id="law-open-btn" onclick="h1bOpen()" class="ext-btn">↗ OPEN FULL</button>
-          <a href="https://visa-vantage.lovable.app" target="_blank" style="display:none" id="h1b-link"></a>
+        <div style="background:rgba(100,140,180,.25)"></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:0 18px;min-width:0">
+          <div style="font-family:var(--font-h);font-size:15px;color:#2a4a6a;white-space:nowrap">02 · Voice AI</div>
+          <div style="font-family:var(--font-m);font-size:8px;letter-spacing:2px;color:#7a9ab8;border:1px solid rgba(100,140,180,.3);padding:2px 8px;border-radius:20px;white-space:nowrap">IN DEV</div>
+          <div style="flex:1"></div>
+          <button id="voice-try-btn" onclick="voiceDemo()" style="font-family:var(--font-m);font-size:10px;letter-spacing:2px;background:#4a7fa8;color:#fff;border:none;padding:7px 14px;cursor:pointer;font-weight:700;white-space:nowrap">▶ TRY</button>
+          <button onclick="voiceOpen()" class="ext-btn" style="font-size:10px;padding:6px 10px">↗</button>
         </div>
       </div>
-      <!-- Iframe -->
-      <div style="position:relative;height:calc(100vh - 120px);min-height:600px">
-        <iframe
-          id="h1b-frame"
-          src="about:blank"
-          style="width:100%;height:100%;border:none;display:none"
-          allow="clipboard-write"
-        ></iframe>
-        <!-- Fallback: rich product description (shown if iframe blocked) -->
-        <div id="h1b-fallback" style="position:absolute;inset:0;background:rgba(10,14,26,.97);overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:48px 32px">
-          <div style="max-width:680px;width:100%">
-
+      <!-- Split body -->
+      <div style="display:grid;grid-template-columns:1fr 1px 1fr;height:calc(100vh - 56px)">
+        <!-- LEFT: H-1B Compass -->
+        <div style="position:relative;overflow:hidden">
+        <iframe id="h1b-frame" src="about:blank" style="width:100%;height:100%;border:none;display:none;position:absolute;inset:0" allow="clipboard-write"></iframe>
+        <!-- Fallback content -->
+        <div id="h1b-fallback" style="position:absolute;inset:0;background:rgba(10,14,26,.97);overflow-y:auto;display:block;padding:48px 32px">
+        <div style="max-width:580px;width:100%;margin:0 auto">
             <!-- SYSTEMS hero -->
             <div style="font-family:var(--font-m);font-size:10px;letter-spacing:3px;opacity:.35;text-transform:uppercase;margin-bottom:20px">AI + Systems · Structure / Logic / Rules</div>
             <h2 style="font-family:var(--font-h);font-size:clamp(24px,4vw,40px);color:var(--paper);line-height:1.08;margin-bottom:14px">I build the logic that<br>makes complexity navigable.</h2>
@@ -1270,14 +1186,14 @@ body:has(.room.active) #tooltip { display:none !important }
             </div>
 
             <div style="display:flex;gap:12px;align-items:center;flex-wrap:wrap">
-              <button onclick="h1bDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:var(--purple);color:#fff;padding:14px 28px;cursor:pointer">⚡ TRY H-1B COMPASS DEMO</button>
-              <a href="https://visa-vantage.lovable.app" target="_blank" class="ext-btn">↗ OPEN FULL PRODUCT</a>
+              <button onclick="h1bDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:#4a7fa8;color:#fff;padding:12px 24px;cursor:pointer;font-weight:700">▶ TRY LIVE</button>
+              <a href="https://visa-vantage.lovable.app" target="_blank" class="ext-btn">↗ visa-vantage.lovable.app</a>
             </div>
           </div>
         </div>
         <!-- Demo overlay — shown when TRY DEMO is clicked -->
-        <div id="h1b-demo-overlay" style="display:none">
-          <div>
+        <div id="h1b-demo-overlay" style="display:none;position:absolute;inset:0;background:rgba(10,14,26,.97);overflow-y:auto;padding:48px 32px;z-index:5">
+          <div style="max-width:580px;width:100%;margin:0 auto">
             <!-- Header -->
             <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid rgba(179,136,255,.15)">
               <div>
@@ -1372,23 +1288,20 @@ body:has(.room.active) #tooltip { display:none !important }
               This is a sample analysis for demonstration purposes. Probabilities sourced from Federal Register 2025-23853 (FY2027). This tool does not constitute legal advice — consult a licensed immigration attorney.
             </div>
           </div>
-        </div>
-
-        <!-- VOICE AI IFRAME -->
+        </div><!-- end h1b-demo-overlay -->
+      </div><!-- end LEFT panel -->
+      <!-- Column divider -->
+      <div style="background:rgba(100,140,180,.25)"></div>
+      <!-- RIGHT: Voice AI -->
+      <div style="position:relative;overflow:hidden">
         <iframe id="voice-frame" src="about:blank" style="width:100%;height:100%;border:none;display:none;position:absolute;inset:0" allow="clipboard-write; microphone"></iframe>
-
-        <!-- VOICE AI FALLBACK -->
-        <div id="voice-fallback" style="position:absolute;inset:0;background:rgba(10,14,26,.97);overflow-y:auto;display:none;align-items:flex-start;justify-content:center;padding:48px 32px">
-          <div style="max-width:700px;width:100%">
+        <div id="voice-fallback" style="position:absolute;inset:0;background:rgba(10,14,26,.97);overflow-y:auto;display:block;padding:48px 32px">
+        <div style="max-width:580px;width:100%;margin:0 auto">
 
             <!-- Hero -->
             <div style="font-family:var(--font-m);font-size:10px;letter-spacing:3px;opacity:.35;text-transform:uppercase;margin-bottom:16px">SYSTEMS · AI Voice Infrastructure · Business Automation</div>
             <h2 style="font-family:var(--font-h);font-size:clamp(24px,4vw,40px);line-height:1.08;margin-bottom:14px">Your front desk.<br>Running 24 / 7. Never on hold.</h2>
-            <p style="font-size:13px;line-height:1.9;opacity:.65;margin-bottom:12px;max-width:580px">VoiceAI is an API platform for building production-ready voice agents. Designed for businesses that lose revenue every time a customer is put on hold, sent to voicemail, or bounces because no one picked up. Ultra-low latency. Multilingual. Works with real phone numbers.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px">
-              <button onclick="voiceDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:#b388ff;color:#000;padding:12px 24px;cursor:pointer;font-weight:700">▶ TRY LIVE</button>
-              <a href="https://voice-ai-agents.lovable.app" target="_blank" class="ext-btn">↗ voice-ai-agents.lovable.app</a>
-            </div>
+            <p style="font-size:13px;line-height:1.9;opacity:.65;margin-bottom:36px;max-width:580px">VoiceAI is an API platform for building production-ready voice agents. Designed for businesses that lose revenue every time a customer is put on hold, sent to voicemail, or bounces because no one picked up. Ultra-low latency. Multilingual. Works with real phone numbers.</p>
 
             <!-- Screenshots -->
             <div style="margin-bottom:40px">
@@ -1586,77 +1499,53 @@ body:has(.room.active) #tooltip { display:none !important }
               <div style="font-family:var(--font-h);font-size:clamp(14px,2.5vw,18px);line-height:1.7;opacity:.8;margin-bottom:8px">Every missed call is a missed customer.</div>
               <div style="font-size:13px;opacity:.45;line-height:1.75;margin-bottom:20px">Voice AI doesn't replace your team. It handles the calls your team was never going to take at 11pm on a Sunday.</div>
               <div style="display:flex;gap:10px;flex-wrap:wrap">
-                <button onclick="voiceDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:#b388ff;color:#000;padding:12px 24px;cursor:pointer;font-weight:700">▶ TRY LIVE</button>
+                <button onclick="voiceDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:#4a7fa8;color:#fff;padding:12px 24px;cursor:pointer;font-weight:700">▶ TRY LIVE</button>
                 <a href="https://voice-ai-agents.lovable.app" target="_blank" class="ext-btn">↗ voice-ai-agents.lovable.app</a>
               </div>
             </div>
 
           </div>
-        </div>
-      </div>
-    </div>
+        </div><!-- end voice-fallback -->
+      </div><!-- end RIGHT panel -->
+    </div><!-- end split body -->
+  </div><!-- end room-law -->
 
     <!-- THE EMOTION ROOM -->
     <div class="room" id="room-blueprint" style="padding:0;overflow:hidden">
-      <div id="bp-topbar" style="display:flex;align-items:center;justify-content:space-between;padding:12px 24px;background:rgba(253,240,240,.96);border-bottom:1px solid rgba(180,100,100,.15);z-index:10;position:relative">
-        <!-- LEFT: tab buttons only (margin-left clears the fixed back button) -->
-        <div style="display:flex;gap:4px;flex-shrink:0;margin-left:150px">
-          <button id="bp-tab-mochi" onclick="bpTab('mochi')" style="font-family:var(--font-m);font-size:10px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:6px 6px 0 0;background:#c45050;color:#fff;padding:8px 16px;cursor:pointer;transition:all .2s;font-weight:600">MOCHI</button>
-          <button id="bp-tab-dog" onclick="bpTab('dog')" style="font-family:var(--font-m);font-size:10px;letter-spacing:2px;text-transform:uppercase;border:none;border-radius:6px 6px 0 0;background:rgba(120,60,60,.18);color:rgba(120,60,60,.5);padding:8px 16px;cursor:pointer;transition:all .2s">DOG SELECTOR</button>
+      <!-- Split topbar -->
+      <div style="display:grid;grid-template-columns:1fr 1px 1fr;height:56px;background:rgba(253,240,240,.96);border-bottom:1px solid rgba(180,100,100,.15);z-index:10;position:relative">
+        <div style="display:flex;align-items:center;gap:10px;padding:0 18px 0 200px;min-width:0">
+          <div style="font-family:var(--font-h);font-size:15px;color:#8b4040;white-space:nowrap">01 · Mochi</div>
+          <div style="font-family:var(--font-m);font-size:8px;letter-spacing:2px;color:#c47070;border:1px solid rgba(180,100,100,.3);padding:2px 8px;border-radius:20px;white-space:nowrap">● LIVE</div>
+          <div style="flex:1"></div>
+          <button id="bp-try-btn" onclick="mochiDemo()" style="font-family:var(--font-m);font-size:10px;letter-spacing:2px;background:#c47070;color:#fff;border:none;padding:7px 14px;cursor:pointer;font-weight:700;white-space:nowrap">▶ TRY</button>
+          <button onclick="mochiOpen()" class="ext-btn" style="font-size:10px;padding:6px 10px">↗</button>
         </div>
-        <!-- CENTER: absolutely centered title/eyebrow -->
-        <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;pointer-events:none;white-space:nowrap">
-          <div style="font-family:var(--font-m);font-size:9px;letter-spacing:3px;opacity:.5;text-transform:uppercase;margin-bottom:2px">EMOTION / HUMAN MEANING &nbsp;·&nbsp; Yvonne Li</div>
-          <div id="bp-topbar-title" style="font-family:var(--font-h);font-size:17px;color:#8b4040">Mochi — Attachment Machine</div>
-        </div>
-        <!-- RIGHT: action buttons -->
-        <div style="display:flex;gap:8px;align-items:center;flex-shrink:0">
-          <button id="bp-try-btn" onclick="mochiDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:#c47070;color:#fff;padding:10px 20px;cursor:pointer;font-weight:700">▶ TRY LIVE</button>
-          <button id="bp-open-btn" onclick="mochiOpen()" class="ext-btn">↗ OPEN FULL</button>
+        <div style="background:rgba(180,100,100,.25)"></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:0 18px;min-width:0">
+          <div style="font-family:var(--font-h);font-size:15px;color:#8b4040;white-space:nowrap">02 · Dog Selector</div>
+          <div style="font-family:var(--font-m);font-size:8px;letter-spacing:2px;color:#c47070;border:1px solid rgba(180,100,100,.3);padding:2px 8px;border-radius:20px;white-space:nowrap">● LIVE</div>
+          <div style="flex:1"></div>
+          <button id="dog-try-btn" onclick="dogDemo()" style="font-family:var(--font-m);font-size:10px;letter-spacing:2px;background:#c47070;color:#fff;border:none;padding:7px 14px;cursor:pointer;font-weight:700;white-space:nowrap">▶ TRY</button>
+          <button onclick="dogOpen()" class="ext-btn" style="font-size:10px;padding:6px 10px">↗</button>
         </div>
       </div>
-      <div style="position:relative;height:calc(100vh - 65px);min-height:600px">
+      <!-- Split body -->
+      <div style="display:grid;grid-template-columns:1fr 1px 1fr;height:calc(100vh - 56px)">
+        <!-- LEFT: Mochi -->
+        <div style="position:relative;overflow:hidden">
         <iframe id="bp-frame" src="about:blank" style="width:100%;height:100%;border:none;display:none" allow="clipboard-write; microphone"></iframe>
-        <iframe id="dog-frame" src="about:blank" style="width:100%;height:100%;border:none;display:none" allow="clipboard-write; microphone"></iframe>
-        <div id="bp-fallback" style="position:absolute;inset:0;background:rgba(253,245,245,.98);overflow-y:auto;display:flex;align-items:flex-start;justify-content:center;padding:40px 28px 80px">
-          <div style="max-width:720px;width:100%">
+        <div id="bp-fallback" style="position:absolute;inset:0;background:rgba(253,245,245,.98);overflow-y:auto;padding:32px 28px 60px">
+          <div>
 
             <!-- ── HERO ── -->
             <div style="font-family:var(--font-m);font-size:9px;letter-spacing:4px;color:#b07070;text-transform:uppercase;margin-bottom:14px;opacity:.7">EMOTION &nbsp;·&nbsp; Human Meaning &nbsp;·&nbsp; Perception / Attachment / Psychological Response</div>
-            <h2 style="font-family:var(--font-h);font-size:clamp(26px,5vw,44px);line-height:1.06;margin-bottom:10px;color:#3a1818">Mochi is not a chatbot.<br>It's an attachment machine.</h2>
-            <p style="font-size:13px;line-height:1.9;color:#7a4545;margin-bottom:16px;max-width:580px">An AI companion designed around the psychology of emotional bonds — not conversational utility. Feed her. Play with her. Talk to her. She remembers. She pushes back. She changes.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:36px">
-              <button onclick="mochiDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:#c47070;color:#fff;padding:12px 24px;cursor:pointer;font-weight:700">▶ TRY MOCHI LIVE</button>
-              <a href="https://mochi-ai-pet.lovable.app" target="_blank" style="font-family:var(--font-m);font-size:11px;letter-spacing:1px;color:#9a5050;border:1px solid rgba(150,80,80,.35);padding:11px 18px;text-decoration:none;transition:border-color .2s">↗ mochi-ai-pet.lovable.app</a>
-              <span style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#c47070;border:1px solid rgba(180,100,100,.3);padding:4px 10px;border-radius:20px">● LIVE</span>
-            </div>
-
-            <!-- ── PROJECT CATALOG (sys-grid style) ── -->
-            <div style="margin-bottom:40px;border:1px solid rgba(150,80,80,.15);overflow:hidden">
-              <div style="font-family:var(--font-m);font-size:9px;letter-spacing:3px;color:#b07070;text-transform:uppercase;padding:10px 16px;border-bottom:1px solid rgba(150,80,80,.1);background:rgba(180,100,100,.04)">Projects in this room</div>
-              <!-- Row 1: Mochi -->
-              <div style="display:grid;grid-template-columns:110px 1fr auto;align-items:center;padding:14px 16px;border-bottom:1px solid rgba(150,80,80,.08);cursor:pointer;transition:background .2s" onclick="bpTab('mochi')" onmouseover="this.style.background='rgba(180,100,100,.06)'" onmouseout="this.style.background='none'">
-                <div style="font-family:var(--font-m);font-size:8px;letter-spacing:2px;color:#b07070;opacity:.6;text-transform:uppercase;writing-mode:vertical-lr;height:40px;display:flex;align-items:center">AI COMPANION</div>
-                <div>
-                  <div style="font-family:var(--font-h);font-size:15px;color:#3a1818;margin-bottom:3px">Mochi — Attachment Machine</div>
-                  <div style="font-family:var(--font-m);font-size:10px;color:#9a5050;opacity:.7">0→1 · SOLO BUILD · AI COMPANION · EMOTIONAL DESIGN</div>
-                </div>
-                <div style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:#c47070;border:1px solid rgba(180,100,100,.3);padding:3px 10px;border-radius:20px;white-space:nowrap">● LIVE</div>
-              </div>
-              <!-- Row 2: Dog Selector -->
-              <div style="display:grid;grid-template-columns:110px 1fr auto;align-items:center;padding:14px 16px;border-bottom:1px solid rgba(150,80,80,.08);cursor:pointer;transition:background .2s" onclick="bpTab('dog')" onmouseover="this.style.background='rgba(180,100,100,.06)'" onmouseout="this.style.background='none'">
-                <div style="font-family:var(--font-m);font-size:8px;letter-spacing:2px;color:#b07070;opacity:.6;text-transform:uppercase;writing-mode:vertical-lr;height:40px;display:flex;align-items:center">AI PRODUCT</div>
-                <div>
-                  <div style="font-family:var(--font-h);font-size:15px;color:#3a1818;margin-bottom:3px">Dog Selector — Perfect Puppy</div>
-                  <div style="font-family:var(--font-m);font-size:10px;color:#9a5050;opacity:.7">0→1 · SOLO BUILD · DECISION CONFIDENCE · QUIZ DESIGN</div>
-                </div>
-                <div style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:#c47070;border:1px solid rgba(180,100,100,.3);padding:3px 10px;border-radius:20px;white-space:nowrap">● LIVE</div>
-              </div>
-            </div>
+            <h2 style="font-family:var(--font-h);font-size:clamp(22px,3vw,36px);line-height:1.08;margin-bottom:10px;color:#3a1818">Mochi is not a chatbot.<br>It's an attachment machine.</h2>
+            <p style="font-size:13px;line-height:1.9;color:#7a4545;margin-bottom:32px;max-width:580px">An AI companion designed around the psychology of emotional bonds — not conversational utility. Feed her. Play with her. Talk to her. She remembers. She pushes back. She changes.</p>
 
             <!-- ── SECTION DIVIDER ── -->
             <div style="display:flex;align-items:center;gap:14px;margin-bottom:28px">
-              <div style="font-family:var(--font-m);font-size:9px;letter-spacing:4px;color:#c47070;text-transform:uppercase">01 · MOCHI AI PET</div>
+              <div style="font-family:var(--font-m);font-size:9px;letter-spacing:4px;color:#c47070;text-transform:uppercase">MOCHI AI PET</div>
               <div style="flex:1;height:1px;background:rgba(150,80,80,.2)"></div>
             </div>
 
@@ -1671,9 +1560,9 @@ body:has(.room.active) #tooltip { display:none !important }
                     <span style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:#9a5050">Mochi</span>
                   </div>
                   <div style="padding:10px 10px;display:flex;flex-direction:column;gap:6px;min-height:180px">
-                    <div style="background:rgba(180,100,100,.12);border-radius:8px 8px 8px 2px;padding:7px 9px;font-size:10px;color:#5c3535;line-height:1.5">我今天心情不好...</div>
-                    <div style="background:rgba(180,100,100,.2);border-radius:8px 8px 2px 8px;padding:7px 9px;font-size:10px;color:#3a1818;line-height:1.5;align-self:flex-end">没关系，我在呢 🐾</div>
-                    <div style="background:rgba(180,100,100,.12);border-radius:8px 8px 8px 2px;padding:7px 9px;font-size:10px;color:#5c3535;line-height:1.5">谢谢你陪着我</div>
+                    <div style="background:rgba(180,100,100,.12);border-radius:8px 8px 8px 2px;padding:7px 9px;font-size:10px;color:#5c3535;line-height:1.5">Feeling low today...</div>
+                    <div style="background:rgba(180,100,100,.2);border-radius:8px 8px 2px 8px;padding:7px 9px;font-size:10px;color:#3a1818;line-height:1.5;align-self:flex-end">It's okay, I'm here 🐾</div>
+                    <div style="background:rgba(180,100,100,.12);border-radius:8px 8px 8px 2px;padding:7px 9px;font-size:10px;color:#5c3535;line-height:1.5">Thank you for staying</div>
                   </div>
                   <div style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:#9a5050;padding:6px 8px;border-top:1px solid rgba(150,80,80,.08);opacity:.7">Chat</div>
                 </div>
@@ -1698,9 +1587,9 @@ body:has(.room.active) #tooltip { display:none !important }
                     <span style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:#9a5050">Outing</span>
                   </div>
                   <div style="padding:14px 12px;min-height:180px;display:flex;flex-direction:column;gap:8px">
-                    <div style="font-family:var(--font-h);font-size:12px;color:#3a1818">今日外出</div>
-                    <div style="background:rgba(180,100,100,.1);border-radius:6px;padding:10px;display:flex;align-items:center;gap:8px"><span style="font-size:18px">🌳</span><div><div style="font-size:10px;color:#5c3535">公园</div><div style="font-size:9px;color:#9a5050;opacity:.7">30 min</div></div></div>
-                    <div style="background:rgba(180,100,100,.1);border-radius:6px;padding:10px;display:flex;align-items:center;gap:8px"><span style="font-size:18px">☕</span><div><div style="font-size:10px;color:#5c3535">咖啡厅</div><div style="font-size:9px;color:#9a5050;opacity:.7">45 min</div></div></div>
+                    <div style="font-family:var(--font-h);font-size:12px;color:#3a1818">Today's Outing</div>
+                    <div style="background:rgba(180,100,100,.1);border-radius:6px;padding:10px;display:flex;align-items:center;gap:8px"><span style="font-size:18px">🌳</span><div><div style="font-size:10px;color:#5c3535">Park</div><div style="font-size:9px;color:#9a5050;opacity:.7">30 min</div></div></div>
+                    <div style="background:rgba(180,100,100,.1);border-radius:6px;padding:10px;display:flex;align-items:center;gap:8px"><span style="font-size:18px">☕</span><div><div style="font-size:10px;color:#5c3535">Café</div><div style="font-size:9px;color:#9a5050;opacity:.7">45 min</div></div></div>
                   </div>
                   <div style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:#9a5050;padding:6px 8px;border-top:1px solid rgba(150,80,80,.08);opacity:.7">Outing</div>
                 </div>
@@ -1710,11 +1599,11 @@ body:has(.room.active) #tooltip { display:none !important }
                     <span style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:#9a5050">Stats</span>
                   </div>
                   <div style="padding:14px 12px;min-height:180px;display:flex;flex-direction:column;gap:8px">
-                    <div style="font-family:var(--font-h);font-size:12px;color:#3a1818">关系成长</div>
+                    <div style="font-family:var(--font-h);font-size:12px;color:#3a1818">Bond Growth</div>
                     <div style="display:flex;flex-direction:column;gap:6px">
-                      <div><div style="font-size:9px;color:#9a5050;margin-bottom:3px">亲密度</div><div style="height:5px;background:rgba(150,80,80,.12);border-radius:3px"><div style="width:72%;height:100%;background:#c47070;border-radius:3px"></div></div></div>
-                      <div><div style="font-size:9px;color:#9a5050;margin-bottom:3px">信任感</div><div style="height:5px;background:rgba(150,80,80,.12);border-radius:3px"><div style="width:58%;height:100%;background:#c47070;border-radius:3px"></div></div></div>
-                      <div><div style="font-size:9px;color:#9a5050;margin-bottom:3px">记忆深度</div><div style="height:5px;background:rgba(150,80,80,.12);border-radius:3px"><div style="width:85%;height:100%;background:#c47070;border-radius:3px"></div></div></div>
+                      <div><div style="font-size:9px;color:#9a5050;margin-bottom:3px">Closeness</div><div style="height:5px;background:rgba(150,80,80,.12);border-radius:3px"><div style="width:72%;height:100%;background:#c47070;border-radius:3px"></div></div></div>
+                      <div><div style="font-size:9px;color:#9a5050;margin-bottom:3px">Trust</div><div style="height:5px;background:rgba(150,80,80,.12);border-radius:3px"><div style="width:58%;height:100%;background:#c47070;border-radius:3px"></div></div></div>
+                      <div><div style="font-size:9px;color:#9a5050;margin-bottom:3px">Memory Depth</div><div style="height:5px;background:rgba(150,80,80,.12);border-radius:3px"><div style="width:85%;height:100%;background:#c47070;border-radius:3px"></div></div></div>
                     </div>
                   </div>
                   <div style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:#9a5050;padding:6px 8px;border-top:1px solid rgba(150,80,80,.08);opacity:.7">Stats</div>
@@ -1725,12 +1614,12 @@ body:has(.room.active) #tooltip { display:none !important }
                     <span style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:#9a5050">Games</span>
                   </div>
                   <div style="padding:14px 12px;min-height:180px;display:flex;flex-direction:column;gap:8px">
-                    <div style="font-family:var(--font-h);font-size:12px;color:#3a1818">一起玩</div>
+                    <div style="font-family:var(--font-h);font-size:12px;color:#3a1818">Play Together</div>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px">
-                      <div style="background:rgba(180,100,100,.1);border-radius:6px;padding:10px;text-align:center"><div style="font-size:18px">🎮</div><div style="font-size:9px;color:#9a5050;margin-top:4px">猜谜</div></div>
-                      <div style="background:rgba(180,100,100,.1);border-radius:6px;padding:10px;text-align:center"><div style="font-size:18px">🎨</div><div style="font-size:9px;color:#9a5050;margin-top:4px">涂色</div></div>
-                      <div style="background:rgba(180,100,100,.1);border-radius:6px;padding:10px;text-align:center"><div style="font-size:18px">📖</div><div style="font-size:9px;color:#9a5050;margin-top:4px">故事</div></div>
-                      <div style="background:rgba(180,100,100,.1);border-radius:6px;padding:10px;text-align:center"><div style="font-size:18px">🎵</div><div style="font-size:9px;color:#9a5050;margin-top:4px">音乐</div></div>
+                      <div style="background:rgba(180,100,100,.1);border-radius:6px;padding:10px;text-align:center"><div style="font-size:18px">🎮</div><div style="font-size:9px;color:#9a5050;margin-top:4px">Quiz</div></div>
+                      <div style="background:rgba(180,100,100,.1);border-radius:6px;padding:10px;text-align:center"><div style="font-size:18px">🎨</div><div style="font-size:9px;color:#9a5050;margin-top:4px">Color</div></div>
+                      <div style="background:rgba(180,100,100,.1);border-radius:6px;padding:10px;text-align:center"><div style="font-size:18px">📖</div><div style="font-size:9px;color:#9a5050;margin-top:4px">Story</div></div>
+                      <div style="background:rgba(180,100,100,.1);border-radius:6px;padding:10px;text-align:center"><div style="font-size:18px">🎵</div><div style="font-size:9px;color:#9a5050;margin-top:4px">Music</div></div>
                     </div>
                   </div>
                   <div style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:#9a5050;padding:6px 8px;border-top:1px solid rgba(150,80,80,.08);opacity:.7">Games</div>
@@ -1874,64 +1763,36 @@ body:has(.room.active) #tooltip { display:none !important }
               </div>
             </div>
 
-            <!-- ── SECTION DIVIDER: DOG SELECTOR TEASER ── -->
-            <div style="display:flex;align-items:center;gap:14px;margin-bottom:24px;margin-top:48px">
-              <div style="font-family:var(--font-m);font-size:9px;letter-spacing:4px;color:#c47070;text-transform:uppercase">02 · DOG SELECTOR</div>
-              <div style="flex:1;height:1px;background:rgba(150,80,80,.2)"></div>
-            </div>
-
-            <!-- Dog Selector teaser — clickable to switch tab -->
-            <div style="padding:22px;border:1px solid rgba(150,80,80,.18);cursor:pointer;transition:border-color .2s,background .2s,transform .2s;margin-bottom:48px" onclick="bpTab('dog')" onmouseover="this.style.borderColor='rgba(180,100,100,.4)';this.style.background='rgba(180,100,100,.05)';this.style.transform='translateY(-2px)'" onmouseout="this.style.borderColor='rgba(150,80,80,.18)';this.style.background='none';this.style.transform='none'">
-              <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px">
-                <div style="font-family:var(--font-m);font-size:9px;letter-spacing:3px;color:#b07070;text-transform:uppercase;opacity:.7">AI Product · Decision Confidence</div>
-                <div style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:#c47070;border:1px solid rgba(180,100,100,.3);padding:3px 10px;border-radius:20px;white-space:nowrap">● LIVE</div>
-              </div>
-              <div style="font-family:var(--font-h);font-size:18px;color:#3a1818;margin-bottom:8px">Dog Selector — Perfect Puppy</div>
-              <p style="font-size:13px;color:#7a4545;line-height:1.75;margin-bottom:12px">12 questions. 50+ breeds. The output isn't a recommendation — it's <em>permission</em>. The real product isn't breed matching. It's removing the fear of choosing wrong.</p>
-              <div style="font-family:var(--font-m);font-size:11px;color:#c47070;letter-spacing:1px">→ Click to open full case study</div>
-            </div>
-
             <!-- Closing -->
             <div style="border-top:1px solid rgba(150,80,80,.15);padding-top:28px">
               <div style="font-family:var(--font-h);font-size:clamp(15px,2.5vw,22px);line-height:1.6;color:#3a1818;margin-bottom:10px">Every product is an emotional contract.</div>
-              <div style="font-size:13px;color:#9a5050;line-height:1.75">The user gives attention. The product promises to be worth it. I design the terms.</div>
+              <div style="font-size:13px;color:#9a5050;line-height:1.75;margin-bottom:20px">The user gives attention. The product promises to be worth it. I design the terms.</div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap">
+                <button onclick="mochiDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:#c47070;color:#fff;padding:12px 24px;cursor:pointer;font-weight:700">▶ TRY LIVE</button>
+                <a href="https://mochi-ai-pet.lovable.app" target="_blank" style="font-family:var(--font-m);font-size:11px;letter-spacing:1px;color:#9a5050;border:1px solid rgba(150,80,80,.35);padding:11px 18px;text-decoration:none;transition:border-color .2s">↗ mochi-ai-pet.lovable.app</a>
+              </div>
             </div>
 
           </div>
         </div>
 
-        <!-- DOG SELECTOR FALLBACK -->
-        <div id="dog-fallback" style="position:absolute;inset:0;background:rgba(253,245,245,.98);overflow-y:auto;display:none;align-items:flex-start;justify-content:center;padding:40px 28px 80px">
-          <div style="max-width:720px;width:100%">
+        </div><!-- end left panel -->
+        <!-- SPLIT DIVIDER -->
+        <div style="background:rgba(180,100,100,.25)"></div>
+        <!-- RIGHT: Dog Selector -->
+        <div style="position:relative;overflow:hidden">
+        <iframe id="dog-frame" src="about:blank" style="width:100%;height:100%;border:none;display:none" allow="clipboard-write; microphone"></iframe>
+        <div id="dog-fallback" style="position:absolute;inset:0;background:rgba(253,245,245,.98);overflow-y:auto;padding:32px 28px 60px">
+          <div>
 
             <!-- Hero -->
             <div style="font-family:var(--font-m);font-size:9px;letter-spacing:4px;color:#b07070;text-transform:uppercase;margin-bottom:14px;opacity:.7">EMOTION &nbsp;·&nbsp; Decision Confidence &nbsp;·&nbsp; Human-Animal Bond</div>
-            <h2 style="font-family:var(--font-h);font-size:clamp(24px,5vw,40px);line-height:1.08;margin-bottom:10px;color:#3a1818">找到最适合你的狗狗<br><span style="font-size:.6em;color:#9a5050">Find your perfect dog companion.</span></h2>
-            <p style="font-size:13px;line-height:1.9;color:#7a4545;margin-bottom:16px;max-width:580px">12 lifestyle questions. 50+ breeds analyzed. Match percentages. Favorite and reject options. Dog Selector is a fast, free, judgment-free way to find the breed that actually fits your life — not just your aesthetic.</p>
-            <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:36px">
-              <button onclick="dogDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:#c47070;color:#fff;padding:12px 24px;cursor:pointer;font-weight:700">▶ TRY DOG SELECTOR</button>
-              <a href="https://perfect-puppy.lovable.app" target="_blank" style="font-family:var(--font-m);font-size:11px;letter-spacing:1px;color:#9a5050;border:1px solid rgba(150,80,80,.35);padding:11px 18px;text-decoration:none;transition:border-color .2s">↗ perfect-puppy.lovable.app</a>
-              <span style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#c47070;border:1px solid rgba(180,100,100,.3);padding:4px 10px;border-radius:20px">● LIVE</span>
-            </div>
-
-            <!-- ── PROJECT CATALOG ── -->
-            <div style="margin-bottom:36px;border:1px solid rgba(150,80,80,.15);overflow:hidden">
-              <div style="font-family:var(--font-m);font-size:9px;letter-spacing:3px;color:#b07070;text-transform:uppercase;padding:10px 16px;border-bottom:1px solid rgba(150,80,80,.1);background:rgba(180,100,100,.04)">Projects in this room</div>
-              <div style="display:grid;grid-template-columns:110px 1fr auto;align-items:center;padding:14px 16px;border-bottom:1px solid rgba(150,80,80,.08);cursor:pointer;transition:background .2s" onclick="bpTab('mochi')" onmouseover="this.style.background='rgba(180,100,100,.06)'" onmouseout="this.style.background='none'">
-                <div style="font-family:var(--font-m);font-size:8px;letter-spacing:2px;color:#b07070;opacity:.6;text-transform:uppercase;writing-mode:vertical-lr;height:40px;display:flex;align-items:center">AI COMPANION</div>
-                <div><div style="font-family:var(--font-h);font-size:15px;color:#3a1818;margin-bottom:3px">Mochi — Attachment Machine</div><div style="font-family:var(--font-m);font-size:10px;color:#9a5050;opacity:.7">0→1 · SOLO BUILD · AI COMPANION · EMOTIONAL DESIGN</div></div>
-                <div style="font-family:var(--font-m);font-size:9px;color:#c47070;border:1px solid rgba(180,100,100,.3);padding:3px 10px;border-radius:20px;white-space:nowrap">← Back</div>
-              </div>
-              <div style="display:grid;grid-template-columns:110px 1fr auto;align-items:center;padding:14px 16px;cursor:default;background:rgba(180,100,100,.04)">
-                <div style="font-family:var(--font-m);font-size:8px;letter-spacing:2px;color:#b07070;opacity:.6;text-transform:uppercase;writing-mode:vertical-lr;height:40px;display:flex;align-items:center">AI PRODUCT</div>
-                <div><div style="font-family:var(--font-h);font-size:15px;color:#3a1818;margin-bottom:3px">Dog Selector — Perfect Puppy</div><div style="font-family:var(--font-m);font-size:10px;color:#9a5050;opacity:.7">0→1 · SOLO BUILD · DECISION CONFIDENCE · QUIZ DESIGN</div></div>
-                <div style="font-family:var(--font-m);font-size:9px;color:#c47070;border:1px solid rgba(180,100,100,.3);padding:3px 10px;border-radius:20px">● LIVE</div>
-              </div>
-            </div>
+            <h2 style="font-family:var(--font-h);font-size:clamp(22px,3vw,36px);line-height:1.08;margin-bottom:10px;color:#3a1818">Find Your Perfect Dog Companion.</h2>
+            <p style="font-size:13px;line-height:1.9;color:#7a4545;margin-bottom:32px">12 lifestyle questions. 50+ breeds analyzed. Match percentages. Favorite and reject options. A fast, free, judgment-free way to find the breed that actually fits your life — not just your aesthetic.</p>
 
             <!-- ── SECTION DIVIDER ── -->
             <div style="display:flex;align-items:center;gap:14px;margin-bottom:28px">
-              <div style="font-family:var(--font-m);font-size:9px;letter-spacing:4px;color:#c47070;text-transform:uppercase">01 · DOG SELECTOR</div>
+              <div style="font-family:var(--font-m);font-size:9px;letter-spacing:4px;color:#c47070;text-transform:uppercase">DOG SELECTOR</div>
               <div style="flex:1;height:1px;background:rgba(150,80,80,.2)"></div>
             </div>
 
@@ -1943,43 +1804,43 @@ body:has(.room.active) #tooltip { display:none !important }
                 <!-- Screenshot 1: Home page -->
                 <div style="flex:0 0 220px;scroll-snap-align:start;border:1px solid rgba(79,195,247,.2);background:rgba(15,20,35,.9);border-radius:4px;overflow:hidden">
                   <div style="padding:10px 12px;border-bottom:1px solid rgba(79,195,247,.1)">
-                    <span style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;opacity:.4">首页 · HOME</span>
+                    <span style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;opacity:.4">HOME</span>
                   </div>
                   <div style="padding:20px 14px;text-align:center">
                     <div style="font-size:32px;margin-bottom:12px">🐾</div>
-                    <div style="font-family:var(--font-h);font-size:15px;margin-bottom:6px;line-height:1.3">找到最适合你的<br>狗狗</div>
-                    <div style="font-size:10px;opacity:.5;margin-bottom:16px;line-height:1.6">回答几个简单问题<br>为你精准匹配完美伴侣</div>
+                    <div style="font-family:var(--font-h);font-size:15px;margin-bottom:6px;line-height:1.3">Find Your Perfect<br>Dog</div>
+                    <div style="font-size:10px;opacity:.5;margin-bottom:16px;line-height:1.6">Answer a few questions<br>Get your perfect match</div>
                     <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;margin-bottom:16px">
                       <div style="border:1px solid rgba(79,195,247,.2);padding:6px 4px;border-radius:2px">
                         <div style="font-size:14px;font-weight:700;color:#4fc3f7">50+</div>
-                        <div style="font-size:8px;opacity:.4">犬种</div>
+                        <div style="font-size:8px;opacity:.4">Breeds</div>
                       </div>
                       <div style="border:1px solid rgba(79,195,247,.2);padding:6px 4px;border-radius:2px">
                         <div style="font-size:14px;font-weight:700;color:#4fc3f7">12</div>
-                        <div style="font-size:8px;opacity:.4">问题</div>
+                        <div style="font-size:8px;opacity:.4">Questions</div>
                       </div>
                       <div style="border:1px solid rgba(79,195,247,.2);padding:6px 4px;border-radius:2px">
-                        <div style="font-size:14px;font-weight:700;color:#69f0ae">免费</div>
+                        <div style="font-size:14px;font-weight:700;color:#69f0ae">Free</div>
                         <div style="font-size:8px;opacity:.4">100%</div>
                       </div>
                     </div>
-                    <div style="background:#4fc3f7;color:#000;padding:8px 16px;font-family:var(--font-m);font-size:10px;letter-spacing:2px;font-weight:700;border-radius:2px">开始匹配</div>
+                    <div style="background:#4fc3f7;color:#000;padding:8px 16px;font-family:var(--font-m);font-size:10px;letter-spacing:2px;font-weight:700;border-radius:2px">Start</div>
                   </div>
                 </div>
 
                 <!-- Screenshot 2: Quiz question -->
                 <div style="flex:0 0 220px;scroll-snap-align:start;border:1px solid rgba(79,195,247,.2);background:rgba(15,20,35,.9);border-radius:4px;overflow:hidden">
                   <div style="padding:10px 12px;border-bottom:1px solid rgba(79,195,247,.1);display:flex;align-items:center;justify-content:space-between">
-                    <span style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;opacity:.4">问卷 · QUIZ</span>
+                    <span style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;opacity:.4">QUIZ</span>
                     <span style="font-size:9px;opacity:.4">5 / 12</span>
                   </div>
                   <div style="padding:14px">
                     <div style="height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin-bottom:14px"><div style="width:42%;height:100%;background:#4fc3f7;border-radius:2px"></div></div>
-                    <div style="font-size:12px;font-weight:500;margin-bottom:14px;line-height:1.5">你的居住空间有多大？</div>
+                    <div style="font-size:12px;font-weight:500;margin-bottom:14px;line-height:1.5">How large is your living space?</div>
                     <div style="display:flex;flex-direction:column;gap:6px">
-                      <div style="border:1px solid rgba(79,195,247,.3);padding:8px 10px;font-size:11px;border-radius:2px;background:rgba(79,195,247,.08);color:#4fc3f7">🏠 公寓 / 小空间</div>
-                      <div style="border:1px solid rgba(255,255,255,.1);padding:8px 10px;font-size:11px;border-radius:2px;opacity:.6">🏡 普通住宅</div>
-                      <div style="border:1px solid rgba(255,255,255,.1);padding:8px 10px;font-size:11px;border-radius:2px;opacity:.6">🌳 大宅 / 有院子</div>
+                      <div style="border:1px solid rgba(79,195,247,.3);padding:8px 10px;font-size:11px;border-radius:2px;background:rgba(79,195,247,.08);color:#4fc3f7">🏠 Apartment / Small space</div>
+                      <div style="border:1px solid rgba(255,255,255,.1);padding:8px 10px;font-size:11px;border-radius:2px;opacity:.6">🏡 Standard house</div>
+                      <div style="border:1px solid rgba(255,255,255,.1);padding:8px 10px;font-size:11px;border-radius:2px;opacity:.6">🌳 Large home / Yard</div>
                     </div>
                   </div>
                 </div>
@@ -1987,16 +1848,16 @@ body:has(.room.active) #tooltip { display:none !important }
                 <!-- Screenshot 3: More questions -->
                 <div style="flex:0 0 220px;scroll-snap-align:start;border:1px solid rgba(79,195,247,.2);background:rgba(15,20,35,.9);border-radius:4px;overflow:hidden">
                   <div style="padding:10px 12px;border-bottom:1px solid rgba(79,195,247,.1);display:flex;align-items:center;justify-content:space-between">
-                    <span style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;opacity:.4">问卷 · QUIZ</span>
+                    <span style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;opacity:.4">QUIZ</span>
                     <span style="font-size:9px;opacity:.4">9 / 12</span>
                   </div>
                   <div style="padding:14px">
                     <div style="height:3px;background:rgba(255,255,255,.1);border-radius:2px;margin-bottom:14px"><div style="width:75%;height:100%;background:#4fc3f7;border-radius:2px"></div></div>
-                    <div style="font-size:12px;font-weight:500;margin-bottom:14px;line-height:1.5">你每天能花多少时间遛狗？</div>
+                    <div style="font-size:12px;font-weight:500;margin-bottom:14px;line-height:1.5">How much time can you walk per day?</div>
                     <div style="display:flex;flex-direction:column;gap:6px">
-                      <div style="border:1px solid rgba(255,255,255,.1);padding:8px 10px;font-size:11px;border-radius:2px;opacity:.6">⏱ 少于30分钟</div>
-                      <div style="border:1px solid rgba(79,195,247,.3);padding:8px 10px;font-size:11px;border-radius:2px;background:rgba(79,195,247,.08);color:#4fc3f7">🚶 30–60分钟</div>
-                      <div style="border:1px solid rgba(255,255,255,.1);padding:8px 10px;font-size:11px;border-radius:2px;opacity:.6">🏃 1小时以上</div>
+                      <div style="border:1px solid rgba(255,255,255,.1);padding:8px 10px;font-size:11px;border-radius:2px;opacity:.6">⏱ Under 30 min</div>
+                      <div style="border:1px solid rgba(79,195,247,.3);padding:8px 10px;font-size:11px;border-radius:2px;background:rgba(79,195,247,.08);color:#4fc3f7">🚶 30–60 min</div>
+                      <div style="border:1px solid rgba(255,255,255,.1);padding:8px 10px;font-size:11px;border-radius:2px;opacity:.6">🏃 Over 1 hour</div>
                     </div>
                   </div>
                 </div>
@@ -2004,29 +1865,29 @@ body:has(.room.active) #tooltip { display:none !important }
                 <!-- Screenshot 4: Results -->
                 <div style="flex:0 0 220px;scroll-snap-align:start;border:1px solid rgba(79,195,247,.2);background:rgba(15,20,35,.9);border-radius:4px;overflow:hidden">
                   <div style="padding:10px 12px;border-bottom:1px solid rgba(79,195,247,.1)">
-                    <span style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;opacity:.4">结果 · RESULTS</span>
+                    <span style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;opacity:.4">RESULTS</span>
                   </div>
                   <div style="padding:14px">
                     <div style="text-align:center;margin-bottom:12px">
                       <div style="font-size:28px;margin-bottom:4px">🐩</div>
-                      <div style="font-family:var(--font-h);font-size:14px;margin-bottom:2px">比熊犬</div>
-                      <div style="font-size:11px;color:#69f0ae;font-weight:700">85% 匹配</div>
+                      <div style="font-family:var(--font-h);font-size:14px;margin-bottom:2px">Bichon Frise</div>
+                      <div style="font-size:11px;color:#69f0ae;font-weight:700">85% Match</div>
                     </div>
                     <div style="display:flex;flex-direction:column;gap:5px">
                       <div>
-                        <div style="display:flex;justify-content:space-between;font-size:9px;margin-bottom:2px;opacity:.5"><span>比熊犬 Bichon Frise</span><span>85%</span></div>
+                        <div style="display:flex;justify-content:space-between;font-size:9px;margin-bottom:2px;opacity:.5"><span>Bichon Frise</span><span>85%</span></div>
                         <div style="height:3px;background:rgba(255,255,255,.1);border-radius:2px"><div style="width:85%;height:100%;background:#69f0ae;border-radius:2px"></div></div>
                       </div>
                       <div>
-                        <div style="display:flex;justify-content:space-between;font-size:9px;margin-bottom:2px;opacity:.5"><span>柯基 Corgi</span><span>73%</span></div>
+                        <div style="display:flex;justify-content:space-between;font-size:9px;margin-bottom:2px;opacity:.5"><span>Corgi</span><span>73%</span></div>
                         <div style="height:3px;background:rgba(255,255,255,.1);border-radius:2px"><div style="width:73%;height:100%;background:#4fc3f7;border-radius:2px"></div></div>
                       </div>
                       <div>
-                        <div style="display:flex;justify-content:space-between;font-size:9px;margin-bottom:2px;opacity:.5"><span>博美 Pomeranian</span><span>61%</span></div>
+                        <div style="display:flex;justify-content:space-between;font-size:9px;margin-bottom:2px;opacity:.5"><span>Pomeranian</span><span>61%</span></div>
                         <div style="height:3px;background:rgba(255,255,255,.1);border-radius:2px"><div style="width:61%;height:100%;background:#4fc3f7;border-radius:2px"></div></div>
                       </div>
                       <div>
-                        <div style="display:flex;justify-content:space-between;font-size:9px;margin-bottom:2px;opacity:.5"><span>贵宾 Poodle</span><span>54%</span></div>
+                        <div style="display:flex;justify-content:space-between;font-size:9px;margin-bottom:2px;opacity:.5"><span>Poodle</span><span>54%</span></div>
                         <div style="height:3px;background:rgba(255,255,255,.1);border-radius:2px"><div style="width:54%;height:100%;background:rgba(79,195,247,.5);border-radius:2px"></div></div>
                       </div>
                     </div>
@@ -2096,7 +1957,7 @@ body:has(.room.active) #tooltip { display:none !important }
 
             <!-- Who it's for -->
             <div style="margin-bottom:36px;padding:18px 22px;border-left:3px solid rgba(180,100,100,.35);background:rgba(180,100,100,.03)">
-              <div style="font-family:var(--font-m);font-size:9px;letter-spacing:3px;color:#c47070;text-transform:uppercase;margin-bottom:10px;opacity:.8">05 · 适合哪些人</div>
+              <div style="font-family:var(--font-m);font-size:9px;letter-spacing:3px;color:#c47070;text-transform:uppercase;margin-bottom:10px;opacity:.8">05 · Who It's For</div>
               <p style="font-size:13px;color:#7a4545;line-height:1.85">First-time dog owners who don't know where to start. Families debating between a dozen breeds. People with allergies, small apartments, or busy schedules who need a dog that actually fits their life — not just Instagram. Dog Selector works for most people because it asks about <strong style="color:#3a1818">lifestyle, not preference</strong>. You don't need to already know what you want.</p>
             </div>
 
@@ -2105,15 +1966,16 @@ body:has(.room.active) #tooltip { display:none !important }
               <div style="font-family:var(--font-h);font-size:clamp(15px,2.5vw,22px);line-height:1.6;color:#3a1818;margin-bottom:10px">A 3-minute quiz. A decision you can feel good about.</div>
               <div style="font-size:13px;color:#9a5050;line-height:1.75;margin-bottom:20px">The hardest part of choosing a dog isn't research — it's committing. Dog Selector makes committing easy.</div>
               <div style="display:flex;gap:10px;flex-wrap:wrap">
-                <button onclick="dogDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:#c47070;color:#fff;padding:12px 24px;cursor:pointer;font-weight:700">▶ TRY IT NOW</button>
+                <button onclick="dogDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:#c47070;color:#fff;padding:12px 24px;cursor:pointer;font-weight:700">▶ TRY LIVE</button>
                 <a href="https://perfect-puppy.lovable.app" target="_blank" style="font-family:var(--font-m);font-size:11px;letter-spacing:1px;color:#9a5050;border:1px solid rgba(150,80,80,.35);padding:11px 18px;text-decoration:none;transition:border-color .2s">↗ perfect-puppy.lovable.app</a>
               </div>
             </div>
 
-          </div>
-        </div>
-      </div>
-    </div>
+          </div><!-- end dog content inner -->
+        </div><!-- end dog-fallback -->
+        </div><!-- end right panel -->
+      </div><!-- end split body -->
+    </div><!-- end room-blueprint -->
 
     <!-- THE SIGNAL ROOM (hidden) -->
     <div class="room" id="room-signal">
@@ -3654,6 +3516,7 @@ function exitBuilding() {
 function showRoom(key) {
   const b = BUILDINGS[key];
   if (!b) return;
+  document.querySelectorAll('.room.active').forEach(r => r.classList.remove('active'));
   const container = document.getElementById('interior-container');
   container.classList.add('active');
   const room = document.getElementById(b.roomId);
@@ -3951,7 +3814,7 @@ const PANELS = {
     <p style="font-family:var(--font-m);font-size:11px;opacity:.4;letter-spacing:1px">SKILLS &nbsp;&middot;&nbsp; Financial modeling &middot; DCF &middot; Power BI &middot; Primary research &middot; M&amp;A &middot; Capital markets</p>
   `,
   blueprint_cw: `
-    <div class="tag" style="background:rgba(79,195,247,.1);color:var(--blue);margin-bottom:20px">JAN &ndash; AUG 2021 &nbsp;&middot;&nbsp; CHENGDU</div>
+    <div class="tag" style="background:rgba(79,195,247,.1);color:var(--blue);margin-bottom:20px">FEB &ndash; JUL 2021 &nbsp;&middot;&nbsp; CHENGDU</div>
     <h2 style="font-size:22px;margin-bottom:6px">Cushman &amp; Wakefield</h2>
     <p style="font-family:var(--font-m);font-size:11px;opacity:.4;letter-spacing:2px;margin-bottom:24px">REAL ESTATE CONSULTANT &nbsp;&middot;&nbsp; CHENGDU OFFICE</p>
     <p><strong style="opacity:.9">The project:</strong> Co-led a 7.5-acre multiuse development project from concept to completion — a $10M engagement that required overseeing site strategy, coordinating the due diligence team, and synthesizing all findings into a 118-page client deliverable.</p>
@@ -3981,7 +3844,7 @@ const PANELS = {
     <p style="font-family:var(--font-m);font-size:11px;opacity:.4;letter-spacing:1px">SKILLS &nbsp;&middot;&nbsp; Financial modeling &middot; DCF &middot; Power BI &middot; Primary research &middot; M&amp;A &middot; Capital markets</p>
   `,
   lab_cw: `
-    <div class="tag" style="background:rgba(79,195,247,.1);color:var(--blue);margin-bottom:20px">JAN &ndash; AUG 2021 &nbsp;&middot;&nbsp; CHENGDU</div>
+    <div class="tag" style="background:rgba(79,195,247,.1);color:var(--blue);margin-bottom:20px">FEB &ndash; JUL 2021 &nbsp;&middot;&nbsp; CHENGDU</div>
     <h2 style="font-size:22px;margin-bottom:6px">Cushman &amp; Wakefield</h2>
     <p style="font-family:var(--font-m);font-size:11px;opacity:.4;letter-spacing:2px;margin-bottom:24px">REAL ESTATE CONSULTANT &nbsp;&middot;&nbsp; CHENGDU OFFICE</p>
     <p><strong style="opacity:.9">The project:</strong> Co-led a 7.5-acre multiuse development project — a $10M engagement requiring site strategy, due diligence coordination, and a 118-page client deliverable.</p>
@@ -4300,97 +4163,43 @@ function h1bDemo() {
   if (!frame.src || frame.src === 'about:blank' || frame.src === location.href) frame.src = H1B_URL;
   frame.style.display = 'block';
   if (fallback) fallback.style.display = 'none';
-  const tryBtn = document.getElementById('law-try-btn');
+  const tryBtn = document.getElementById('h1b-try-btn');
   if (tryBtn) { tryBtn.textContent = '✕ CLOSE'; tryBtn.onclick = h1bClose; }
 }
 function h1bClose() {
   const frame = document.getElementById('h1b-frame');
   if (frame) frame.style.display = 'none';
   const fallback = document.getElementById('h1b-fallback');
-  if (fallback) fallback.style.display = 'flex';
-  const tryBtn = document.getElementById('law-try-btn');
-  if (tryBtn) { tryBtn.textContent = '▶ TRY LIVE'; tryBtn.onclick = h1bDemo; }
+  if (fallback) fallback.style.display = 'block';
+  const tryBtn = document.getElementById('h1b-try-btn');
+  if (tryBtn) { tryBtn.textContent = '▶ TRY'; tryBtn.onclick = h1bDemo; }
 }
 function h1bOpen() {
   window.open(H1B_URL, '_blank');
 }
 
 // ═══════════════════════════════════════
-// SYSTEMS ROOM — TAB CONTROLS
+// SYSTEMS ROOM — VOICE URL
 // ═══════════════════════════════════════
 const VOICE_URL = 'https://voice-ai-agents.lovable.app';
-let _lawActiveTab = 'h1b';
-
-function lawTab(tab) {
-  _lawActiveTab = tab;
-  const isH1b = tab === 'h1b';
-
-  // Tab button styles
-  const tH1b   = document.getElementById('law-tab-h1b');
-  const tVoice = document.getElementById('law-tab-voice');
-  if (tH1b) {
-    tH1b.style.background  = isH1b ? '#4a7fa8' : 'rgba(74,106,138,.2)';
-    tH1b.style.color       = isH1b ? '#fff' : 'rgba(74,106,138,.55)';
-    tH1b.style.fontWeight  = isH1b ? '600' : '400';
-  }
-  if (tVoice) {
-    tVoice.style.background  = !isH1b ? '#7c5cbf' : 'rgba(74,106,138,.2)';
-    tVoice.style.color       = !isH1b ? '#fff' : 'rgba(74,106,138,.55)';
-    tVoice.style.fontWeight  = !isH1b ? '600' : '400';
-  }
-
-  // Topbar title
-  const title = document.getElementById('law-topbar-title');
-  if (title) title.textContent = isH1b ? 'H-1B Compass' : 'VoiceAI — Business Voice Agents';
-
-  // Action buttons
-  const tryBtn  = document.getElementById('law-try-btn');
-  const openBtn = document.getElementById('law-open-btn');
-  if (tryBtn) {
-    tryBtn.textContent = isH1b ? '▶ TRY LIVE' : '▶ TRY LIVE';
-    tryBtn.style.background = isH1b ? '#4a7fa8' : '#7c5cbf';
-    tryBtn.onclick = isH1b ? h1bDemo : voiceDemo;
-  }
-  if (openBtn) { openBtn.onclick = isH1b ? h1bOpen : voiceOpen; }
-
-  // Hide everything
-  ['h1b-frame','voice-frame'].forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-  });
-  const hFallback = document.getElementById('h1b-fallback');
-  const vFallback = document.getElementById('voice-fallback');
-  const overlay   = document.getElementById('h1b-demo-overlay');
-  if (hFallback) hFallback.style.display = 'none';
-  if (vFallback) vFallback.style.display = 'none';
-  if (overlay)   overlay.style.display   = 'none';
-
-  // Show correct fallback
-  if (isH1b) {
-    if (hFallback) hFallback.style.display = 'flex';
-  } else {
-    if (vFallback) vFallback.style.display = 'flex';
-  }
-}
 
 function voiceDemo() {
-  _lawActiveTab = 'voice';
   const frame = document.getElementById('voice-frame');
   const fallback = document.getElementById('voice-fallback');
   if (!frame) return;
   if (!frame.src || frame.src === 'about:blank' || frame.src === location.href) frame.src = VOICE_URL;
   frame.style.display = 'block';
   if (fallback) fallback.style.display = 'none';
-  const tryBtn = document.getElementById('law-try-btn');
+  const tryBtn = document.getElementById('voice-try-btn');
   if (tryBtn) { tryBtn.textContent = '✕ CLOSE'; tryBtn.onclick = voiceClose; }
 }
 function voiceClose() {
   const frame = document.getElementById('voice-frame');
   if (frame) frame.style.display = 'none';
   const fallback = document.getElementById('voice-fallback');
-  if (fallback) fallback.style.display = 'flex';
-  const tryBtn = document.getElementById('law-try-btn');
-  if (tryBtn) { tryBtn.textContent = '▶ TRY LIVE'; tryBtn.style.background = '#b388ff'; tryBtn.onclick = voiceDemo; }
+  if (fallback) fallback.style.display = 'block';
+  const tryBtn = document.getElementById('voice-try-btn');
+  if (tryBtn) { tryBtn.textContent = '▶ TRY'; tryBtn.onclick = voiceDemo; }
 }
 function voiceOpen() { window.open(VOICE_URL, '_blank'); }
 
@@ -4455,44 +4264,42 @@ function bpTab(tab) {
 }
 
 function mochiDemo() {
-  _bpActiveTab = 'mochi';
   const frame = document.getElementById('bp-frame');
   const fallback = document.getElementById('bp-fallback');
   if (!frame) return;
   if (!frame.src || frame.src === 'about:blank' || frame.src === location.href) frame.src = MOCHI_URL;
   frame.style.display = 'block';
   if (fallback) fallback.style.display = 'none';
-  const tryBtn = document.getElementById('bp-try-btn');
-  if (tryBtn) { tryBtn.textContent = '✕ CLOSE'; tryBtn.onclick = mochiClose; }
+  const btn = document.getElementById('bp-try-btn');
+  if (btn) { btn.textContent = '✕ CLOSE'; btn.onclick = mochiClose; }
 }
 function mochiClose() {
   const frame = document.getElementById('bp-frame');
   if (frame) frame.style.display = 'none';
   const fallback = document.getElementById('bp-fallback');
-  if (fallback) fallback.style.display = 'flex';
-  const tryBtn = document.getElementById('bp-try-btn');
-  if (tryBtn) { tryBtn.textContent = '▶ TRY LIVE'; tryBtn.onclick = mochiDemo; }
+  if (fallback) fallback.style.display = 'block';
+  const btn = document.getElementById('bp-try-btn');
+  if (btn) { btn.textContent = '▶ TRY'; btn.onclick = mochiDemo; }
 }
 function mochiOpen() { window.open(MOCHI_URL, '_blank'); }
 
 function dogDemo() {
-  _bpActiveTab = 'dog';
   const frame = document.getElementById('dog-frame');
   const fallback = document.getElementById('dog-fallback');
   if (!frame) return;
   if (!frame.src || frame.src === 'about:blank' || frame.src === location.href) frame.src = DOG_URL;
   frame.style.display = 'block';
   if (fallback) fallback.style.display = 'none';
-  const tryBtn = document.getElementById('bp-try-btn');
-  if (tryBtn) { tryBtn.textContent = '✕ CLOSE'; tryBtn.onclick = dogClose; }
+  const btn = document.getElementById('dog-try-btn');
+  if (btn) { btn.textContent = '✕ CLOSE'; btn.onclick = dogClose; }
 }
 function dogClose() {
   const frame = document.getElementById('dog-frame');
   if (frame) frame.style.display = 'none';
   const fallback = document.getElementById('dog-fallback');
-  if (fallback) fallback.style.display = 'flex';
-  const tryBtn = document.getElementById('bp-try-btn');
-  if (tryBtn) { tryBtn.textContent = '▶ TRY LIVE'; tryBtn.onclick = dogDemo; }
+  if (fallback) fallback.style.display = 'block';
+  const btn = document.getElementById('dog-try-btn');
+  if (btn) { btn.textContent = '▶ TRY'; btn.onclick = dogDemo; }
 }
 function dogOpen() { window.open(DOG_URL, '_blank'); }
 // Legacy stubs (kept so old inline onclick refs don't error)
@@ -4753,7 +4560,7 @@ function h1bShow(report, zip) {
   }
 
   // Typewriter
-  const TEXT = 'Building Systems for Human Intelligence';
+  const TEXT = 'Turning complex systems into AI-powered decision scaffolding.';
   let typed = 0;
   let typeStarted = false;
   let introDone = false;
