@@ -3,8 +3,8 @@
   "configurations": [
     {
       "name": "personal-website",
-      "runtimeExecutable": "ruby",
-      "runtimeArgs": ["-e", "require 'webrick'; WEBrick::HTTPServer.new(:Port=>9123,:DocumentRoot=>'/tmp/site_preview').start"],
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "-l", "9123", "."],
       "port": 9123
     }
   ]

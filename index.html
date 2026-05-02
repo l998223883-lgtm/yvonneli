@@ -26,12 +26,13 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 #back-btn.visible{pointer-events:auto;opacity:1}
 #back-btn:hover{border-color:#6a7a5a;background:rgba(237,232,222,1)}
 #interior-container{position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity .4s ease;z-index:15}
-#interior-container.active{pointer-events:auto;opacity:1;background:var(--bg)}
+#interior-container.active{opacity:1}
 .room{display:none;position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden}
-.room.active{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--bg)}
+.room.active{display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,#dddbe8 0%,#e5e2ec 30%,#edeae4 70%,#ece8e0 100%);pointer-events:auto}
 #room-law.active,#room-blueprint.active{align-items:stretch;justify-content:flex-start}
-#room-lab.active,#room-archive.active,#room-atelier.active{overflow-y:auto;align-items:center;justify-content:flex-start}
-#room-lab .room-content,#room-archive .room-content,#room-atelier .room-content{max-height:none;overflow-y:visible}
+#room-lab.active,#room-atelier.active,#room-signal.active{overflow-y:auto;align-items:center;justify-content:flex-start}
+#room-archive.active{align-items:stretch;justify-content:flex-start}
+#room-lab .room-content,#room-atelier .room-content,#room-signal .room-content{max-height:none;overflow-y:visible}
 .room-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0}
 .room-content{position:relative;z-index:1;width:100%;max-width:900px;padding:60px 32px 40px;overflow-y:auto;max-height:100vh}
 .room-title{font-family:var(--font-h);font-size:clamp(28px,5vw,42px);margin-bottom:8px;letter-spacing:1px}
@@ -261,24 +262,45 @@ html,body{width:100%;height:100%;overflow:hidden;background:var(--bg);font-famil
 /* ── ALL ROOMS LIGHT THEME ── */
 #room-archive,#room-atelier,#room-law,#room-blueprint,#room-signal{
   --paper:#1a1825;--ink:#1a1825;
-  --bg:rgba(240,237,246,.45);
+  --bg:#edeae4;
   --teal:#0a7a6e;--coral:#8a2020;--amber:#7a5500;--purple:#4a2070;--blue:#1a5090;
   color:#1a1825;
 }
 #room-archive.active,#room-atelier.active,#room-signal.active{
   background:linear-gradient(160deg,#dddbe8 0%,#e5e2ec 30%,#edeae4 70%,#ece8e0 100%)!important
 }
-#room-archive .room-bg,#room-atelier .room-bg,#room-signal .room-bg{background:transparent!important}
+#room-archive .room-bg,#room-atelier .room-bg,#room-signal .room-bg,
+#room-law .room-bg,#room-blueprint .room-bg{
+  background:linear-gradient(160deg,#dddbe8 0%,#e5e2ec 30%,#edeae4 70%,#ece8e0 100%)!important
+}
 #room-law.active,#room-blueprint.active{
   background:linear-gradient(160deg,#dddbe8 0%,#e5e2ec 30%,#edeae4 70%,#ece8e0 100%)!important
 }
 /* Topbars */
 #law-topbar{background:rgba(228,225,240,.97)!important;border-bottom-color:rgba(74,68,96,.18)!important}
 #bp-topbar{background:rgba(228,225,240,.97)!important;border-bottom-color:rgba(74,68,96,.18)!important}
+#arch-topbar{background:rgba(228,225,240,.97)!important;border-bottom-color:rgba(74,68,96,.18)!important}
+/* All text in light-theme rooms → dark (overrides inline color:#f4f1ea) */
+#room-archive *,#room-atelier *,#room-law *,#room-blueprint *,#room-signal *{color:#1a1825!important}
+/* Keep TRY buttons readable: dark text on purple bg */
+#room-archive [style*="background:var(--teal)"],#room-law [style*="background:var(--teal)"],
+#room-blueprint [style*="background:var(--teal)"]{color:#0a0e1a!important}
+/* Keep colored accents: teal spans, amber, coral labels */
+#room-law .cs-h,#room-blueprint .cs-h{color:#1a1825!important}
+/* Divider lines between panels */
+#room-law [style*="background:rgba(244,241,234,.1)"],
+#room-blueprint [style*="background:rgba(244,241,234,.1)"]{background:rgba(74,68,96,.15)!important}
+/* archive split panels — adapt cs-* classes to light theme */
+#arc-voice-fallback .cs-sec,#arc-water-fallback .cs-sec{border-bottom-color:rgba(26,24,16,.08)!important}
+#arc-voice-fallback .cs-label,#arc-water-fallback .cs-label{color:rgba(26,24,16,.38)!important}
+#arc-voice-fallback .cs-label::before,#arc-water-fallback .cs-label::before{background:rgba(26,24,16,.2)!important}
+#arc-voice-fallback .cs-h,#arc-water-fallback .cs-h{color:#1a1825!important}
 /* Fallback panel backgrounds */
-#h1b-fallback,#voice-fallback,#bp-fallback,#dog-fallback{background:transparent!important}
+#h1b-fallback,#voice-fallback{background:linear-gradient(160deg,#dddbe8 0%,#e5e2ec 30%,#edeae4 70%,#ece8e0 100%)!important}
+#bp-fallback,#dog-fallback{background:transparent!important}
+#arc-voice-fallback,#arc-water-fallback{background:linear-gradient(160deg,#dddbe8 0%,#e5e2ec 30%,#edeae4 70%,#ece8e0 100%)!important}
 /* All text inside fallback panels → dark */
-#h1b-fallback *,#voice-fallback *,#bp-fallback *,#bp-fallback *{color:#1a1825!important}
+#h1b-fallback *,#voice-fallback *,#bp-fallback *,#bp-fallback *,#arc-voice-fallback *,#arc-water-fallback *{color:#1a1825!important}
 /* dog-fallback: keep phone mockup cards as dark "screenshot" displays */
 #dog-fallback{color:#1a1825}
 #dog-fallback>div>div:first-child,
@@ -543,7 +565,7 @@ body:has(#lab-facade.active) #tooltip { display:none !important }
   box-shadow:0 0 60px rgba(230,230,210,.35), 0 0 120px rgba(230,230,210,.18);
   pointer-events:none;z-index:1;
 }
-#lab-facade.active{display:block;animation:facadeFadeIn .8s ease-out}
+#lab-facade.active{display:block;animation:facadeFadeIn .8s ease-out;pointer-events:auto}
 @keyframes facadeFadeIn{from{opacity:0}to{opacity:1}}
 
 .facade-sky{
@@ -910,6 +932,224 @@ body:has(#lab-facade.active) #tooltip { display:none !important }
   0%,100%{transform:translate(-50%, -50%) translateY(0)}
   50%{transform:translate(-50%, -50%) translateY(-6px)}
 }
+
+/* ═══════════════════════════════════════════════════════════════════
+   DESIGN SYSTEM — 5 BUILDINGS UNIFIED TEMPLATE
+   ───────────────────────────────────────────────────────────────────
+   All rooms use light purple gradient theme.
+   Use .ds-* classes as defaults for any new room content.
+   Override accent color via --ds-accent if needed per project.
+   ═══════════════════════════════════════════════════════════════════ */
+
+/* ── DESIGN TOKENS ──────────────────────────────────────── */
+:root{
+  /* Backgrounds */
+  --ds-room-bg:linear-gradient(160deg,#dddbe8 0%,#e5e2ec 30%,#edeae4 70%,#ece8e0 100%);
+  --ds-topbar-bg:rgba(228,225,240,.97);
+  --ds-card-bg:rgba(108,71,255,.12);
+  --ds-card-bg-hover:rgba(108,71,255,.18);
+  --ds-grid-gap:rgba(74,68,96,.12);
+
+  /* Accent / brand */
+  --ds-accent:#6c47ff;
+  --ds-accent-dim:rgba(108,71,255,.7);
+  --ds-accent-faint:rgba(108,71,255,.35);
+
+  /* Text */
+  --ds-text:#1a1825;
+  --ds-text-body:rgba(26,24,16,.75);
+  --ds-text-muted:rgba(26,24,16,.5);
+  --ds-text-faint:rgba(26,24,16,.35);
+
+  /* Borders / dividers */
+  --ds-border:rgba(74,68,96,.18);
+  --ds-border-strong:rgba(74,68,96,.35);
+
+  /* Buttons */
+  --ds-btn-bg:rgba(74,68,96,.12);
+  --ds-btn-border:rgba(74,68,96,.35);
+  --ds-btn-bg-hover:rgba(74,68,96,.22);
+
+  /* Typography scale */
+  --ds-label-sz:9px;
+  --ds-body-sm:11px;
+  --ds-body:12px;
+  --ds-body-md:13px;
+  --ds-h3:clamp(16px,2.2vw,22px);
+  --ds-h2:clamp(18px,2.5vw,26px);
+  --ds-h1:clamp(26px,3.5vw,42px);
+}
+
+/* ── SECTION WRAPPER ──────────────────────────────────────── */
+.ds-sec{padding:28px 0;border-bottom:1px solid var(--ds-border)}
+.ds-sec:last-child{border-bottom:none;padding-bottom:48px}
+
+/* ── SECTION LABEL (small caps with line) ──────────────────── */
+.ds-label{
+  font-family:var(--font-m);font-size:var(--ds-label-sz);
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--ds-text-faint);margin-bottom:14px;
+  display:flex;align-items:center;gap:10px
+}
+.ds-label::before{
+  content:'';display:inline-block;width:16px;height:1px;
+  background:var(--ds-accent-faint)
+}
+
+/* ── META ROW (category · year · status) ───────────────────── */
+.ds-meta{
+  font-family:var(--font-m);font-size:var(--ds-label-sz);
+  letter-spacing:2px;text-transform:uppercase;
+  color:var(--ds-accent);opacity:.8;margin-bottom:16px
+}
+.ds-live-dot{
+  display:inline-block;width:6px;height:6px;border-radius:50%;
+  background:#2db87a;margin-right:4px;
+  animation:ds-pulse 2s ease-in-out infinite
+}
+@keyframes ds-pulse{0%,100%{opacity:1}50%{opacity:.5}}
+
+/* ── HEADINGS ──────────────────────────────────────────────── */
+.ds-h1{font-family:var(--font-h);font-size:var(--ds-h1);line-height:1.08;letter-spacing:-.3px;color:var(--ds-text);margin-bottom:12px}
+.ds-h2{font-family:var(--font-h);font-size:var(--ds-h2);line-height:1.12;color:var(--ds-text);margin-bottom:20px}
+.ds-h3{font-family:var(--font-h);font-size:var(--ds-h3);color:var(--ds-text);margin-bottom:8px}
+.ds-em{font-style:italic;color:var(--ds-accent)}
+
+/* ── BODY TEXT ─────────────────────────────────────────────── */
+.ds-body{font-size:var(--ds-body-md);line-height:1.75;color:var(--ds-text-body)}
+.ds-body-sm{font-size:var(--ds-body);line-height:1.75;color:var(--ds-text-body)}
+.ds-muted{font-size:var(--ds-body-sm);line-height:1.65;color:var(--ds-text-muted)}
+
+/* ── CARD — p3 unified text frame ──────────────────────────── */
+/* Usage: <div class="ds-card"><div class="ds-card-label">Label</div><p class="ds-body">...</p></div> */
+.ds-card{background:var(--ds-card-bg);padding:18px}
+.ds-card+.ds-card{margin-top:10px}
+.ds-card-label{
+  font-family:var(--font-m);font-size:var(--ds-label-sz);
+  letter-spacing:2px;color:var(--ds-accent);opacity:.7;
+  text-transform:uppercase;margin-bottom:8px
+}
+.ds-card-title{font-size:13px;font-weight:600;color:var(--ds-text);margin-bottom:6px}
+.ds-card-body{font-size:12px;line-height:1.75;color:var(--ds-text-body)}
+
+/* ── PROBLEM / INSIGHT BLOCK (full-width insight card) ─────── */
+/* Usage: <div class="ds-insight"><div class="ds-card-label">Key Insight</div><p class="ds-body">...</p></div> */
+.ds-insight{background:var(--ds-card-bg);padding:18px;margin-top:20px}
+
+/* ── STATS STRIP (3 across) ────────────────────────────────── */
+/* Usage: <div class="ds-stats"><div class="ds-stat"><div class="ds-stat-num">500<span class="ds-stat-unit">ms</span></div><div class="ds-stat-lbl">Avg Latency</div></div>…</div> */
+.ds-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ds-grid-gap);margin-bottom:28px}
+.ds-stat{background:var(--ds-room-bg);padding:18px 14px;text-align:center}
+.ds-stat-num{font-family:var(--font-h);font-size:28px;color:var(--ds-text);margin-bottom:3px}
+.ds-stat-unit{font-size:13px;color:var(--ds-accent)}
+.ds-stat-lbl{font-family:var(--font-m);font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--ds-text-muted);margin-top:4px}
+
+/* ── GRID (workflow steps / feature cards) ──────────────────── */
+/* Usage: <div class="ds-grid ds-grid-2">…<div class="ds-grid-cell">…</div>…</div> */
+.ds-grid{display:grid;gap:1px;background:var(--ds-grid-gap);margin-bottom:20px}
+.ds-grid-1{grid-template-columns:1fr}
+.ds-grid-2{grid-template-columns:1fr 1fr}
+.ds-grid-cell{background:var(--ds-card-bg);padding:18px 16px}
+.ds-grid-num{font-family:var(--font-m);font-size:9px;color:rgba(108,71,255,.6);letter-spacing:2px;margin-bottom:8px}
+.ds-grid-title{font-size:12px;font-weight:600;color:var(--ds-text);margin-bottom:5px}
+.ds-grid-sub{font-family:var(--font-m);font-size:9px;color:var(--ds-accent);margin-bottom:8px}
+.ds-grid-body{font-size:11px;color:var(--ds-text-body);line-height:1.65}
+
+/* ── COMPARISON TABLE (model vs model, chosen vs rejected) ─── */
+/* Usage: <div class="ds-table"><div class="ds-tr ds-tr-head">…</div><div class="ds-tr ds-tr-chosen">…</div>…</div> */
+.ds-table{border:1px solid var(--ds-border);margin-bottom:20px;overflow:hidden}
+.ds-tr{display:grid;grid-template-columns:110px 1fr;padding:12px 14px;border-bottom:1px solid var(--ds-border)}
+.ds-tr:last-child{border-bottom:none}
+.ds-tr-head{background:var(--ds-card-bg);padding:9px 14px}
+.ds-tr-chosen{background:var(--ds-card-bg)}
+.ds-tr-key{font-family:var(--font-m);font-size:11px;color:var(--ds-text)}
+.ds-tr-val{font-size:11px;line-height:1.6}
+.ds-chosen-badge{font-size:9px;border:1px solid var(--ds-accent-faint);padding:1px 5px;margin-left:4px;color:var(--ds-accent)}
+.ds-val-good{color:#0a7a6e}
+.ds-val-bad{color:#8a2020}
+
+/* ── OUTPUT / DATA BLOCK ────────────────────────────────────── */
+/* Usage: <div class="ds-output"><div class="ds-output-lbl">Output Sample</div><div class="ds-output-row">…</div></div> */
+.ds-output{background:var(--ds-card-bg);padding:18px;font-family:var(--font-m);font-size:11px;line-height:1.9}
+.ds-output-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--ds-text-muted);margin-bottom:10px}
+.ds-output-row{display:grid;grid-template-columns:160px 1fr;gap:12px;padding:6px 0;border-bottom:1px solid var(--ds-border)}
+.ds-output-row:last-child{border-bottom:none}
+.ds-output-k{color:var(--ds-text-muted)}
+.ds-output-v{color:var(--ds-text)}
+.ds-output-hi{color:var(--ds-accent)}
+
+/* ── STACK TAGS ─────────────────────────────────────────────── */
+/* Usage: <div class="ds-stack"><span class="ds-tag">LiveKit</span>…</div> */
+.ds-stack{display:flex;flex-wrap:wrap;gap:6px}
+.ds-tag{font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:var(--ds-text-body)}
+
+/* ── BUTTONS ─────────────────────────────────────────────────── */
+/* Primary: <button class="ds-btn">▶ Try Demo</button>
+   Link:    <a class="ds-btn-link" href="…">↗ Live Tool</a>
+   Row:     <div class="ds-btn-row">…buttons…</div> */
+.ds-btn{
+  font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  border:1px solid var(--ds-btn-border);background:var(--ds-btn-bg);
+  color:var(--ds-text);padding:11px 20px;cursor:pointer;font-weight:700;
+  text-decoration:none;display:inline-flex;align-items:center;gap:6px;
+  transition:background .2s,border-color .2s;white-space:nowrap
+}
+.ds-btn:hover{background:var(--ds-btn-bg-hover);border-color:var(--ds-border-strong)}
+.ds-btn-link{
+  font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;
+  border:1px solid var(--ds-btn-border);color:#4a4460;
+  padding:11px 20px;text-decoration:none;
+  display:inline-flex;align-items:center;gap:6px;transition:border-color .2s
+}
+.ds-btn-link:hover{border-color:var(--ds-border-strong)}
+.ds-btn-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px}
+
+/* ── TOPBAR (split-screen room nav) ─────────────────────────── */
+/* Usage: <div class="ds-topbar"><span class="ds-topbar-name">01 · Project</span><span class="ds-live-pill">● LIVE</span><div class="ds-topbar-actions">…</div></div> */
+.ds-topbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;height:48px;background:var(--ds-topbar-bg);
+  border-bottom:1px solid var(--ds-border);
+  position:sticky;top:0;z-index:5;flex-shrink:0
+}
+.ds-topbar-name{font-family:var(--font-m);font-size:11px;letter-spacing:2px;font-weight:600;color:var(--ds-text)}
+.ds-live-pill{font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:#2db87a}
+.ds-topbar-actions{display:flex;align-items:center;gap:8px}
+
+/* ── SCOPE LIST (AI does / does not) ────────────────────────── */
+.ds-scope-grid{display:grid;grid-template-columns:1fr 1px 1fr;margin-bottom:16px}
+.ds-scope-col{padding:0 16px}
+.ds-scope-col:first-child{padding-left:0}
+.ds-scope-divider{background:var(--ds-grid-gap)}
+.ds-scope-heading{font-family:var(--font-m);font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px}
+.ds-scope-heading.positive{color:rgba(45,184,122,.8)}
+.ds-scope-heading.negative{color:rgba(184,64,64,.8)}
+.ds-scope-item{
+  font-size:11px;color:var(--ds-text-body);padding:7px 10px;
+  border-left:1px solid var(--ds-border);line-height:1.5;margin-bottom:6px
+}
+.ds-scope-item.positive{border-color:rgba(45,184,122,.3)}
+.ds-scope-item.negative{border-color:rgba(184,64,64,.25)}
+
+/* ── DISC FOOTER ────────────────────────────────────────────── */
+.ds-disclaimer{
+  font-family:var(--font-m);font-size:10px;color:var(--ds-text-faint);
+  line-height:1.8;padding:12px;border-top:1px solid var(--ds-border);margin-top:14px
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   QUICK REFERENCE — paste these snippets to build any room section
+   ───────────────────────────────────────────────────────────────────
+   CARD:       <div class="ds-card"><div class="ds-card-label">Label</div><p class="ds-body">…</p></div>
+   INSIGHT:    <div class="ds-insight"><div class="ds-card-label">Key Insight</div><p class="ds-body">…</p></div>
+   STATS:      <div class="ds-stats"><div class="ds-stat"><div class="ds-stat-num">X<span class="ds-stat-unit">u</span></div><div class="ds-stat-lbl">Label</div></div></div>
+   GRID 2col:  <div class="ds-grid ds-grid-2"><div class="ds-grid-cell"><div class="ds-grid-num">01 →</div><div class="ds-grid-title">…</div><div class="ds-grid-body">…</div></div></div>
+   TABLE:      <div class="ds-table"><div class="ds-tr ds-tr-head"><span class="ds-tr-key">Model</span><span>Decision</span></div><div class="ds-tr ds-tr-chosen"><span class="ds-tr-key">Claude<span class="ds-chosen-badge">CHOSEN</span></span><span class="ds-tr-val ds-val-good">…</span></div></div>
+   BUTTONS:    <div class="ds-btn-row"><button class="ds-btn">▶ Try</button><a class="ds-btn-link" href="#">↗ Live</a></div>
+   STACK:      <div class="ds-stack"><span class="ds-tag">Next.js</span></div>
+   LABEL:      <div class="ds-label">Section Title</div>
+   META:       <div class="ds-meta">AI Product · 2026 · <span class="ds-live-dot"></span> Live</div>
+   ═══════════════════════════════════════════════════════════════════ */
 </style>
 </head>
 <body>
@@ -1190,9 +1430,9 @@ body:has(#lab-facade.active) #tooltip { display:none !important }
 
           </div>
 
-          <div style="border-left:2px solid rgba(179,136,255,.25);padding:14px 20px;background:rgba(179,136,255,.03);margin-top:16px">
-            <div style="font-family:var(--font-m);font-size:9px;letter-spacing:3px;opacity:.4;text-transform:uppercase;margin-bottom:8px">The thread</div>
-            <div style="font-size:13px;opacity:.72;line-height:1.8">All three products live at the same intersection: complex systems that most people can't navigate alone, AI that removes the friction without removing the human judgment. Law, immigration, emotional design — different domains, same architecture.</div>
+          <div style="background:rgba(108,71,255,.12);padding:18px;margin-top:16px">
+            <div style="font-family:var(--font-m);font-size:9px;letter-spacing:3px;color:#6c47ff;opacity:.7;text-transform:uppercase;margin-bottom:8px">The Thread</div>
+            <div style="font-size:13px;color:rgba(26,24,16,.75);line-height:1.8">All three products live at the same intersection: complex systems that most people can't navigate alone, AI that removes the friction without removing the human judgment. Law, immigration, emotional design — different domains, same architecture.</div>
           </div>
         </section>
 
@@ -1278,221 +1518,282 @@ body:has(#lab-facade.active) #tooltip { display:none !important }
     </div>
 
     <!-- THE ARCHIVE -->
-    <div class="room" id="room-archive">
-      <div class="room-bg" style="background:radial-gradient(ellipse at 50% 30%,rgba(255,179,0,.05),var(--bg))"></div>
-      <div class="room-content">
-
-        <!-- Hero -->
-        <div class="arc-hero">
-          <div style="font-family:var(--font-m);font-size:10px;letter-spacing:4px;opacity:.35;margin-bottom:16px;text-transform:uppercase">AI + Strategy &nbsp;·&nbsp; Why / Decisions / Value</div>
-          <h1 style="font-family:var(--font-h);font-size:clamp(26px,5vw,46px);line-height:1.08;color:var(--amber);margin-bottom:16px">Every decision<br>is a structured argument.</h1>
-          <p style="font-family:var(--font-m);font-size:12px;opacity:.45;letter-spacing:2px">CBRE &nbsp;&middot;&nbsp; Cushman &amp; Wakefield &nbsp;&middot;&nbsp; New Dream Services &nbsp;&middot;&nbsp; Brand Consulting</p>
+    <div class="room" id="room-archive" style="padding:0;overflow:hidden">
+      <!-- Split topbar -->
+      <div id="arch-topbar" style="display:grid;grid-template-columns:1fr 1px 1fr;height:56px;background:rgba(10,14,26,.96);border-bottom:1px solid rgba(244,241,234,.08);z-index:10;position:relative">
+        <div style="display:flex;align-items:center;gap:10px;padding:0 18px 0 20px;min-width:0">
+          <div style="font-family:var(--font-h);font-size:15px;color:#f4f1ea;white-space:nowrap">01 · Voice AI</div>
+          <div style="font-family:var(--font-m);font-size:8px;letter-spacing:2px;color:var(--teal);border:1px solid rgba(0,245,212,.3);padding:2px 8px;border-radius:20px;white-space:nowrap">● LIVE</div>
+          <div style="flex:1"></div>
+          <button id="arch-voice-try-btn" onclick="archVoiceDemo()" style="font-family:var(--font-m);font-size:10px;letter-spacing:2px;background:var(--teal);color:#0a0e1a;border:none;padding:7px 14px;cursor:pointer;font-weight:700;white-space:nowrap">▶ TRY</button>
+          <button onclick="window.open('https://voice-ai-agents.lovable.app','_blank')" class="ext-btn" style="font-size:10px;padding:6px 10px">↗</button>
         </div>
-
-        <!-- Animated stats -->
-        <div class="arc-stats" id="arc-stats" style="display:grid;grid-template-columns:repeat(3,1fr)">
-          <div class="arc-stat">
-            <div class="arc-stat-num" data-target="1" data-suffix="B+">$0</div>
-            <div class="arc-stat-label">M&amp;A Proposal</div>
-          </div>
-          <div class="arc-stat">
-            <div class="arc-stat-num" data-target="4" data-suffix="">0</div>
-            <div class="arc-stat-label">Strategic Engagements</div>
-          </div>
-          <div class="arc-stat">
-            <div class="arc-stat-num" data-target="118" data-suffix="pp">0</div>
-            <div class="arc-stat-label">Market Research</div>
-          </div>
+        <div style="background:rgba(244,241,234,.1)"></div>
+        <div style="display:flex;align-items:center;gap:10px;padding:0 18px;min-width:0">
+          <div style="font-family:var(--font-h);font-size:15px;color:#f4f1ea;white-space:nowrap">02 · WaterOps</div>
+          <div style="font-family:var(--font-m);font-size:8px;letter-spacing:2px;color:var(--teal);border:1px solid rgba(0,245,212,.3);padding:2px 8px;border-radius:20px;white-space:nowrap">● LIVE</div>
+          <div style="flex:1"></div>
+          <button id="arch-water-try-btn" onclick="archWaterDemo()" style="font-family:var(--font-m);font-size:10px;letter-spacing:2px;background:var(--teal);color:#0a0e1a;border:none;padding:7px 14px;cursor:pointer;font-weight:700;white-space:nowrap">▶ TRY</button>
+          <button onclick="window.open('https://water-xi-five.vercel.app/','_blank')" class="ext-btn" style="font-size:10px;padding:6px 10px">↗</button>
         </div>
+      </div>
+      <!-- Split body -->
+      <div style="display:grid;grid-template-columns:1fr 1px 1fr;height:calc(100vh - 56px)">
 
-        <!-- Narrative -->
-        <div style="font-size:13px;line-height:1.85;opacity:.7;margin-bottom:32px;max-width:580px">
-          Strategy is the discipline of deciding <em>what not to do</em>. Every engagement here — from a $1B capital markets pitch to a brand identity reset — was an exercise in that same logic: what matters, what doesn't, and why now. I learned to think this way through finance, sharpened it through consulting, and now apply it to AI product decisions.
-        </div>
+        <!-- LEFT: Voice AI -->
+        <div style="position:relative;overflow:hidden">
+          <iframe id="arch-voice-frame" src="about:blank" style="width:100%;height:100%;border:none;display:none;position:absolute;inset:0" allow="clipboard-write; microphone"></iframe>
+          <div id="arc-voice-fallback" style="position:absolute;inset:0;overflow-y:auto;display:block">
 
-        <!-- Staggered experience cards -->
-        <div class="pf-section-label">Experience</div>
-        <div class="arc-grid" id="arc-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:36px">
-          <div class="arc-card">
-            <div class="arc-card-badge">JUN–AUG 2022</div>
-            <div class="arc-card-co">CBRE Los Angeles</div>
-            <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;opacity:.35;margin-bottom:4px;text-transform:uppercase">Global Real Estate &amp; Investment</div>
-            <div class="arc-card-role">Financial Analyst Intern &middot; FP&amp;A</div>
-            <div class="arc-card-detail">Led $1B+ M&amp;A proposal for Australia acquisition &middot; 50+ capital market interviews &middot; Power BI dashboards &middot; Modeled entry strategy across asset classes</div>
-          </div>
-          <div class="arc-card">
-            <div class="arc-card-badge">FEB–JUL 2021</div>
-            <div class="arc-card-co">Cushman &amp; Wakefield</div>
-            <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;opacity:.35;margin-bottom:4px;text-transform:uppercase">Global Commercial Real Estate · Chengdu</div>
-            <div class="arc-card-role">Real Estate Consultant</div>
-            <div class="arc-card-detail">Co-led 7.5-acre multiuse development generating $10M revenue &middot; 118-page client deliverable &middot; 18 subdistrict interviews &middot; 5 on-site investigations &middot; 7 real estate projects</div>
-          </div>
-          <div class="arc-card">
-            <div class="arc-card-badge">AUG 2022–DEC 2024</div>
-            <div class="arc-card-co">New Dream Services</div>
-            <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;opacity:.35;margin-bottom:4px;text-transform:uppercase">Real Estate &middot; Irvine, CA</div>
-            <div class="arc-card-role">Acquisition Manager &rarr; Financial &amp; Investment Analyst</div>
-            <div class="arc-card-detail">Managed $25M+ portfolio outperforming benchmarks by 5.5% &middot; Appraised 7 commercial properties (ARGUS) &middot; 23 financial models (DCF) &middot; Investment memoranda &amp; deal pipeline</div>
-          </div>
-          <div class="arc-card">
-            <div class="arc-card-badge">AUG 2022–JAN 2023</div>
-            <div class="arc-card-co">US Furniture Brand</div>
-            <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;opacity:.35;margin-bottom:4px;text-transform:uppercase">Consumer Furniture Brand &middot; Chino, CA</div>
-            <div class="arc-card-role">Brand Strategy Consultant</div>
-            <div class="arc-card-detail">Repositioned Instagram identity from product-centric to lifestyle-aspirational &middot; Brand identity system: tone, visual logic, content pillars &middot; Creator partnership campaigns</div>
-          </div>
-        </div>
-
-        <!-- AI Product angle -->
-        <div style="border-left:2px solid rgba(255,179,0,.3);padding:20px 24px;margin-bottom:36px;background:rgba(255,179,0,.03)">
-          <div style="font-family:var(--font-m);font-size:9px;letter-spacing:3px;opacity:.4;text-transform:uppercase;margin-bottom:10px">Strategy × AI</div>
-          <div style="font-size:14px;line-height:1.75;opacity:.8">
-            The same pattern runs through all these engagements: a complex situation with unclear direction, a need to surface what actually matters, and a recommendation that changes what happens next. AI doesn't change that pattern — it accelerates the research and sharpens the options. Now I use it to compress the time between question and clarity.
-          </div>
-        </div>
-
-        <!-- AI Product: Voice AI -->
-        <div class="pf-section-label">AI Product · Voice AI</div>
-
-        <div style="margin-bottom:14px">
-          <h2 style="font-family:var(--font-h);font-size:clamp(20px,3.5vw,32px);line-height:1.1;margin-bottom:10px">Your front desk.<br>Running 24 / 7. Never on hold.</h2>
-          <p style="font-size:13px;line-height:1.9;opacity:.7;margin-bottom:24px;max-width:560px">VoiceAI is an API platform for building production-ready voice agents. Designed for businesses that lose revenue every time a customer is put on hold, sent to voicemail, or bounces because no one picked up. Ultra-low latency. Multilingual. Works with real phone numbers.</p>
-        </div>
-
-        <!-- Screenshots -->
-        <div style="margin-bottom:28px">
-          <div style="font-family:var(--font-m);font-size:9px;letter-spacing:3px;opacity:.35;text-transform:uppercase;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid rgba(42,37,32,.08)">Screenshots</div>
-          <div style="display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scroll-snap-type:x mandatory">
-            <div style="flex:0 0 220px;scroll-snap-align:start;border:1px solid rgba(179,136,255,.25);background:rgba(15,18,30,.9);border-radius:4px;overflow:hidden">
-              <div style="padding:8px 12px;border-bottom:1px solid rgba(179,136,255,.12);display:flex;align-items:center;gap:6px">
-                <span style="font-size:8px;color:#b388ff">⚡</span>
-                <span style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;opacity:.5;color:#f4f1ea">VoiceAI · Landing</span>
+            <!-- HERO -->
+            <div class="cs-sec" style="padding-top:36px">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+                <span style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#6c47ff;opacity:.8">AI Product · Voice Infrastructure · 2026</span>
+                <span style="width:1px;height:9px;background:rgba(26,24,16,.12)"></span>
+                <span style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);opacity:.9">● Live</span>
               </div>
-              <div style="padding:16px 14px;text-align:center">
-                <div style="display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(179,136,255,.25);border-radius:20px;padding:4px 10px;margin-bottom:10px">
-                  <span style="font-size:9px;color:#b388ff">✦</span>
-                  <span style="font-size:9px;opacity:.6;color:#f4f1ea">Build production-ready voice agents</span>
+              <h2 class="cs-h" style="font-size:clamp(26px,3.5vw,42px);margin-bottom:12px">Your front desk.<br><em style="font-style:italic;color:#6c47ff">Running 24 / 7.</em></h2>
+              <p style="font-size:13px;line-height:1.82;color:rgba(26,24,16,.6);max-width:460px">An API platform for production-ready voice agents. Ultra-low latency. Multilingual. Works with real phone numbers. Designed for businesses that lose revenue every time a customer is put on hold.</p>
+            </div>
+
+            <!-- STATS -->
+            <div style="display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr;border-bottom:1px solid rgba(26,24,16,.08)">
+              <div style="padding:18px 20px;text-align:center">
+                <div class="cs-h" style="font-size:28px;margin-bottom:3px">&lt;500<span style="font-size:13px;color:#6c47ff">ms</span></div>
+                <div style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:rgba(26,24,16,.38);text-transform:uppercase;line-height:1.6">Avg.<br>latency</div>
+              </div>
+              <div style="background:rgba(26,24,16,.08)"></div>
+              <div style="padding:18px 20px;text-align:center">
+                <div class="cs-h" style="font-size:28px;margin-bottom:3px">40<span style="font-size:13px;color:#6c47ff">%</span></div>
+                <div style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:rgba(26,24,16,.38);text-transform:uppercase;line-height:1.6">Inbound leads<br>lost to voicemail</div>
+              </div>
+              <div style="background:rgba(26,24,16,.08)"></div>
+              <div style="padding:18px 20px;text-align:center">
+                <div class="cs-h" style="font-size:28px;margin-bottom:3px">60<span style="font-size:13px;color:#6c47ff">%</span></div>
+                <div style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:rgba(26,24,16,.38);text-transform:uppercase;line-height:1.6">Intake time<br>saved</div>
+              </div>
+            </div>
+
+            <!-- PROBLEM -->
+            <div class="cs-sec">
+              <div class="cs-label">01 — Problem</div>
+              <h3 class="cs-h" style="font-size:clamp(17px,2.5vw,24px);margin-bottom:20px">Phone is high-value.<br><em style="font-style:italic;color:#6c47ff">But nobody answers.</em></h3>
+              <div style="display:grid;gap:1px;background:rgba(26,24,16,.08)">
+                <div style="background:rgba(108,71,255,.04);padding:18px">
+                  <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#6c47ff;opacity:.7;margin-bottom:8px;text-transform:uppercase">The Revenue Gap</div>
+                  <div style="font-size:13px;font-weight:600;margin-bottom:6px">20–40% of inbound leads lost after hours</div>
+                  <p style="font-size:12px;color:rgba(26,24,16,.6);line-height:1.75">Small businesses rely on phone calls for their highest-value interactions — appointment bookings, consultations, intake. But staff can't be on 24/7, and voicemail converts at near zero.</p>
                 </div>
-                <div style="font-size:13px;font-weight:700;line-height:1.3;margin-bottom:6px;color:#f4f1ea">The API Platform for<br><span style="color:#b388ff">Conversational Voice AI</span></div>
-                <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:12px">
-                  <div style="border:1px solid rgba(179,136,255,.15);padding:6px;border-radius:2px">
-                    <div style="font-size:12px;font-weight:700;color:#b388ff">&lt; 500ms</div>
-                    <div style="font-size:8px;opacity:.4;color:#f4f1ea">Avg. Latency</div>
-                  </div>
-                  <div style="border:1px solid rgba(179,136,255,.15);padding:6px;border-radius:2px">
-                    <div style="font-size:12px;font-weight:700;color:#b388ff">10M+</div>
-                    <div style="font-size:8px;opacity:.4;color:#f4f1ea">Calls Processed</div>
-                  </div>
+                <div style="background:rgba(108,71,255,.04);padding:18px">
+                  <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#6c47ff;opacity:.7;margin-bottom:8px;text-transform:uppercase">The Language Barrier</div>
+                  <div style="font-size:13px;font-weight:600;margin-bottom:6px">Multilingual markets, monolingual front desks</div>
+                  <p style="font-size:12px;color:rgba(26,24,16,.6);line-height:1.75">Law firms, clinics, and service businesses serving diverse communities can't staff multilingual phone teams around the clock. Callers who can't communicate in English hang up.</p>
+                </div>
+              </div>
+              <div style="margin-top:20px;background:rgba(108,71,255,.12);padding:18px">
+                <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#6c47ff;opacity:.7;margin-bottom:8px;text-transform:uppercase">Key Insight</div>
+                <p style="font-size:13px;line-height:1.75;color:rgba(26,24,16,.75)">Most people prefer not to call. But businesses still rely on phone for their highest-value interactions. Voice AI closes the gap — fast, clear, never on hold.</p>
+              </div>
+            </div>
+
+            <!-- WORKFLOW -->
+            <div class="cs-sec">
+              <div class="cs-label">02 — How It Works</div>
+              <h3 class="cs-h" style="font-size:clamp(17px,2.5vw,24px);margin-bottom:20px">Define once.<br><em style="font-style:italic;color:#6c47ff">Deploy everywhere.</em></h3>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(26,24,16,.08);margin-bottom:20px">
+                <div style="background:rgba(108,71,255,.04);padding:16px">
+                  <div style="font-family:var(--font-m);font-size:9px;color:rgba(108,71,255,.6);letter-spacing:2px;margin-bottom:8px">01 →</div>
+                  <div style="font-size:12px;font-weight:600;margin-bottom:5px">Define Agent</div>
+                  <div style="font-size:11px;color:rgba(26,24,16,.6);line-height:1.65">AI Consultant Chat or Quick Questionnaire. Business type, persona, handling rules — set once.</div>
+                </div>
+                <div style="background:rgba(108,71,255,.04);padding:16px">
+                  <div style="font-family:var(--font-m);font-size:9px;color:rgba(108,71,255,.6);letter-spacing:2px;margin-bottom:8px">02 →</div>
+                  <div style="font-size:12px;font-weight:600;margin-bottom:5px">Connect Number</div>
+                  <div style="font-size:11px;color:rgba(26,24,16,.6);line-height:1.65">Link a real phone number in minutes. Agent picks up every call automatically, any hour.</div>
+                </div>
+                <div style="background:rgba(108,71,255,.04);padding:16px">
+                  <div style="font-family:var(--font-m);font-size:9px;color:rgba(108,71,255,.6);letter-spacing:2px;margin-bottom:8px">03 →</div>
+                  <div style="font-size:12px;font-weight:600;margin-bottom:5px">Handle &amp; Route</div>
+                  <div style="font-size:11px;color:rgba(26,24,16,.6);line-height:1.65">Books appointments, collects intake, answers FAQs. Complex cases escalated to human staff.</div>
+                </div>
+                <div style="background:rgba(108,71,255,.04);padding:16px">
+                  <div style="font-family:var(--font-m);font-size:9px;color:rgba(108,71,255,.6);letter-spacing:2px;margin-bottom:8px">04</div>
+                  <div style="font-size:12px;font-weight:600;margin-bottom:5px">Dashboard &amp; Logs</div>
+                  <div style="font-size:11px;color:rgba(26,24,16,.6);line-height:1.65">Every call transcribed. Appointment confirmations sent. Intake summaries stored for follow-up.</div>
                 </div>
               </div>
             </div>
-            <div style="flex:0 0 220px;scroll-snap-align:start;border:1px solid rgba(179,136,255,.25);background:rgba(15,18,30,.9);border-radius:4px;overflow:hidden">
-              <div style="padding:8px 12px;border-bottom:1px solid rgba(179,136,255,.12)">
-                <span style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;opacity:.5;color:#f4f1ea">Dashboard · Agents</span>
-              </div>
-              <div style="padding:10px;height:160px;overflow:hidden">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-                  <div style="font-size:11px;font-weight:600;color:#f4f1ea">Agents</div>
-                  <div style="background:#6c47ff;color:#fff;font-size:8px;padding:3px 7px;border-radius:3px">+ Create</div>
+
+            <!-- DESIGN DECISIONS -->
+            <div class="cs-sec">
+              <div class="cs-label">03 — Design Decisions</div>
+              <h3 class="cs-h" style="font-size:clamp(17px,2.5vw,24px);margin-bottom:20px">Latency is the product.<br><em style="font-style:italic;color:#6c47ff">Sub-500ms or it feels broken.</em></h3>
+              <div style="display:grid;gap:10px">
+                <div style="background:rgba(108,71,255,.12);padding:14px 18px">
+                  <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#6c47ff;opacity:.7;margin-bottom:6px;text-transform:uppercase">API-first architecture</div>
+                  <div style="font-size:12px;line-height:1.75;color:rgba(26,24,16,.75)">Voice agents built on composable API calls — STT, LLM routing, TTS — so businesses can customize behavior per call type without touching infrastructure.</div>
                 </div>
-                <div style="display:flex;flex-direction:column;gap:5px">
-                  <div style="border:1px solid rgba(255,255,255,.1);padding:7px 8px;border-radius:3px">
-                    <div style="font-size:9px;font-weight:500;margin-bottom:2px;color:#f4f1ea">Hair &amp; Nail Salon Agent</div>
-                    <div style="display:inline-block;background:rgba(108,71,255,.3);color:#b388ff;font-size:7px;padding:1px 5px;border-radius:10px">active</div>
-                  </div>
-                  <div style="border:1px solid rgba(255,255,255,.1);padding:7px 8px;border-radius:3px">
-                    <div style="font-size:9px;font-weight:500;margin-bottom:2px;color:#f4f1ea">Sarah — Real Estate Asst.</div>
-                    <div style="display:inline-block;background:rgba(108,71,255,.3);color:#b388ff;font-size:7px;padding:1px 5px;border-radius:10px">active</div>
-                  </div>
+                <div style="background:rgba(108,71,255,.12);padding:14px 18px">
+                  <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#6c47ff;opacity:.7;margin-bottom:6px;text-transform:uppercase">Intake as a revenue event</div>
+                  <div style="font-size:12px;line-height:1.75;color:rgba(26,24,16,.75)">Pre-qualification and intake collection reduces attorney/consultant time on intake by 60%+. Every call is a billable moment captured, not lost.</div>
                 </div>
               </div>
             </div>
-            <div style="flex:0 0 220px;scroll-snap-align:start;border:1px solid rgba(179,136,255,.25);background:rgba(15,18,30,.9);border-radius:4px;overflow:hidden">
-              <div style="padding:8px 12px;border-bottom:1px solid rgba(179,136,255,.12)">
-                <span style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;opacity:.5;color:#f4f1ea">Create Agent · Define Mode</span>
+
+            <!-- STACK -->
+            <div class="cs-sec">
+              <div class="cs-label">Stack</div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px">
+                <span style="font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:rgba(26,24,16,.65)">LiveKit / WebRTC</span>
+                <span style="font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:rgba(26,24,16,.65)">Twilio</span>
+                <span style="font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:rgba(26,24,16,.65)">Deepgram STT</span>
+                <span style="font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:rgba(26,24,16,.65)">Claude / GPT-4o</span>
+                <span style="font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:rgba(26,24,16,.65)">ElevenLabs TTS</span>
+                <span style="font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:rgba(26,24,16,.65)">Next.js</span>
+                <span style="font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:rgba(26,24,16,.65)">Lovable</span>
               </div>
-              <div style="padding:14px;text-align:center">
-                <div style="width:32px;height:32px;background:rgba(179,136,255,.12);border-radius:8px;margin:0 auto 10px;display:flex;align-items:center;justify-content:center;font-size:14px">💡</div>
-                <div style="font-size:11px;font-weight:600;margin-bottom:10px;color:#f4f1ea">How would you like<br>to define your agent?</div>
-                <div style="display:flex;flex-direction:column;gap:5px">
-                  <div style="border:1px solid rgba(108,71,255,.4);padding:8px;border-radius:4px;background:rgba(108,71,255,.06);text-align:left">
-                    <div style="font-size:10px;font-weight:600;margin-bottom:2px;color:#f4f1ea">AI Consultant Chat</div>
-                    <div style="display:inline-block;background:rgba(108,71,255,.3);color:#b388ff;font-size:7px;padding:1px 6px;border-radius:10px">Recommended</div>
-                  </div>
-                  <div style="border:1px solid rgba(255,255,255,.1);padding:8px;border-radius:4px;text-align:left">
-                    <div style="font-size:10px;font-weight:600;color:#f4f1ea">Quick Questionnaire</div>
-                  </div>
+            </div>
+
+          </div><!-- /arc-voice-fallback -->
+        </div><!-- /LEFT -->
+
+        <div style="background:rgba(26,24,16,.1)"></div>
+
+        <!-- RIGHT: WaterOps SaaS -->
+        <div style="position:relative;overflow:hidden">
+          <iframe id="arch-water-frame" src="about:blank" style="width:100%;height:100%;border:none;display:none;position:absolute;inset:0" allow="clipboard-write"></iframe>
+          <div id="arc-water-fallback" style="position:absolute;inset:0;overflow-y:auto;display:block">
+
+            <!-- HERO -->
+            <div class="cs-sec" style="padding-top:36px">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
+                <span style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#6c47ff;opacity:.85">AI Product · Industrial SaaS · 2026</span>
+                <span style="width:1px;height:9px;background:rgba(26,24,16,.12)"></span>
+                <span style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--teal);opacity:.9">● Live</span>
+              </div>
+              <h2 class="cs-h" style="font-size:clamp(26px,3.5vw,42px);margin-bottom:12px">Will the effluent<br><em style="font-style:italic;color:#6c47ff">pass tomorrow?</em></h2>
+              <p style="font-size:13px;line-height:1.82;color:rgba(26,24,16,.6);max-width:460px">Full-stack SaaS for real-time monitoring, AI diagnostics, and remote control of township wastewater treatment stations in rural China. Built end-to-end: data model, API layer, real-time dashboard, hardware deployment guide.</p>
+            </div>
+
+            <!-- STATS -->
+            <div style="display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr;border-bottom:1px solid rgba(26,24,16,.08)">
+              <div style="padding:18px 20px;text-align:center">
+                <div class="cs-h" style="font-size:24px;margin-bottom:3px">50–1k<span style="font-size:11px;color:#6c47ff">t/day</span></div>
+                <div style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:rgba(26,24,16,.38);text-transform:uppercase;line-height:1.6">Facility<br>scale</div>
+              </div>
+              <div style="background:rgba(26,24,16,.08)"></div>
+              <div style="padding:18px 20px;text-align:center">
+                <div class="cs-h" style="font-size:24px;margin-bottom:3px">3<span style="font-size:11px;color:#6c47ff">-layer</span></div>
+                <div style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:rgba(26,24,16,.38);text-transform:uppercase;line-height:1.6">Safety<br>architecture</div>
+              </div>
+              <div style="background:rgba(26,24,16,.08)"></div>
+              <div style="padding:18px 20px;text-align:center">
+                <div class="cs-h" style="font-size:24px;margin-bottom:3px">¥8k<span style="font-size:11px;color:#6c47ff">+</span></div>
+                <div style="font-family:var(--font-m);font-size:9px;letter-spacing:1px;color:rgba(26,24,16,.38);text-transform:uppercase;line-height:1.6">Min. sensor<br>BOM</div>
+              </div>
+            </div>
+
+            <!-- PROBLEM -->
+            <div class="cs-sec">
+              <div class="cs-label">01 — Problem</div>
+              <h3 class="cs-h" style="font-size:clamp(17px,2.5vw,24px);margin-bottom:20px">The regulation is strict.<br><em style="font-style:italic;color:#6c47ff">The tooling doesn't exist.</em></h3>
+              <div style="display:grid;gap:1px;background:rgba(26,24,16,.08)">
+                <div style="background:rgba(108,71,255,.04);padding:18px">
+                  <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#6c47ff;opacity:.7;margin-bottom:8px;text-transform:uppercase">Compliance Gap</div>
+                  <div style="font-size:13px;font-weight:600;margin-bottom:6px">GB 18918-2002 violations risk facility shutdown</div>
+                  <p style="font-size:12px;color:rgba(26,24,16,.6);line-height:1.75">Township facilities (50–1000 ton/day) run with aging infrastructure and undertrained staff under strict discharge regulations. No affordable software bridges the hardware sensor layer to actionable compliance decisions.</p>
+                </div>
+                <div style="background:rgba(108,71,255,.04);padding:18px">
+                  <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#6c47ff;opacity:.7;margin-bottom:8px;text-transform:uppercase">Operator Mental Model</div>
+                  <div style="font-size:13px;font-weight:600;margin-bottom:6px">Operators don't read sensors — they read outcomes</div>
+                  <p style="font-size:12px;color:rgba(26,24,16,.6);line-height:1.75">Raw DO, pH, ORP values mean nothing to a township operator. The real question is: will the effluent pass the regulatory test tomorrow? Existing tools don't answer that question.</p>
+                </div>
+              </div>
+              <div style="margin-top:20px;background:rgba(108,71,255,.12);padding:18px">
+                <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#6c47ff;opacity:.7;margin-bottom:8px;text-transform:uppercase">Key Insight</div>
+                <p style="font-size:13px;line-height:1.75;color:rgba(26,24,16,.75)">Operators don't care about raw sensor values. They care about one question: will the effluent pass tomorrow? That insight drove every design decision.</p>
+              </div>
+            </div>
+
+            <!-- WORKFLOW -->
+            <div class="cs-sec">
+              <div class="cs-label">02 — AI Architecture</div>
+              <h3 class="cs-h" style="font-size:clamp(17px,2.5vw,24px);margin-bottom:20px">Hard sensors.<br><em style="font-style:italic;color:#6c47ff">Soft predictions.</em></h3>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(26,24,16,.08);margin-bottom:20px">
+                <div style="background:rgba(108,71,255,.04);padding:16px">
+                  <div style="font-family:var(--font-m);font-size:9px;color:rgba(108,71,255,.7);letter-spacing:2px;margin-bottom:8px">01 →</div>
+                  <div style="font-size:12px;font-weight:600;margin-bottom:5px">Sensor Ingestion</div>
+                  <div style="font-family:var(--font-m);font-size:9px;color:#6c47ff;margin-bottom:6px">DO · pH · ORP · Flow</div>
+                  <div style="font-size:11px;color:rgba(26,24,16,.6);line-height:1.65">Hard sensors feed real-time readings. Non-negotiable sensors flagged as GB 18918 legal requirements in the in-app BOM guide.</div>
+                </div>
+                <div style="background:rgba(108,71,255,.04);padding:16px">
+                  <div style="font-family:var(--font-m);font-size:9px;color:rgba(108,71,255,.7);letter-spacing:2px;margin-bottom:8px">02 →</div>
+                  <div style="font-size:12px;font-weight:600;margin-bottom:5px">Soft Measurement</div>
+                  <div style="font-family:var(--font-m);font-size:9px;color:#6c47ff;margin-bottom:6px">LightGBM · Empirical fallback</div>
+                  <div style="font-size:11px;color:rgba(26,24,16,.6);line-height:1.65">Predicted COD and NH₃-N output surfaced as the primary dashboard metric. Shows inference source ("本地推理 · LightGBM" vs "经验公式") with confidence score.</div>
+                </div>
+                <div style="background:rgba(108,71,255,.04);padding:16px">
+                  <div style="font-family:var(--font-m);font-size:9px;color:rgba(108,71,255,.7);letter-spacing:2px;margin-bottom:8px">03 →</div>
+                  <div style="font-size:12px;font-weight:600;margin-bottom:5px">Control Panel</div>
+                  <div style="font-family:var(--font-m);font-size:9px;color:#6c47ff;margin-bottom:6px">3-layer safety · Advisory-only MVP</div>
+                  <div style="font-size:11px;color:rgba(26,24,16,.6);line-height:1.65">Hard physical limits + soft change-rate warnings + rule-based algorithm layer. Every command logged with clampedFrom and source:SAFETY. No MQTT downlink in MVP.</div>
+                </div>
+                <div style="background:rgba(108,71,255,.04);padding:16px">
+                  <div style="font-family:var(--font-m);font-size:9px;color:rgba(108,71,255,.7);letter-spacing:2px;margin-bottom:8px">04</div>
+                  <div style="font-size:12px;font-weight:600;margin-bottom:5px">Compliance Report</div>
+                  <div style="font-family:var(--font-m);font-size:9px;color:#6c47ff;margin-bottom:6px">Lab entry → model bias correction</div>
+                  <div style="font-size:11px;color:rgba(26,24,16,.6);line-height:1.65">Monthly reports aggregate alert history. Manual lab samples correct model bias. Full ops loop: sensor → anomaly → control → report.</div>
+                </div>
+              </div>
+              <!-- Output sample -->
+              <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:rgba(26,24,16,.3);text-transform:uppercase;margin-bottom:10px">Dashboard Sample</div>
+              <div style="background:rgba(108,71,255,.04);border:1px solid rgba(108,71,255,.15);padding:18px;font-family:var(--font-m);font-size:11px;line-height:1.9">
+                <div style="display:grid;grid-template-columns:160px 1fr;gap:12px;padding:6px 0;border-bottom:1px solid rgba(26,24,16,.07)"><span style="color:rgba(26,24,16,.5)">Primary metric</span><span>预测COD: <strong>18.4 mg/L</strong> ✓ (&lt;20 limit)</span></div>
+                <div style="display:grid;grid-template-columns:160px 1fr;gap:12px;padding:6px 0;border-bottom:1px solid rgba(26,24,16,.07)"><span style="color:rgba(26,24,16,.5)">Inference source</span><span style="color:#6c47ff">本地推理 · LightGBM · 89% confidence</span></div>
+                <div style="display:grid;grid-template-columns:160px 1fr;gap:12px;padding:6px 0;border-bottom:1px solid rgba(26,24,16,.07)"><span style="color:rgba(26,24,16,.5)">Alert triggered</span><span>DO drop → CRITICAL · Storm surge scenario</span></div>
+                <div style="display:grid;grid-template-columns:160px 1fr;gap:12px;padding:6px 0"><span style="color:rgba(26,24,16,.5)">Safety log</span><span style="color:#6c47ff">aeration_rate clamped · source: SAFETY</span></div>
+              </div>
+            </div>
+
+            <!-- DESIGN DECISIONS -->
+            <div class="cs-sec">
+              <div class="cs-label">03 — Design Decisions Worth Explaining</div>
+              <div style="display:grid;gap:10px">
+                <div style="background:rgba(108,71,255,.12);padding:14px 18px">
+                  <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#6c47ff;opacity:.7;margin-bottom:6px;text-transform:uppercase">AI as swappable seams</div>
+                  <div style="font-size:12px;line-height:1.75;color:rgba(26,24,16,.75)">Alert diagnosis and monthly summaries are rule-based templates today. Every callsite is a named function (generateAlertDiagnosis, generateReportSummary) with a clear interface. The P1 upgrade is replacing the body with a Claude Haiku API call — no UI changes needed.</div>
+                </div>
+                <div style="background:rgba(108,71,255,.12);padding:14px 18px">
+                  <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#6c47ff;opacity:.7;margin-bottom:6px;text-transform:uppercase">Hardware cost as a first-class feature</div>
+                  <div style="font-size:12px;line-height:1.75;color:rgba(26,24,16,.75)">In-app docs include a full sensor BOM (¥8k–80k by scale) and a vision-camera alternative that cuts spend by ¥8–20k. Non-negotiable sensors flagged as GB 18918 legal requirements — this distinction shapes every pricing tier.</div>
+                </div>
+                <div style="background:rgba(108,71,255,.12);padding:14px 18px">
+                  <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#6c47ff;opacity:.7;margin-bottom:6px;text-transform:uppercase">Demo console as sales tool</div>
+                  <div style="font-size:12px;line-height:1.75;color:rgba(26,24,16,.75)">Four scripted scenarios (normal, storm surge, sensor fault, reset) let a potential buyer experience the full alert → diagnosis → resolve loop without any hardware. Storm event triggers a CRITICAL alert with a multi-step diagnosis that reads like an experienced operator.</div>
                 </div>
               </div>
             </div>
-          </div>
-          <div style="font-size:10px;opacity:.3;margin-top:6px;text-align:center">← scroll →</div>
-        </div>
 
-        <!-- Problem / Solution -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px">
-          <div style="border-left:2px solid rgba(255,80,80,.3);padding:12px 16px;background:rgba(255,80,80,.03)">
-            <div style="font-family:var(--font-m);font-size:9px;opacity:.4;letter-spacing:2px;margin-bottom:6px">THE PROBLEM</div>
-            <div style="font-size:12px;opacity:.7;line-height:1.7">Small businesses lose 20–40% of inbound leads to unanswered phones — especially after hours and on weekends.</div>
-          </div>
-          <div style="border-left:2px solid rgba(179,136,255,.4);padding:12px 16px;background:rgba(179,136,255,.03)">
-            <div style="font-family:var(--font-m);font-size:9px;opacity:.4;letter-spacing:2px;margin-bottom:6px">THE SOLUTION</div>
-            <div style="font-size:12px;opacity:.7;line-height:1.7">A voice agent that answers every call, books appointments, and routes complex cases — under 500ms, any language.</div>
-          </div>
-        </div>
+            <!-- STACK -->
+            <div class="cs-sec">
+              <div class="cs-label">Stack</div>
+              <div style="display:flex;flex-wrap:wrap;gap:6px">
+                <span style="font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:rgba(26,24,16,.65)">Next.js 14 App Router</span>
+                <span style="font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:rgba(26,24,16,.65)">PostgreSQL + Prisma</span>
+                <span style="font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:rgba(26,24,16,.65)">TailwindCSS + shadcn/ui</span>
+                <span style="font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:rgba(26,24,16,.65)">Recharts</span>
+                <span style="font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:rgba(26,24,16,.65)">Anthropic SDK (wired)</span>
+                <span style="font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:rgba(26,24,16,.65)">MQTT (arch ready)</span>
+                <span style="font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:rgba(26,24,16,.65)">LightGBM</span>
+                <span style="font-family:var(--font-m);font-size:10px;padding:4px 10px;border:1px solid rgba(108,71,255,.25);color:rgba(26,24,16,.65)">Vercel</span>
+              </div>
+            </div>
 
-        <!-- Key capabilities -->
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:28px">
-          <div style="border:1px solid rgba(42,37,32,.1);padding:14px">
-            <div style="font-size:12px;font-weight:500;margin-bottom:4px">📞 Appointment Scheduling</div>
-            <div style="font-size:11px;opacity:.55;line-height:1.6">Inbound calls, confirms availability, books slots, sends confirmations.</div>
-          </div>
-          <div style="border:1px solid rgba(42,37,32,.1);padding:14px">
-            <div style="font-size:12px;font-weight:500;margin-bottom:4px">🤝 Consultation Front Desk</div>
-            <div style="font-size:11px;opacity:.55;line-height:1.6">Pre-qualifies callers, collects intake info. Reduces attorney time on intake by 60%+.</div>
-          </div>
-          <div style="border:1px solid rgba(42,37,32,.1);padding:14px">
-            <div style="font-size:12px;font-weight:500;margin-bottom:4px">🌐 Multilingual Support</div>
-            <div style="font-size:11px;opacity:.55;line-height:1.6">English, Spanish, Mandarin, and more. No caller left behind due to language barriers.</div>
-          </div>
-          <div style="border:1px solid rgba(42,37,32,.1);padding:14px">
-            <div style="font-size:12px;font-weight:500;margin-bottom:4px">📱 Auto Phone Number Link</div>
-            <div style="font-size:11px;opacity:.55;line-height:1.6">Connect a real phone number in minutes. Agent picks up calls automatically.</div>
-          </div>
-        </div>
+          </div><!-- /arc-water-fallback -->
+        </div><!-- /RIGHT -->
 
-        <!-- Design insight -->
-        <div style="border-left:2px solid rgba(255,179,0,.35);padding:16px 20px;margin-bottom:28px;background:rgba(255,179,0,.03)">
-          <div style="font-family:var(--font-m);font-size:9px;letter-spacing:3px;opacity:.4;text-transform:uppercase;margin-bottom:8px">Design Insight</div>
-          <div style="font-size:13px;opacity:.75;line-height:1.8">Most people prefer not to call. But businesses still rely on phone calls for their highest-value interactions. Voice AI closes the gap — fast, clear, never annoyed, never rushed.</div>
-        </div>
-
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px">
-          <button id="arc-voice-try-btn" onclick="arcVoiceDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:#2a2a2a;color:#f4f1ea;padding:12px 24px;cursor:pointer;font-weight:700">▶ TRY LIVE</button>
-          <a href="https://voice-ai-agents.lovable.app" target="_blank" class="ext-btn">↗ voice-ai-agents.lovable.app</a>
-        </div>
-
-        <!-- Embed preview -->
-        <div id="arc-voice-embed" style="display:none;position:relative;width:100%;height:600px;border:1px solid rgba(42,37,32,.12);border-radius:4px;overflow:hidden;margin-bottom:28px">
-          <iframe id="arc-voice-frame" src="about:blank" style="width:100%;height:100%;border:none" allow="clipboard-write; microphone"></iframe>
-          <button onclick="arcVoiceClose()" style="position:absolute;top:10px;right:10px;font-family:var(--font-m);font-size:10px;letter-spacing:2px;background:rgba(26,21,16,.85);color:rgba(244,241,234,.7);border:1px solid rgba(244,241,234,.15);padding:6px 12px;cursor:pointer;z-index:10">✕ CLOSE</button>
-        </div>
-
-        <!-- Manifesto quote -->
-        <div class="arc-quote">
-          <span class="en" style="display:block;font-size:clamp(13px,2vw,17px);line-height:2;opacity:.85">Strategy is just structure applied to uncertainty.</span>
-          <span class="en">I've been building that structure since before it was called AI.</span>
-        </div>
-
-        <!-- Contact -->
-        <div class="arc-contact">
-          <div>
-            <div style="font-family:var(--font-h);font-size:16px;color:var(--paper);opacity:.9;margin-bottom:4px">Yvonne Li</div>
-            <div style="font-size:11px;opacity:.35">Strategy builder &nbsp;·&nbsp; Decision architect</div>
-          </div>
-          <div><a href="mailto:yl4553@columbia.edu" class="ext-btn">✉ Email</a></div>
-        </div>
-
+      </div><!-- /split body -->
+      <!-- keep .room-content stub so existing JS that queries it doesn't crash -->
       </div>
     </div>
 
@@ -1506,8 +1807,9 @@ body:has(#lab-facade.active) #tooltip { display:none !important }
           <p class="pf-subline">Architecture · IP Design · BJD Brand · Portfolio Website</p>
         </section>
 
-        <div style="font-size:13px;line-height:1.85;opacity:.7;margin-bottom:32px;max-width:580px;border-left:2px solid rgba(255,107,107,.3);padding-left:18px">
-          Design is where I started — architectural drawing, spatial logic, building systems that feel right before they function correctly. That instinct carried into product: every interface decision is a spatial one. What do you see first? What do you reach for? Where does your eye rest? I've applied this to physical products, digital systems, and original IP.
+        <div style="background:rgba(255,107,107,.12);padding:18px;margin-bottom:32px;max-width:580px">
+          <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:rgba(255,107,107,.8);opacity:.8;margin-bottom:8px;text-transform:uppercase">Background</div>
+          <p style="font-size:13px;line-height:1.85;color:rgba(26,24,16,.75)">Design is where I started — architectural drawing, spatial logic, building systems that feel right before they function correctly. That instinct carried into product: every interface decision is a spatial one. What do you see first? What do you reach for? Where does your eye rest? I've applied this to physical products, digital systems, and original IP.</p>
         </div>
 
         <!-- Architecture Portfolio image viewer -->
@@ -1675,7 +1977,7 @@ body:has(#lab-facade.active) #tooltip { display:none !important }
         <div style="position:relative;overflow:hidden">
         <iframe id="h1b-frame" src="about:blank" style="width:100%;height:100%;border:none;display:none;position:absolute;inset:0" allow="clipboard-write"></iframe>
         <!-- H-1B Case Study — built in -->
-        <div id="h1b-fallback" style="position:absolute;inset:0;background:#0a0e1a;overflow-y:auto;display:block">
+        <div id="h1b-fallback" style="position:absolute;inset:0;background:#edeae4;overflow-y:auto;display:block">
           <style>
             @keyframes h1b-scan{0%,100%{opacity:.3;transform:scaleX(.4)}50%{opacity:1;transform:scaleX(1)}}
             .cs-sec{padding:32px 36px;border-bottom:1px solid rgba(244,241,234,.08)}
@@ -1753,8 +2055,9 @@ body:has(#lab-facade.active) #tooltip { display:none !important }
               </div>
             </div>
             <!-- Pull quote -->
-            <div style="margin-top:22px;border-left:2px solid rgba(200,69,26,.4);padding:14px 18px;background:rgba(200,69,26,.04)">
-              <p style="font-family:var(--font-h);font-size:15px;line-height:1.6;color:#f4f1ea">The lawyer doesn't care which SOC code gets you a higher wage level — they care about getting your case filed. <em style="font-style:italic;color:#c8451a">But you should care.</em> That's the gap I built for.</p>
+            <div style="margin-top:22px;background:rgba(108,71,255,.12);padding:18px">
+              <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#6c47ff;opacity:.7;margin-bottom:8px;text-transform:uppercase">The Gap</div>
+              <p style="font-size:13px;line-height:1.75;color:rgba(26,24,16,.75)">The lawyer doesn't care which SOC code gets you a higher wage level — they care about getting your case filed. But you should care. That's the gap I built for.</p>
             </div>
           </div>
 
@@ -1905,8 +2208,9 @@ body:has(#lab-facade.active) #tooltip { display:none !important }
 
           <!-- ── CLOSING ── -->
           <div class="cs-sec" style="border-bottom:none;padding-bottom:48px">
-            <div style="border-left:2px solid rgba(200,69,26,.35);padding:16px 18px;background:rgba(200,69,26,.04);margin-bottom:24px">
-              <p style="font-family:var(--font-h);font-size:15px;line-height:1.7;color:#f4f1ea">It's not about using AI. It's about understanding a domain deeply enough to know where the friction is, designing a workflow that removes it, and making decisions — on model choice, on data sources, on UI — that reflect real constraints.</p>
+            <div style="background:rgba(108,71,255,.12);padding:18px;margin-bottom:24px">
+              <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#6c47ff;opacity:.7;margin-bottom:8px;text-transform:uppercase">Design Philosophy</div>
+              <p style="font-size:13px;line-height:1.75;color:rgba(26,24,16,.75)">It's not about using AI. It's about understanding a domain deeply enough to know where the friction is, designing a workflow that removes it, and making decisions — on model choice, on data sources, on UI — that reflect real constraints.</p>
             </div>
             <div style="display:flex;gap:10px;flex-wrap:wrap">
               <button onclick="h1bDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(74,68,96,.35);background:rgba(74,68,96,.1);color:#1a1825;padding:11px 20px;cursor:pointer;font-weight:700">▶ Try Demo</button>
@@ -2020,7 +2324,7 @@ body:has(#lab-facade.active) #tooltip { display:none !important }
       <div style="position:relative;overflow:hidden">
         <iframe id="voice-frame" src="about:blank" style="width:100%;height:100%;border:none;display:none;position:absolute;inset:0" allow="clipboard-write; microphone"></iframe>
         <!-- Legal AI Design Doc — built in -->
-        <div id="voice-fallback" style="position:absolute;inset:0;background:#0a0e1a;overflow-y:auto;display:block">
+        <div id="voice-fallback" style="position:absolute;inset:0;background:#edeae4;overflow-y:auto;display:block">
           <style>
             .lx-sec{padding:32px 36px;border-bottom:1px solid rgba(26,79,200,.07)}
             .lx-label{font-family:var(--font-m);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(26,79,200,.35);margin-bottom:14px;display:flex;align-items:center;gap:10px}
@@ -2094,8 +2398,9 @@ body:has(#lab-facade.active) #tooltip { display:none !important }
                 <p style="font-size:11px;color:rgba(244,241,234,.6);line-height:1.7">I-130, I-485, N-400, I-765 — long, detailed, unforgiving. A missed checkbox or wrong date format delays a case by months. Not legally complex. Just exhausting. Exactly what document assistance is for.</p>
               </div>
             </div>
-            <div style="margin-top:16px;border-left:2px solid rgba(26,79,200,.4);padding:14px 18px;background:rgba(26,79,200,.04)">
-              <p style="font-family:var(--font-h);font-size:14px;line-height:1.65;color:#f4f1ea">None of these require legal advice. They require a guide who knows the process and can prepare the paperwork correctly. <em style="font-style:italic;color:#1a4fc8">Legal AI is that guide — at scale, 24/7.</em></p>
+            <div style="margin-top:16px;background:rgba(108,71,255,.12);padding:18px">
+              <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#6c47ff;opacity:.7;margin-bottom:8px;text-transform:uppercase">The Scope</div>
+              <p style="font-size:13px;line-height:1.75;color:rgba(26,24,16,.75)">None of these require legal advice. They require a guide who knows the process and can prepare the paperwork correctly. Legal AI is that guide — at scale, 24/7.</p>
             </div>
           </div>
 
@@ -2211,12 +2516,13 @@ body:has(#lab-facade.active) #tooltip { display:none !important }
 
           <!-- ── CLOSING ── -->
           <div class="lx-sec" style="border-bottom:none;padding-bottom:48px">
-            <div style="border-left:2px solid rgba(26,79,200,.35);padding:14px 18px;background:rgba(26,79,200,.04);margin-bottom:22px">
-              <p style="font-family:var(--font-h);font-size:14px;line-height:1.7;color:#f4f1ea">Radical transparency: Legal AI doesn't just give you an answer. It shows you every step of its reasoning — which laws it checked, which cases it compared, and why it recommends what it recommends.</p>
+            <div style="background:rgba(108,71,255,.12);padding:18px;margin-bottom:22px">
+              <div style="font-family:var(--font-m);font-size:9px;letter-spacing:2px;color:#6c47ff;opacity:.7;margin-bottom:8px;text-transform:uppercase">Design Principle</div>
+              <p style="font-size:13px;line-height:1.75;color:rgba(26,24,16,.75)">Radical transparency: Legal AI doesn't just give you an answer. It shows you every step of its reasoning — which laws it checked, which cases it compared, and why it recommends what it recommends.</p>
             </div>
             <div style="display:flex;gap:10px;flex-wrap:wrap">
-              <button onclick="voiceDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:#1a1714;color:#f5f2ed;padding:11px 20px;cursor:pointer;font-weight:700">▶ Try Demo</button>
-              <a href="https://legal-support.lovable.app" target="_blank" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(244,241,234,.2);color:rgba(244,241,234,.6);padding:11px 20px;text-decoration:none">↗ Live Tool</a>
+              <button onclick="voiceDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(74,68,96,.35);background:rgba(74,68,96,.12);color:#1a1825;padding:11px 20px;cursor:pointer;font-weight:700">▶ Try Demo</button>
+              <a href="https://legal-support.lovable.app" target="_blank" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(74,68,96,.3);color:#4a4460;padding:11px 20px;text-decoration:none">↗ Live Tool</a>
             </div>
           </div>
 
@@ -2556,7 +2862,7 @@ body:has(#lab-facade.active) #tooltip { display:none !important }
               <div style="font-family:var(--font-h);font-size:clamp(15px,2.5vw,22px);line-height:1.6;color:#f4f1ea;margin-bottom:10px">Every product is an emotional contract.</div>
               <div style="font-size:13px;color:var(--coral);line-height:1.75;margin-bottom:20px">The user gives attention. The product promises to be worth it. I design the terms.</div>
               <div style="display:flex;gap:10px;flex-wrap:wrap">
-                <button onclick="mochiDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:#2a2a2a;color:#f4f1ea;padding:12px 24px;cursor:pointer;font-weight:700">▶ TRY LIVE</button>
+                <button onclick="mochiDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(74,68,96,.35);background:rgba(74,68,96,.12);color:#1a1825;padding:12px 24px;cursor:pointer;font-weight:700">▶ TRY LIVE</button>
                 <a href="https://mochi-ai-pet.lovable.app" target="_blank" style="font-family:var(--font-m);font-size:11px;letter-spacing:1px;color:var(--coral);border:1px solid rgba(150,80,80,.35);padding:11px 18px;text-decoration:none;transition:border-color .2s">↗ mochi-ai-pet.lovable.app</a>
               </div>
             </div>
@@ -2754,7 +3060,7 @@ body:has(#lab-facade.active) #tooltip { display:none !important }
               <div style="font-family:var(--font-h);font-size:clamp(15px,2.5vw,22px);line-height:1.6;color:#f4f1ea;margin-bottom:10px">A 3-minute quiz. A decision you can feel good about.</div>
               <div style="font-size:13px;color:var(--coral);line-height:1.75;margin-bottom:20px">The hardest part of choosing a dog isn't research — it's committing. Dog Selector makes committing easy.</div>
               <div style="display:flex;gap:10px;flex-wrap:wrap">
-                <button onclick="dogDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:none;background:#2a2a2a;color:#f4f1ea;padding:12px 24px;cursor:pointer;font-weight:700">▶ TRY LIVE</button>
+                <button onclick="dogDemo()" style="font-family:var(--font-m);font-size:11px;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(74,68,96,.35);background:rgba(74,68,96,.12);color:#1a1825;padding:12px 24px;cursor:pointer;font-weight:700">▶ TRY LIVE</button>
                 <a href="https://perfect-puppy.lovable.app" target="_blank" style="font-family:var(--font-m);font-size:11px;letter-spacing:1px;color:var(--coral);border:1px solid rgba(150,80,80,.35);padding:11px 18px;text-decoration:none;transition:border-color .2s">↗ perfect-puppy.lovable.app</a>
               </div>
             </div>
@@ -2774,8 +3080,8 @@ body:has(#lab-facade.active) #tooltip { display:none !important }
         <p style="font-size:15px;line-height:1.9;opacity:.85;margin-bottom:24px">
           This is where I think about things that don't have products yet. The ideas that keep me up at night. The questions I'd pursue if someone gave me six months and a blank page.
         </p>
-        <div style="border-left:2px solid var(--amber);padding-left:16px;margin-bottom:32px">
-          <p style="font-family:var(--font-m);font-size:10px;letter-spacing:3px;opacity:.35;margin-bottom:14px;text-transform:uppercase">Currently curious about:</p>
+        <div style="background:rgba(255,179,0,.12);padding:18px;margin-bottom:32px">
+          <div style="font-family:var(--font-m);font-size:10px;letter-spacing:3px;color:rgba(255,179,0,.8);margin-bottom:14px;text-transform:uppercase">Currently curious about:</div>
           <p style="font-size:14px;line-height:2;opacity:.75">— The next form of human-AI attachment (beyond companionship, before merger)</p>
           <p style="font-size:14px;line-height:2;opacity:.75">— How mainstream thinking gets formed — and what actually disrupts it</p>
           <p style="font-size:14px;line-height:2;opacity:.75">— What it means to build something with genuine life force, not just utility</p>
@@ -5277,24 +5583,47 @@ function voiceClose() {
 function voiceOpen() { window.open(VOICE_URL, '_blank'); }
 
 // ═══════════════════════════════════════
-// STRATEGY ROOM — VOICE AI EMBED
+// STRATEGY ROOM — VOICE AI + WATEROPS SPLIT EMBEDS
 // ═══════════════════════════════════════
-const ARC_VOICE_URL = 'https://voice-ai-agents.lovable.app';
-function arcVoiceDemo() {
-  const frame = document.getElementById('arc-voice-frame');
-  const embed = document.getElementById('arc-voice-embed');
-  const btn   = document.getElementById('arc-voice-try-btn');
+const ARCH_VOICE_URL = 'https://voice-ai-agents.lovable.app';
+const ARCH_WATER_URL = 'https://water-xi-five.vercel.app/';
+
+function archVoiceDemo() {
+  const frame    = document.getElementById('arch-voice-frame');
+  const fallback = document.getElementById('arc-voice-fallback');
+  const btn      = document.getElementById('arch-voice-try-btn');
   if (!frame) return;
-  if (!frame.src || frame.src === 'about:blank' || frame.src === location.href) frame.src = ARC_VOICE_URL;
-  if (embed) embed.style.display = 'block';
-  if (btn) { btn.textContent = '✕ CLOSE'; btn.onclick = arcVoiceClose; }
+  if (!frame.src || frame.src === 'about:blank' || frame.src === location.href) frame.src = ARCH_VOICE_URL;
+  frame.style.display = 'block';
+  if (fallback) fallback.style.display = 'none';
+  if (btn) { btn.textContent = '✕ CLOSE'; btn.onclick = archVoiceClose; }
 }
-function arcVoiceClose() {
-  const frame = document.getElementById('arc-voice-frame');
-  const embed = document.getElementById('arc-voice-embed');
-  const btn   = document.getElementById('arc-voice-try-btn');
-  if (embed) embed.style.display = 'none';
-  if (btn) { btn.textContent = '▶ TRY LIVE'; btn.onclick = arcVoiceDemo; }
+function archVoiceClose() {
+  const frame    = document.getElementById('arch-voice-frame');
+  const fallback = document.getElementById('arc-voice-fallback');
+  const btn      = document.getElementById('arch-voice-try-btn');
+  if (frame) frame.style.display = 'none';
+  if (fallback) fallback.style.display = 'block';
+  if (btn) { btn.textContent = '▶ TRY'; btn.onclick = archVoiceDemo; }
+}
+
+function archWaterDemo() {
+  const frame    = document.getElementById('arch-water-frame');
+  const fallback = document.getElementById('arc-water-fallback');
+  const btn      = document.getElementById('arch-water-try-btn');
+  if (!frame) return;
+  if (!frame.src || frame.src === 'about:blank' || frame.src === location.href) frame.src = ARCH_WATER_URL;
+  frame.style.display = 'block';
+  if (fallback) fallback.style.display = 'none';
+  if (btn) { btn.textContent = '✕ CLOSE'; btn.onclick = archWaterClose; }
+}
+function archWaterClose() {
+  const frame    = document.getElementById('arch-water-frame');
+  const fallback = document.getElementById('arc-water-fallback');
+  const btn      = document.getElementById('arch-water-try-btn');
+  if (frame) frame.style.display = 'none';
+  if (fallback) fallback.style.display = 'block';
+  if (btn) { btn.textContent = '▶ TRY'; btn.onclick = archWaterDemo; }
 }
 
 // ═══════════════════════════════════════
@@ -5760,28 +6089,7 @@ function h1bShow(report, zip) {
     requestAnimationFrame(step);
   }
 
-  function revealArchive(){
-    // Counters
-    document.querySelectorAll('.arc-stat-num[data-target]').forEach(el => {
-      const target = parseFloat(el.dataset.target);
-      const suffix = el.dataset.suffix || '';
-      el.textContent = '$0';
-      if (suffix === 'B+') {
-        el.textContent = '$0B+';
-        const s = performance.now();
-        (function step(now){ const t=Math.min(1,(now-s)/1200); el.textContent='$'+((1*t).toFixed(t<1?1:0))+'B+'; if(t<1)requestAnimationFrame(step); })(s);
-      } else if (suffix === 'K') {
-        const s = performance.now();
-        (function step(now){ const t=Math.min(1,(now-s)/1000); const v=Math.round(70*t); el.textContent='$'+v+'K'; if(t<1)requestAnimationFrame(step); })(s);
-      } else {
-        animateCounter(el, target, suffix, 900);
-      }
-    });
-    // Stagger cards
-    document.querySelectorAll('#arc-grid .arc-card').forEach((card, i) => {
-      setTimeout(() => { card.style.transition = 'transform .5s ease, opacity .5s ease, border-color .25s, box-shadow .25s'; card.classList.add('revealed'); }, 100 + i * 120);
-    });
-  }
+  function revealArchive(){ /* no-op: strategy room is now split-screen */ }
 
   // Watch for archive room activation
   const archiveRoom = document.getElementById('room-archive');
