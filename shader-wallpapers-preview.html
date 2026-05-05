@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shader Wallpapers — Choose One</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: #060810; color: #f4f1ea; font-family: 'Courier New', monospace; overflow-x: hidden; }
+
+  .picker {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 9999;
+    display: flex; gap: 0;
+    background: rgba(6,8,16,0.92); border-bottom: 1px solid rgba(0,245,212,0.2);
+    backdrop-filter: blur(12px);
+  }
+  .picker-btn {
+    flex: 1; padding: 14px 8px; font-family: 'Courier New', monospace;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    background: none; color: rgba(244,241,234,0.4); border: none;
+    border-right: 1px solid rgba(0,245,212,0.1); cursor: pointer;
+    transition: color .2s, background .2s;
+  }
+  .picker-btn:last-child { border-right: none; }
+  .picker-btn:hover { color: #f4f1ea; background: rgba(0,245,212,0.06); }
+  .picker-btn.active { color: #00f5d4; background: rgba(0,245,212,0.08); border-bottom: 2px solid #00f5d4; }
+
+  .shader-slide {
+    position: fixed; inset: 0;
+    display: none; align-items: center; justify-content: center;
+    flex-direction: column;
+  }
+  .shader-slide.active { display: flex; }
+
+  canvas.bg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  .intro-content {
+    position: relative; z-index: 2; text-align: center;
+    pointer-events: none; padding: 0 24px;
+  }
+  .intro-typer {
+    font-family: Georgia, serif; font-size: clamp(18px,3vw,32px);
+    color: #f4f1ea; letter-spacing: 2px;
+  }
+  .intro-sub {
+    font-family: 'Courier New', monospace; font-size: 11px;
+    letter-spacing: 4px; opacity: 0.4; margin-top: 20px;
+    text-transform: uppercase;
+  }
+  .enter-btn {
+    position: absolute; bottom: 48px; left: 50%; transform: translateX(-50%);
+    font-family: 'Courier New', monospace; font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; border: 1px solid rgba(0,245,212,0.45);
+    color: #00f5d4; background: rgba(0,245,212,0.06);
+    padding: 12px 32px; cursor: pointer; z-index: 3;
+    pointer-events: auto;
+    transition: background .2s;
+  }
+  .enter-btn:hover { background: rgba(0,245,212,0.14); }
+
+  .label {
+    position: absolute; bottom: 110px; left: 50%; transform: translateX(-50%);
+    font-family: 'Courier New', monospace; font-size: 10px; letter-spacing: 3px;
+    opacity: 0.25; text-transform: uppercase; z-index: 3; white-space: nowrap;
+  }
+</style>
+</head>
+<body>
+
+<!-- Nav -->
+<div class="picker">
+  <button class="picker-btn active" onclick="show(0)">01 · Void Lattice</button>
+  <button class="picker-btn" onclick="show(1)">02 · Aurora Flow</button>
+  <button class="picker-btn" onclick="show(2)">03 · Particle Storm</button>
+  <button class="picker-btn" onclick="show(3)">04 · Signal Web</button>
+  <button class="picker-btn" onclick="show(4)">05 · Depth Rings</button>
+</div>
+
+<!-- SLIDE 1: VOID LATTICE — rotating 3D grid that warps toward cursor -->
+<div class="shader-slide active" id="slide-0">
+  <canvas class="bg" id="c0"></canvas>
+  <div class="intro-content">
+    <div class="intro-typer">Turning complex systems into AI-powered decision scaffolding.</div>
+    <div class="intro-sub">Yvonne Li &nbsp;·&nbsp; Portfolio 2026</div>
+  </div>
+  <div class="label">Click to ripple · Mouse to warp</div>
+  <button class="enter-btn">ENTER →</button>
+</div>
+
+<!-- SLIDE 2: AURORA FLOW — fluid plasma shader -->
+<div class="shader-slide" id="slide-1">
+  <canvas class="bg" id="c1"></canvas>
+  <div class="intro-content">
+    <div class="intro-typer">Turning complex systems into AI-powered decision scaffolding.</div>
+    <div class="intro-sub">Yvonne Li &nbsp;·&nbsp; Portfolio 2026</div>
+  </div>
+  <div class="label">Move mouse to shift aurora</div>
+  <button class="enter-btn">ENTER →</button>
+</div>
+
+<!-- SLIDE 3: PARTICLE STORM — exploding particles on click -->
+<div class="shader-slide" id="slide-2">
+  <canvas class="bg" id="c2"></canvas>
+  <div class="intro-content">
+    <div class="intro-typer">Turning complex systems into AI-powered decision scaffolding.</div>
+    <div class="intro-sub">Yvonne Li &nbsp;·&nbsp; Portfolio 2026</div>
+  </div>
+  <div class="label">Click anywhere to explode</div>
+  <button class="enter-btn">ENTER →</button>
+</div>
+
+<!-- SLIDE 4: SIGNAL WEB — network nodes that repel cursor -->
+<div class="shader-slide" id="slide-3">
+  <canvas class="bg" id="c3"></canvas>
+  <div class="intro-content">
+    <div class="intro-typer">Turning complex systems into AI-powered decision scaffolding.</div>
+    <div class="intro-sub">Yvonne Li &nbsp;·&nbsp; Portfolio 2026</div>
+  </div>
+  <div class="label">Mouse repels nodes · Click to pulse</div>
+  <button class="enter-btn">ENTER →</button>
+</div>
+
+<!-- SLIDE 5: DEPTH RINGS — concentric ripple rings on click -->
+<div class="shader-slide" id="slide-4">
+  <canvas class="bg" id="c4"></canvas>
+  <div class="intro-content">
+    <div class="intro-typer">Turning complex systems into AI-powered decision scaffolding.</div>
+    <div class="intro-sub">Yvonne Li &nbsp;·&nbsp; Portfolio 2026</div>
+  </div>
+  <div class="label">Click to create ripples</div>
+  <button class="enter-btn">ENTER →</button>
+</div>
+
+<script>
+// ─── NAV ────────────────────────────────────────────────────────────
+const slides = document.querySelectorAll('.shader-slide');
+const btns = document.querySelectorAll('.picker-btn');
+let current = 0;
+function show(i) {
+  slides[current].classList.remove('active');
+  btns[current].classList.remove('active');
+  current = i;
+  slides[i].classList.add('active');
+  btns[i].classList.add('active');
+}
+
+// ─── SHARED UTILS ───────────────────────────────────────────────────
+function resize(c) {
+  c.width = window.innerWidth;
+  c.height = window.innerHeight;
+}
+
+// ═══════════════════════════════════════════════════════════════════
+// SHADER 1: VOID LATTICE
+// Infinite isometric grid that warps/bends toward mouse, click = shockwave
+// ═══════════════════════════════════════════════════════════════════
+(function(){
+  const c = document.getElementById('c0');
+  const ctx = c.getContext('2d');
+  resize(c);
+  window.addEventListener('resize', () => resize(c));
+
+  let mx = 0.5, my = 0.5;
+  let time = 0;
+  const shocks = [];
+
+  c.parentElement.addEventListener('mousemove', e => {
+    mx = e.clientX / c.width;
+    my = e.clientY / c.height;
+  });
+  c.parentElement.addEventListener('click', e => {
+    shocks.push({ x: e.clientX, y: e.clientY, r: 0, life: 1 });
+  });
+
+  function draw() {
+    if (!document.getElementById('slide-0').classList.contains('active')) {
+      requestAnimationFrame(draw); return;
+    }
+    const W = c.width, H = c.height;
+    ctx.clearRect(0, 0, W, H);
+
+    // dark gradient bg
+    const bg = ctx.createRadialGradient(W*mx, H*my, 0, W/2, H/2, Math.max(W,H)*0.8);
+    bg.addColorStop(0, '#0d1220');
+    bg.addColorStop(1, '#060810');
+    ctx.fillStyle = bg;
+    ctx.fillRect(0, 0, W, H);
+
+    time += 0.012;
+    const SPACING = 60;
+    const cols = Math.ceil(W / SPACING) + 4;
+    const rows = Math.ceil(H / SPACING) + 4;
+    const offX = (time * 20) % SPACING;
+    const offY = (time * 8) % SPACING;
+
+    for (let row = -2; row < rows; row++) {
+      for (let col = -2; col < cols; col++) {
+        let px = col * SPACING - offX;
+        let py = row * SPACING - offY;
+
+        // warp toward mouse
+        const dx = (mx * W) - px;
+        const dy = (my * H) - py;
+        const dist = Math.sqrt(dx*dx + dy*dy);
+        const pull = Math.max(0, 1 - dist / 300) * 40;
+        px += dx/dist * pull * (isNaN(dx/dist) ? 0 : 1);
+        py += dy/dist * pull * (isNaN(dy/dist) ? 0 : 1);
+
+        // shockwave displacement
+        for (const s of shocks) {
+          const sdx = px - s.x, sdy = py - s.y;
+          const sr = Math.sqrt(sdx*sdx + sdy*sdy);
+          const wave = Math.exp(-((sr - s.r)*(sr - s.r)) / 4000) * 18 * s.life;
+          if (sr > 0) { px -= sdx/sr * wave; py -= sdy/sr * wave; }
+        }
+
+        // breathing pulse
+        const phase = Math.sin(time * 1.5 + col * 0.4 + row * 0.3) * 0.5 + 0.5;
+        const alpha = 0.08 + phase * 0.18;
+
+        // color shift based on distance from mouse
+        const nd = Math.min(1, dist / (Math.max(W,H) * 0.6));
+        const r = Math.floor(0 + nd * 79);
+        const g = Math.floor(245 - nd * 50);
+        const b = Math.floor(212 - nd * 165 + (1-nd)*165);
+
+        ctx.beginPath();
+        ctx.arc(px, py, 1.2 + phase * 0.8, 0, Math.PI*2);
+        ctx.fillStyle = `rgba(${r},${g},${b},${alpha})`;
+        ctx.fill();
+      }
+    }
+
+    // draw shockwave rings
+    for (let i = shocks.length-1; i >= 0; i--) {
+      const s = shocks[i];
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(0,245,212,${s.life * 0.4})`;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      s.r += 8; s.life -= 0.015;
+      if (s.life <= 0) shocks.splice(i, 1);
+    }
+
+    // connect nearby dots with lines
+    // (skip for perf — just corner accent lines)
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ═══════════════════════════════════════════════════════════════════
+// SHADER 2: AURORA FLOW
+// WebGL-style plasma rendered on canvas with mouse-driven color bands
+// ═══════════════════════════════════════════════════════════════════
+(function(){
+  const c = document.getElementById('c1');
+  const ctx = c.getContext('2d');
+  resize(c);
+  window.addEventListener('resize', () => resize(c));
+
+  let mx = 0.5, my = 0.5;
+  let tmx = 0.5, tmy = 0.5;
+  let time = 0;
+
+  c.parentElement.addEventListener('mousemove', e => {
+    tmx = e.clientX / c.width;
+    tmy = e.clientY / c.height;
+  });
+
+  // off-screen low-res canvas for plasma
+  const plasma = document.createElement('canvas');
+  const px = plasma.getContext('2d');
+  const RES = 3;
+
+  function draw() {
+    if (!document.getElementById('slide-1').classList.contains('active')) {
+      requestAnimationFrame(draw); return;
+    }
+    time += 0.008;
+    mx += (tmx - mx) * 0.04;
+    my += (tmy - my) * 0.04;
+
+    const W = c.width, H = c.height;
+    const PW = Math.ceil(W / RES), PH = Math.ceil(H / RES);
+    plasma.width = PW; plasma.height = PH;
+
+    const img = px.createImageData(PW, PH);
+    const d = img.data;
+
+    for (let y = 0; y < PH; y++) {
+      for (let x = 0; x < PW; x++) {
+        const nx = x / PW, ny = y / PH;
+
+        // multi-layer sine plasma
+        const v1 = Math.sin(nx * 6 + time);
+        const v2 = Math.sin(ny * 5 - time * 0.7 + mx * 4);
+        const v3 = Math.sin((nx + ny) * 4 + time * 1.2 + my * 3);
+        const v4 = Math.sin(Math.sqrt((nx - mx)*(nx - mx)*4 + (ny - my)*(ny - my)*4) * 8 - time * 2);
+        const v = (v1 + v2 + v3 + v4) / 4;
+        const t = (v + 1) / 2; // 0..1
+
+        // palette: deep indigo → teal → violet
+        let r, g, b;
+        if (t < 0.33) {
+          const f = t / 0.33;
+          r = Math.floor(6 + f * 0); g = Math.floor(8 + f * 100); b = Math.floor(16 + f * 196);
+        } else if (t < 0.66) {
+          const f = (t - 0.33) / 0.33;
+          r = Math.floor(0 + f * 60); g = Math.floor(108 + f * 137); b = Math.floor(212 - f * 40);
+        } else {
+          const f = (t - 0.66) / 0.34;
+          r = Math.floor(60 + f * 119); g = Math.floor(245 - f * 110); b = Math.floor(172 + f * 40);
+        }
+
+        const idx = (y * PW + x) * 4;
+        d[idx]   = r;
+        d[idx+1] = g;
+        d[idx+2] = b;
+        d[idx+3] = 255;
+      }
+    }
+    px.putImageData(img, 0, 0);
+
+    ctx.save();
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(plasma, 0, 0, W, H);
+    ctx.restore();
+
+    // dark vignette
+    const vig = ctx.createRadialGradient(W/2, H/2, H*0.1, W/2, H/2, H*0.9);
+    vig.addColorStop(0, 'rgba(6,8,16,0)');
+    vig.addColorStop(1, 'rgba(6,8,16,0.75)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, W, H);
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ═══════════════════════════════════════════════════════════════════
+// SHADER 3: GRAVITATIONAL VORTEX
+// Stars flow toward cursor. Absorbed stars respawn in the void they
+// left behind — the field is always full, always streaming inward.
+// ═══════════════════════════════════════════════════════════════════
+(function(){
+  const c = document.getElementById('c2');
+  const ctx = c.getContext('2d');
+  resize(c);
+  window.addEventListener('resize', () => { resize(c); });
+
+  const COLS = ['rgba(0,245,212,', 'rgba(79,195,247,', 'rgba(179,136,255,', 'rgba(244,241,234,'];
+  let mx = -9999, my = -9999;
+  let mouseActive = false;
+
+  // ── particle factory ──────────────────────────────────────────────
+  // spawnFar: place the new star far from cursor so the void gets filled
+  function makeParticle(spawnFar) {
+    const W = c.width, H = c.height;
+    let x, y;
+    if (spawnFar && mouseActive) {
+      // pick a random point guaranteed >35% of screen away from cursor
+      let attempts = 0;
+      do {
+        x = Math.random() * W;
+        y = Math.random() * H;
+        attempts++;
+      } while (attempts < 20 &&
+        Math.hypot(x - mx, y - my) < Math.min(W, H) * 0.35);
+    } else {
+      x = Math.random() * W;
+      y = Math.random() * H;
+    }
+    const hue = Math.random() < 0.55 ? 0 : Math.random() < 0.55 ? 1 : Math.random() < 0.6 ? 2 : 3;
+    return {
+      x, y,
+      vx: (Math.random() - 0.5) * 0.5,
+      vy: (Math.random() - 0.5) * 0.5,
+      size: Math.random() * 1.8 + 0.4,
+      hue,
+      alpha: Math.random() * 0.5 + 0.2,   // ambient brightness
+      fadeIn: Math.random() * 0.02 + 0.005, // how fast it materialises
+      visible: 0,   // 0..1 fade-in state
+      absorbed: false,
+      absorbT: 0,
+    };
+  }
+
+  // ── pool ──────────────────────────────────────────────────────────
+  const N = 900;
+  const particles = [];
+  for (let i = 0; i < N; i++) particles.push(makeParticle(false));
+
+  // ── burst pool for click ──────────────────────────────────────────
+  const bursts = [];
+
+  // ── events ───────────────────────────────────────────────────────
+  c.parentElement.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY; mouseActive = true;
+  });
+  c.parentElement.addEventListener('mouseleave', () => {
+    mx = -9999; my = -9999; mouseActive = false;
+  });
+  c.parentElement.addEventListener('click', e => {
+    // repulsion burst — scatter everything outward
+    for (const p of particles) {
+      const dx = p.x - e.clientX, dy = p.y - e.clientY;
+      const d = Math.hypot(dx, dy) || 1;
+      const force = Math.max(0, 1 - d / 400) * 12;
+      p.vx += dx/d * force;
+      p.vy += dy/d * force;
+    }
+    // spawn a ring of bright sparks
+    for (let i = 0; i < 100; i++) {
+      const angle = (i / 100) * Math.PI * 2 + Math.random() * 0.2;
+      const spd = Math.random() * 7 + 2;
+      bursts.push({
+        x: e.clientX, y: e.clientY,
+        vx: Math.cos(angle) * spd, vy: Math.sin(angle) * spd,
+        life: 1, decay: 0.013 + Math.random() * 0.01,
+        size: Math.random() * 2.5 + 0.5,
+        hue: Math.floor(Math.random() * 3),
+      });
+    }
+  });
+
+  // ── connection pass (spatial bucket to keep O(n) not O(n²)) ──────
+  const CONNECT_D = 90;
+  const CONNECT_D2 = CONNECT_D * CONNECT_D;
+
+  function drawConnections(W, H) {
+    const bucketSize = CONNECT_D;
+    const cols = Math.ceil(W / bucketSize) + 1;
+    const rows = Math.ceil(H / bucketSize) + 1;
+    const buckets = new Array(cols * rows).fill(null).map(() => []);
+    for (const p of particles) {
+      if (p.visible < 0.1) continue;
+      const bx = Math.floor(p.x / bucketSize);
+      const by = Math.floor(p.y / bucketSize);
+      buckets[by * cols + bx].push(p);
+    }
+    ctx.lineWidth = 0.4;
+    for (let by = 0; by < rows; by++) {
+      for (let bx = 0; bx < cols; bx++) {
+        const cell = buckets[by * cols + bx];
+        // check self + 4 neighbours to avoid double-checking
+        const neighbours = [
+          cell,
+          bx+1 < cols ? buckets[by * cols + bx + 1] : [],
+          by+1 < rows ? buckets[(by+1) * cols + bx] : [],
+          bx+1 < cols && by+1 < rows ? buckets[(by+1) * cols + bx + 1] : [],
+          by+1 < rows && bx > 0 ? buckets[(by+1) * cols + bx - 1] : [],
+        ];
+        for (let ai = 0; ai < cell.length; ai++) {
+          const a = cell[ai];
+          for (const nb of neighbours) {
+            const start = nb === cell ? ai + 1 : 0;
+            for (let bi = start; bi < nb.length; bi++) {
+              const b = nb[bi];
+              const dx = a.x - b.x, dy = a.y - b.y;
+              const d2 = dx*dx + dy*dy;
+              if (d2 < CONNECT_D2) {
+                const t = 1 - d2 / CONNECT_D2;
+                const vis = Math.min(a.visible, b.visible);
+                ctx.strokeStyle = COLS[a.hue] + (t * 0.22 * vis) + ')';
+                ctx.beginPath();
+                ctx.moveTo(a.x, a.y);
+                ctx.lineTo(b.x, b.y);
+                ctx.stroke();
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // ── main loop ─────────────────────────────────────────────────────
+  let frame = 0;
+  function draw() {
+    if (!document.getElementById('slide-2').classList.contains('active')) {
+      requestAnimationFrame(draw); return;
+    }
+    frame++;
+    const W = c.width, H = c.height;
+
+    // motion-blur trail
+    ctx.fillStyle = 'rgba(6,8,16,0.20)';
+    ctx.fillRect(0, 0, W, H);
+
+    // ── update + draw field particles ────────────────────────────────
+    for (let i = 0; i < particles.length; i++) {
+      const p = particles[i];
+
+      // fade in
+      if (p.visible < 1) p.visible = Math.min(1, p.visible + p.fadeIn);
+
+      if (!p.absorbed) {
+        const dx = mx - p.x, dy = my - p.y;
+        const d2 = dx*dx + dy*dy;
+        const d = Math.sqrt(d2);
+
+        // gravitational pull — scales with 1/d (inverse linear, not 1/d²,
+        // so even distant stars feel the tug)
+        if (mouseActive && d > 1) {
+          const strength = Math.min(0.55, 220 / (d + 60));
+          p.vx += (dx/d) * strength;
+          p.vy += (dy/d) * strength;
+        } else if (!mouseActive) {
+          // drift back toward gentle ambient motion
+          p.vx *= 0.98;
+          p.vy *= 0.98;
+          p.vx += (Math.random() - 0.5) * 0.04;
+          p.vy += (Math.random() - 0.5) * 0.04;
+        }
+
+        // speed cap — faster cap when pulled strongly
+        const spd = Math.hypot(p.vx, p.vy);
+        const cap = mouseActive ? 9 : 1.5;
+        if (spd > cap) { p.vx = p.vx/spd*cap; p.vy = p.vy/spd*cap; }
+
+        p.x += p.vx; p.y += p.vy;
+
+        // wrap edges (only when mouse inactive — when active let them stream in)
+        if (!mouseActive) {
+          if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
+          if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
+        }
+
+        // absorb when very close to cursor
+        if (mouseActive && d < 14) {
+          p.absorbed = true;
+          p.absorbT = 1;
+        }
+
+        // also respawn if flew way off-screen
+        if (p.x < -60 || p.x > W+60 || p.y < -60 || p.y > H+60) {
+          Object.assign(p, makeParticle(true));
+        }
+      } else {
+        // absorbed: shrink + fade then respawn in the void
+        p.absorbT -= 0.06;
+        if (p.absorbT <= 0) {
+          Object.assign(p, makeParticle(true)); // rebirth far from cursor
+        }
+      }
+
+      // draw
+      const spd = Math.hypot(p.vx, p.vy);
+      const bright = Math.min(1, spd / 7);
+      const alpha = p.visible * (p.absorbed ? p.absorbT : (p.alpha + bright * 0.5));
+      const r = p.absorbed ? p.absorbT * p.size : p.size * (1 + bright * 0.6);
+
+      if (r > 0.05 && alpha > 0.01) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, r, 0, Math.PI*2);
+        ctx.fillStyle = COLS[p.hue] + alpha + ')';
+        ctx.fill();
+
+        // draw velocity streak for fast-moving stars
+        if (spd > 3 && p.visible > 0.5 && !p.absorbed) {
+          ctx.strokeStyle = COLS[p.hue] + (alpha * 0.35) + ')';
+          ctx.lineWidth = r * 0.6;
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+          ctx.lineTo(p.x - p.vx * 3, p.y - p.vy * 3);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // ── connections ───────────────────────────────────────────────────
+    drawConnections(W, H);
+
+    // ── burst sparks ─────────────────────────────────────────────────
+    for (let i = bursts.length-1; i >= 0; i--) {
+      const b = bursts[i];
+      b.x += b.vx; b.y += b.vy;
+      b.vx *= 0.96; b.vy *= 0.96;
+      b.life -= b.decay;
+      if (b.life <= 0) { bursts.splice(i, 1); continue; }
+      ctx.beginPath();
+      ctx.arc(b.x, b.y, b.size * b.life, 0, Math.PI*2);
+      ctx.fillStyle = COLS[b.hue] + b.life + ')';
+      ctx.fill();
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ═══════════════════════════════════════════════════════════════════
+// SHADER 4: SIGNAL WEB
+// Voronoi-style cells that react to mouse, click sends pulse wave
+// ═══════════════════════════════════════════════════════════════════
+(function(){
+  const c = document.getElementById('c3');
+  const ctx = c.getContext('2d');
+  resize(c);
+  window.addEventListener('resize', () => { resize(c); initNodes(); });
+
+  let mx = c.width/2, my = c.height/2;
+  const pulses = [];
+  let nodes = [];
+
+  function initNodes() {
+    nodes = [];
+    const cnt = Math.floor(c.width * c.height / 14000);
+    for (let i = 0; i < cnt; i++) {
+      nodes.push({
+        x: Math.random() * c.width,
+        y: Math.random() * c.height,
+        ox: 0, oy: 0,
+        vx: (Math.random()-0.5)*0.5,
+        vy: (Math.random()-0.5)*0.5,
+        hue: Math.floor(Math.random()*3),
+        size: Math.random()*2+1,
+      });
+    }
+    nodes.forEach(n => { n.ox = n.x; n.oy = n.y; });
+  }
+  initNodes();
+
+  const COLS = ['rgba(0,245,212,', 'rgba(79,195,247,', 'rgba(179,136,255,'];
+
+  c.parentElement.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  c.parentElement.addEventListener('click', e => {
+    pulses.push({ x: e.clientX, y: e.clientY, r: 0, life: 1.0 });
+  });
+
+  let time = 0;
+  function draw() {
+    if (!document.getElementById('slide-3').classList.contains('active')) {
+      requestAnimationFrame(draw); return;
+    }
+    time += 0.008;
+    const W = c.width, H = c.height;
+
+    ctx.fillStyle = 'rgba(6,8,16,0.25)';
+    ctx.fillRect(0, 0, W, H);
+
+    // update nodes
+    nodes.forEach(n => {
+      // drift
+      n.x += n.vx + Math.sin(time + n.ox * 0.01) * 0.3;
+      n.y += n.vy + Math.cos(time + n.oy * 0.01) * 0.3;
+      if (n.x < 0 || n.x > W) n.vx *= -1;
+      if (n.y < 0 || n.y > H) n.vy *= -1;
+      n.x = Math.max(0, Math.min(W, n.x));
+      n.y = Math.max(0, Math.min(H, n.y));
+
+      // repel from mouse
+      const dx = n.x - mx, dy = n.y - my;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      if (d < 120 && d > 1) {
+        n.x += dx/d * (120-d) * 0.06;
+        n.y += dy/d * (120-d) * 0.06;
+      }
+
+      // pulse displacement
+      for (const p of pulses) {
+        const pdx = n.x - p.x, pdy = n.y - p.y;
+        const pd = Math.sqrt(pdx*pdx + pdy*pdy);
+        const wave = Math.exp(-((pd - p.r)*(pd - p.r)) / 2500) * 15 * p.life;
+        if (pd > 1) { n.x += pdx/pd * wave; n.y += pdy/pd * wave; }
+      }
+    });
+
+    // draw edges
+    const CONNECT = 120;
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i+1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const d = Math.sqrt(dx*dx+dy*dy);
+        if (d < CONNECT) {
+          const a = (1 - d/CONNECT) * 0.35;
+          ctx.strokeStyle = COLS[nodes[i].hue] + a + ')';
+          ctx.lineWidth = 0.8;
+          ctx.beginPath();
+          ctx.moveTo(nodes[i].x, nodes[i].y);
+          ctx.lineTo(nodes[j].x, nodes[j].y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // draw nodes
+    nodes.forEach(n => {
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.size, 0, Math.PI*2);
+      ctx.fillStyle = COLS[n.hue] + '0.7)';
+      ctx.fill();
+    });
+
+    // pulse rings
+    for (let i = pulses.length-1; i >= 0; i--) {
+      const p = pulses[i];
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.strokeStyle = `rgba(0,245,212,${p.life * 0.5})`;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      // second ring
+      if (p.r > 30) {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * 0.6, 0, Math.PI*2);
+        ctx.strokeStyle = `rgba(79,195,247,${p.life * 0.25})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      }
+      p.r += 5; p.life -= 0.012;
+      if (p.life <= 0) pulses.splice(i, 1);
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ═══════════════════════════════════════════════════════════════════
+// SHADER 5: DEPTH RINGS
+// Concentric sine-based topographic lines + mouse distortion + click ripples
+// ═══════════════════════════════════════════════════════════════════
+(function(){
+  const c = document.getElementById('c4');
+  const ctx = c.getContext('2d');
+  resize(c);
+  window.addEventListener('resize', () => resize(c));
+
+  let mx = 0.5, my = 0.5;
+  let tmx = 0.5, tmy = 0.5;
+  let time = 0;
+  const rings = [];
+
+  c.parentElement.addEventListener('mousemove', e => {
+    tmx = e.clientX / c.width;
+    tmy = e.clientY / c.height;
+  });
+  c.parentElement.addEventListener('click', e => {
+    rings.push({ x: e.clientX / c.width, y: e.clientY / c.height, phase: 0, life: 1 });
+  });
+
+  // off-screen low-res canvas
+  const lo = document.createElement('canvas');
+  const lc = lo.getContext('2d');
+  const RES = 3;
+
+  function draw() {
+    if (!document.getElementById('slide-4').classList.contains('active')) {
+      requestAnimationFrame(draw); return;
+    }
+    time += 0.006;
+    mx += (tmx - mx) * 0.05;
+    my += (tmy - my) * 0.05;
+
+    const W = c.width, H = c.height;
+    const PW = Math.ceil(W / RES), PH = Math.ceil(H / RES);
+    lo.width = PW; lo.height = PH;
+
+    const img = lc.createImageData(PW, PH);
+    const d = img.data;
+
+    for (let y = 0; y < PH; y++) {
+      for (let x = 0; x < PW; x++) {
+        const nx = x / PW, ny = y / PH;
+
+        // distance from mouse center
+        const dm = Math.sqrt((nx-mx)*(nx-mx)*2.5 + (ny-my)*(ny-my)*2.5);
+        // multiple concentric wave sources
+        let v = Math.sin(dm * 18 - time * 3) * 0.5;
+        v += Math.sin(dm * 12 + time * 1.5) * 0.3;
+        // secondary wave from opposite corner
+        const dm2 = Math.sqrt((nx-(1-mx))*(nx-(1-mx)) + (ny-(1-my))*(ny-(1-my)));
+        v += Math.sin(dm2 * 10 - time * 2) * 0.2;
+
+        // click ring contributions
+        for (const r of rings) {
+          const dr = Math.sqrt((nx-r.x)*(nx-r.x) + (ny-r.y)*(ny-r.y));
+          v += Math.sin(dr * 25 - r.phase) * r.life * 0.5;
+        }
+
+        const t = (v + 1) / 2; // 0..1
+
+        // palette: dark navy → teal outlines on near-black
+        // make it mostly dark with bright ring lines
+        const ringBrightness = Math.pow(Math.abs(Math.sin(v * Math.PI * 4)), 8);
+        const r_ch = Math.floor(0 + ringBrightness * 0);
+        const g_ch = Math.floor(8 + ringBrightness * 237);
+        const b_ch = Math.floor(16 + ringBrightness * 196);
+        const base = 0.04 + t * 0.08;
+
+        const idx = (y * PW + x) * 4;
+        d[idx]   = r_ch + Math.floor(base * 79);
+        d[idx+1] = g_ch + Math.floor(base * 100);
+        d[idx+2] = b_ch + Math.floor(base * 100);
+        d[idx+3] = 255;
+      }
+    }
+    lc.putImageData(img, 0, 0);
+    ctx.save();
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(lo, 0, 0, W, H);
+    ctx.restore();
+
+    // vignette
+    const vig = ctx.createRadialGradient(W*mx, H*my, 0, W/2, H/2, Math.max(W,H)*0.7);
+    vig.addColorStop(0, 'rgba(6,8,16,0.1)');
+    vig.addColorStop(1, 'rgba(6,8,16,0.82)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, W, H);
+
+    // update ring phases
+    for (let i = rings.length-1; i >= 0; i--) {
+      rings[i].phase += 0.18;
+      rings[i].life -= 0.008;
+      if (rings[i].life <= 0) rings.splice(i, 1);
+    }
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>
