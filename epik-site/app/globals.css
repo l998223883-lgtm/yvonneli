@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+:root {
+  --bg-from: #E8DFFF;
+  --bg-to: #FFF6D6;
+  --ink-primary: #3D3D3D;
+  --ink-secondary: #5A5A5A;
+  --ink-tertiary: #6B6B6B;
+  --ink-muted: #8A8A8A;
+  --surface: rgba(255, 255, 255, 0.45);
+  --rule: rgba(61, 61, 61, 0.12);
+  --rule-strong: rgba(61, 61, 61, 0.25);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: var(--ink-primary);
+  background: linear-gradient(160deg, var(--bg-from) 0%, var(--bg-to) 100%);
+  background-attachment: fixed;
+  min-height: 100vh;
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.text-display {
+  font-family: var(--font-bodoni), 'Bodoni Moda', serif;
+  font-size: clamp(44px, 6vw, 76px);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--ink-primary);
+}
+
+.text-section {
+  font-family: var(--font-bodoni), 'Bodoni Moda', serif;
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: 400;
+  line-height: 1.2;
+  color: var(--ink-primary);
+}
+
+.text-lead {
+  font-family: 'Inter', sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--ink-secondary);
+}
+
+.text-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--ink-secondary);
+}
+
+.text-meta {
+  font-family: var(--font-mono), 'JetBrains Mono', monospace;
+  font-size: 12px;
+  color: var(--ink-muted);
+  letter-spacing: 0.02em;
+}
+
+.text-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+}
+
+.highlight {
+  font-family: var(--font-bodoni), 'Bodoni Moda', serif;
+  font-style: italic;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--ink-primary);
+}
+
+.rule {
+  border: none;
+  border-top: 1px solid var(--rule);
+}
+
+.container-site {
+  max-width: 1180px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+
+@media (max-width: 640px) {
+  .container-site {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
