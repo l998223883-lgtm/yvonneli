@@ -81,25 +81,45 @@ function ProjectCard({
             boxShadow: "0 4px 24px rgba(61,61,61,0.06)",
           }}
         >
-          {project.link && project.image ? (
+          {project.link && (project.image || project.video) ? (
             <a
               href={project.link}
               target="_blank"
               rel="noopener noreferrer"
               style={{ display: "block", width: "100%", height: "100%", position: "relative" }}
             >
-              <img
-                src={project.image}
-                alt={`${project.title} screenshot`}
-                loading="lazy"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  objectFit: "cover",
-                  objectPosition: "top center",
-                  display: "block",
-                }}
-              />
+              {project.video ? (
+                <video
+                  src={project.video}
+                  poster={project.image}
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  preload="metadata"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "top center",
+                    display: "block",
+                    background: "#0a0e1a",
+                  }}
+                />
+              ) : (
+                <img
+                  src={project.image}
+                  alt={`${project.title} screenshot`}
+                  loading="lazy"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    objectFit: "cover",
+                    objectPosition: "top center",
+                    display: "block",
+                  }}
+                />
+              )}
               {/* Hover overlay */}
               <div
                 className="group-hover-overlay"

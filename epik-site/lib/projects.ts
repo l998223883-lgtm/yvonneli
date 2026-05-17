@@ -7,6 +7,7 @@ export type Project = {
   year: string;
   link?: string;
   image?: string;
+  video?: string;
   metrics?: string[];
   quote?: string;
   features?: string[];
@@ -17,6 +18,7 @@ export const projects: Project[] = [
   {
     number: "01",
     image: "/projects/h1b-compass.png",
+    video: "/projects/h1b-demo.mp4",
     title: "H-1B Compass",
     tagline: "Self-serve visa strategy engine",
     description:
@@ -43,6 +45,7 @@ export const projects: Project[] = [
   {
     number: "02",
     image: "/projects/legal-ai.png",
+    video: "/projects/law-demo.mp4",
     title: "Legal AI",
     tagline: "AI legal strategy for self-represented individuals",
     description:
