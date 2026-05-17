@@ -28,7 +28,7 @@ export default function Hero() {
                     }}
                   />
                   <span className="text-meta" style={{ fontSize: "11px" }}>
-                    Open to roles · Los Angeles, CA
+                    Open to roles
                   </span>
                 </div>
               </FadeUp>
